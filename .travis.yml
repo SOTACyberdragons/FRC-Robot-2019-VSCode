@@ -1,0 +1,20 @@
+language: java
+
+jdk:
+  - oraclejdk11
+
+before_install:
+  - wget -O gradle/gradle-bin.zip https://services.gradle.org/distributions/gradle-5.0-bin.zip
+  - unzip gradle/gradle-bin.zip -d gradle/gradle-bin
+
+install: ./gradle/gradle-bin/gradle-5.0/bin/gradle assemble
+
+script: ./gradle/gradle-bin/gradle-5.0/bin/gradle check
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
