@@ -1,7 +1,8 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 
 /**
@@ -10,7 +11,9 @@ import frc.robot.Robot;
 public class DifferentialDriveWithXbox extends Command {
 
     public DifferentialDriveWithXbox() {
-        requires(Robot.drivetrain);
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
@@ -19,11 +22,8 @@ public class DifferentialDriveWithXbox extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        double throttle = 0.8;
-        Robot.drivetrain.drive.curvatureDrive(
-                Robot.oi.getRightStick().getX() * throttle,
-                Robot.oi.getLeftStick().getY() * throttle,
-                Robot.oi.getSquaredInput());
+        Robot.drivetrain.set(ControlMode.PercentOutput, Robot.oi.getLeftStick().getY()*throttle,
+		Robot.oi.getRightStick().getX()*throttle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
