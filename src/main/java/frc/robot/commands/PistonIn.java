@@ -3,27 +3,25 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-
 /**
  *
  */
-public class DifferentialDriveWithXbox extends Command {
+public class PistonIn extends Command {
 
-    public DifferentialDriveWithXbox() {
-        requires(Robot.drivetrain);
+    public PistonIn() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+        requires(Robot.prototype);
     }
+
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        Robot.prototype.in();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        double throttle = 0.8;
-        Robot.drivetrain.drive.curvatureDrive(
-                Robot.oi.getRightStick().getX() * throttle,
-                Robot.oi.getLeftStick().getY() * throttle,
-                Robot.oi.getSquaredInput());
     }
 
     // Make this return true when this Command no longer needs to run execute()

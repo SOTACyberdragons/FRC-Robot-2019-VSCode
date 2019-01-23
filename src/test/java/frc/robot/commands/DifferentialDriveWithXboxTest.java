@@ -24,6 +24,7 @@ public class DifferentialDriveWithXboxTest {
         Robot.drivetrain = mock(DriveTrain.class);
         Robot.drivetrain.drive = mock(DifferentialDrive.class);
         Robot.oi = mock(OI.class);
+        when(Robot.oi.getSquaredInput()).thenReturn(true);
 
         stick = mock(Thumbstick.class);
         when(Robot.oi.getLeftStick()).thenReturn(stick);
