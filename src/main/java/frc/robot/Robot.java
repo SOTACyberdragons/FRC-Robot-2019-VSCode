@@ -1,4 +1,3 @@
-
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -6,11 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package org.usfirst.frc.team5700.robot;
 
-import frc.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5700.robot.subsystems.DriveTrain;
 
-import edu.wpi.first.wpilibj.TimedRobot;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -25,7 +29,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the build.properties file in the
  * project.
  */
-public class Robot extends TimedRobot {
+public class Robot extends IterativeRobot {
 	private Command autonomousCommand;
 	public static Preferences prefs;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -121,5 +125,17 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+	public static void initTalon(TalonSRX motor) {
+		motor.setNeutralMode(NeutralMode.Coast);
+		motor.neutralOutput();
+		motor.setSensorPhase(false);
+		motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+		motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+		motor.configNominalOutputForward(0.0,0);
+		motor.configNominalOutputReverse(0.0,0);
+		motor.configClosedloopRamp(0.5,0);
+		
+
 	}
 }
