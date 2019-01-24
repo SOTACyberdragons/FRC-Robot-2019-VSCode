@@ -9,12 +9,12 @@ import frc.robot.Robot;
 public class PistonOut extends Command {
 
     public PistonOut() {
-        requires(Robot.prototype);
+        requires(Robot.hatchIntake);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.prototype.out();
+        Robot.hatchIntake.out();
     }
 
     // Called repeatedly when this Command is scheduled to run

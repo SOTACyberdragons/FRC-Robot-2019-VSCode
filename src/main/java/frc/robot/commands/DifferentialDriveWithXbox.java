@@ -20,9 +20,9 @@ public class DifferentialDriveWithXbox extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         double throttle = 0.8;
-        Robot.drivetrain.drive.curvatureDrive(
-                Robot.oi.getRightStick().getX() * throttle,
-                Robot.oi.getLeftStick().getY() * throttle,
+        Robot.drivetrain.drive.arcadeDrive(
+                Robot.oi.getRightStick().getY() * throttle,
+                Robot.oi.getLeftStick().getX() * throttle,
                 Robot.oi.getSquaredInput());
     }
 

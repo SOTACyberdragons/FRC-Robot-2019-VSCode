@@ -11,13 +11,13 @@ public class PistonIn extends Command {
     public PistonIn() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.prototype);
+        requires(Robot.hatchIntake);
     }
 
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.prototype.in();
+        Robot.hatchIntake.in();
     }
 
     // Called repeatedly when this Command is scheduled to run
