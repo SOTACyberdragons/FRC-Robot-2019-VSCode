@@ -12,6 +12,7 @@ public class PistonIn extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(Robot.hatchIntake);
+        System.out.println("Im in");
     }
 
 

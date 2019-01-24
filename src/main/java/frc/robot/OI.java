@@ -24,9 +24,9 @@ public class OI {
 
 
     public OI() {
-        pistonOut = new JoystickButton(controller, 1);
+        pistonOut = new JoystickButton(controller, 2);
         pistonOut.whenPressed(new PistonOut());
-        pistonIn = new JoystickButton(controller, 2);
+        pistonIn = new JoystickButton(controller, 3);
         pistonIn.whenPressed(new PistonIn());
     }
 
