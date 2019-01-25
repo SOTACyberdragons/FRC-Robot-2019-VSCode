@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.PistonIn;
 import frc.robot.commands.PistonOut;
@@ -16,28 +17,39 @@ import frc.robot.commands.PistonOut;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    public XboxController controller = new XboxController(0);
+    //public XboxController controller = new XboxController(0);
     JoystickButton pistonOut;
     JoystickButton pistonIn;
     // Setting squaredInput to true decreases the sensitivity for tankdrive at lower speeds
-    private boolean squaredInput = true;
+	private boolean squaredInput = true;
+	
+	public Joystick leftStick = new Joystick(2);
+	public Joystick rightStick = new Joystick(3);
 
 
     public OI() {
-        pistonOut = new JoystickButton(controller, 2);
+        pistonOut = new JoystickButton(leftStick, 2);
         pistonOut.whenPressed(new PistonOut());
-        pistonIn = new JoystickButton(controller, 3);
+        pistonIn = new JoystickButton(leftStick, 3);
         pistonIn.whenPressed(new PistonIn());
-    }
+	}
+	
+	public Joystick getLeftStick() {
+		return leftStick;
+	}
+
+	public Joystick getRightStick() {
+		return rightStick;
+	}
 
 
-    public XboxController.Thumbstick getLeftStick() {
-        return controller.leftStick;
-    }
+    // public XboxControlle.Thumbsstick getLeftStick() {
+    //     return controller.leftStick;
+    // }
 
-    public XboxController.Thumbstick getRightStick() {
-        return controller.rightStick;
-    }
+    // public XboxController.Thumbstick getRightStick() {
+    //     return controller.rightStick;
+    // }
 
     public boolean getSquaredInput() {
         return squaredInput;

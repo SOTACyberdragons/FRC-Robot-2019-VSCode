@@ -15,7 +15,7 @@ public class HatchIntake extends Subsystem {
     public HatchIntake() {
         super();
         piston = new DoubleSolenoid(0, 1);
-        piston.set(DoubleSolenoid.Value.kReverse);
+        piston.set(DoubleSolenoid.Value.kForward);
     }
 
     public void out() {
