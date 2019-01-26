@@ -5,9 +5,9 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team5700.robot;
+package frc.robot;
 
-import org.usfirst.frc.team5700.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.DriveTrain;
 
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;

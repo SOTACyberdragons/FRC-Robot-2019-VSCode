@@ -1,8 +1,8 @@
-package org.usfirst.frc.team5700.robot.subsystems;
+package frc.robot.subsystems;
 
-import org.usfirst.frc.team5700.robot.Robot;
-import org.usfirst.frc.team5700.robot.RobotMap;
-import org.usfirst.frc.team5700.robot.commands.DifferentialDriveWithXbox;
+import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.commands.DifferentialDriveWithXbox;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
