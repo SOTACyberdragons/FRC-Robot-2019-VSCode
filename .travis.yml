@@ -1,20 +1,10 @@
-language: java
+language: minimal
 
-jdk:
-  - oraclejdk11
+dist: xenial
 
-before_install:
-  - wget -O gradle/gradle-bin.zip https://services.gradle.org/distributions/gradle-5.0-bin.zip
-  - unzip gradle/gradle-bin.zip -d gradle/gradle-bin
+install: docker-compose -f infrastructure/travis/docker-compose.yml build
 
-install: ./gradle/gradle-bin/gradle-5.0/bin/gradle assemble
+script: docker-compose -f infrastructure/travis/docker-compose.yml up
 
-script: ./gradle/gradle-bin/gradle-5.0/bin/gradle check
-
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+services:
+  - docker
