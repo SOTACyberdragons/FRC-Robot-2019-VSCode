@@ -9,6 +9,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.CargoSpinIn;
+import frc.robot.commands.CargoSpinOut;
 import frc.robot.commands.PistonIn;
 import frc.robot.commands.PistonOut;
 
@@ -20,6 +22,8 @@ public class OI {
     //public XboxController controller = new XboxController(0);
     JoystickButton pistonOut;
     JoystickButton pistonIn;
+    JoystickButton cargoIn;
+    JoystickButton cargoOut;
     // Setting squaredInput to true decreases the sensitivity for tankdrive at lower speeds
 	private boolean squaredInput = true;
 	
@@ -32,6 +36,10 @@ public class OI {
         pistonOut.whenPressed(new PistonOut());
         pistonIn = new JoystickButton(leftStick, 3);
         pistonIn.whenPressed(new PistonIn());
+        cargoIn = new JoystickButton(leftStick,1);
+        cargoIn.whileHeld(new CargoSpinIn());
+        cargoOut = new JoystickButton(rightStick,1);
+        cargoOut.whileHeld(new CargoSpinOut());
 	}
 	
 	public Joystick getLeftStick() {

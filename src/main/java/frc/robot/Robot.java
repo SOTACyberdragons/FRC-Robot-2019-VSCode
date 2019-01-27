@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.HatchIntake;
 
@@ -29,7 +30,8 @@ import frc.robot.subsystems.HatchIntake;
 public class Robot extends TimedRobot {
     public static Preferences prefs;
     public static DriveTrain drivetrain;
-    public static HatchIntake hatchIntake;
+	public static HatchIntake hatchIntake;
+	public static CargoIntake cargoIntake;
     public static OI oi;
     SendableChooser<Command> chooser;
     private Command autonomousCommand;
@@ -37,7 +39,8 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         drivetrain = new DriveTrain();
-        hatchIntake = new HatchIntake();
+		hatchIntake = new HatchIntake();
+		cargoIntake = new CargoIntake();
         oi = new OI();
 
         chooser = new SendableChooser<>();
