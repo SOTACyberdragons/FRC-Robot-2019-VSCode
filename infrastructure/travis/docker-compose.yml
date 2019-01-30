@@ -5,4 +5,3 @@ services:
     build:
       context: ../../
       dockerfile: infrastructure/travis/Dockerfile
-    command: ./gradlew test
