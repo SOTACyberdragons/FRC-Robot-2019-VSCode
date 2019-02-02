@@ -2,8 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.CargoSpinIn;
-import frc.robot.commands.CargoSpinOut;
+import frc.robot.commands.CargoIn;
+import frc.robot.commands.CargoOut;
 import frc.robot.commands.PistonIn;
 import frc.robot.commands.PistonOut;
 
