@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.DifferentialDriveWithJoysticks;
+import frc.robot.commands.DifferentialDriveWithJoysticks;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -21,7 +21,6 @@ public class DriveTrain extends Subsystem {
 	private TalonSRX rightMotor;
 	private TalonSRX rightMotorFollower;
 
-	public DifferentialDrive drive; 
 	
 	
 	public DriveTrain() {

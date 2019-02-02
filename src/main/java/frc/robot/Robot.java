@@ -8,7 +8,7 @@
 package frc.robot;
 
 import frc.robot.subsystems.DriveTrain;
-import frc.team5700.robot.subsystems.HatchPanelIntake;
+import frc.robot.subsystems.HatchPanelIntake;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Arm;
 

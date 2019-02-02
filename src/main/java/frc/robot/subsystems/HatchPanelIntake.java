@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class HatchIntake extends Subsystem {
+public class HatchPanelIntake extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -12,7 +12,7 @@ public class HatchIntake extends Subsystem {
     public Compressor compressor = new Compressor();
     private DoubleSolenoid piston;
 
-    public HatchIntake() {
+    public HatchPanelIntake() {
         super();
         piston = new DoubleSolenoid(0, 1);
         piston.set(DoubleSolenoid.Value.kForward);
