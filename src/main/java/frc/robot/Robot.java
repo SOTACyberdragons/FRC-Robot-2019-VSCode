@@ -5,9 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package org.usfirst.frc.team5700.robot;
 
-import frc.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5700.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5700.robot.subsystems.HatchPanelIntake;
+import org.usfirst.frc.team5700.robot.subsystems.CargoIntake;
+import org.usfirst.frc.team5700.robot.subsystems.Arm;
 
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
@@ -35,12 +38,18 @@ public class Robot extends IterativeRobot {
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	
-	public static OI oi;
+	public static HatchPanelIntake hatchPanelIntake;
+	public static CargoIntake cargoIntake;
+	public static Arm arm;
 	public static DriveTrain drivetrain;
+	public static OI oi;
 
 	
 	@Override
 	public void robotInit() {
+		hatchPanelIntake = new HatchPanelIntake();
+		cargoIntake = new CargoIntake();
+		arm = new Arm();
 		drivetrain = new DriveTrain();
 		oi = new OI();
 		
