@@ -1,8 +1,8 @@
-package org.usfirst.frc.team5700.robot.subsystems;
+package frc.robot.subsystems;
 
-import org.usfirst.frc.team5700.robot.Robot;
-import org.usfirst.frc.team5700.robot.RobotMap;
-import org.usfirst.frc.team5700.robot.commands.DifferentialDriveWithJoysticks;
+import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.DifferentialDriveWithJoysticks;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -48,12 +48,10 @@ public class DriveTrain extends Subsystem {
 		rightMotor.set(mode,leftvalue);
 
 	}
-	public void stop() {
-		drive.curvatureDrive(0.0, 0.0, true);
-	}
+	
 	
 	public void initDefaultCommand() {
-		setDefaultCommand(new DifferentialDriveWithXbox());
+		setDefaultCommand(new DifferentialDriveWithJoysticks());
 	}
 }
 

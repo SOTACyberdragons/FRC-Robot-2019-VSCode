@@ -5,12 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team5700.robot;
+package frc.robot;
 
-import org.usfirst.frc.team5700.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5700.robot.subsystems.HatchPanelIntake;
-import org.usfirst.frc.team5700.robot.subsystems.CargoIntake;
-import org.usfirst.frc.team5700.robot.subsystems.Arm;
+import frc.robot.subsystems.DriveTrain;
+import frc.team5700.robot.subsystems.HatchPanelIntake;
+import frc.robot.subsystems.CargoIntake;
+import frc.robot.subsystems.Arm;
 
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
