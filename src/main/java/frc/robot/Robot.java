@@ -135,17 +135,15 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 	}
-	
-	public static void initTalon(TalonSRX motor) {
-		motor.setNeutralMode(NeutralMode.Coast);
-		motor.neutralOutput();
-		motor.setSensorPhase(false);
-		motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-		motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-		motor.configNominalOutputForward(0.0,0);
-		motor.configNominalOutputReverse(0.0,0);
-		motor.configClosedloopRamp(0.5,0);
-		
 
+	public static void initTalon(TalonSRX talon) {
+		talon.setNeutralMode(NeutralMode.Coast);
+		talon.neutralOutput();
+		talon.setSensorPhase(false);
+		talon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+		talon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+		talon.configNominalOutputForward(0.0,0);
+		talon.configNominalOutputReverse(0.0,0);
+		talon.configClosedloopRamp(0.5,0);
 	}
 }

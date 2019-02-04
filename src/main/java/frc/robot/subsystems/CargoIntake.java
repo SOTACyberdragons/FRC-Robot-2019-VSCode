@@ -24,6 +24,11 @@ public class CargoIntake extends Subsystem {
         cargoMotor.set(-1);
     }
 
+    //we don't have any sensors for this yet
+    public boolean hasCargo() {
+        return false;
+    }
+
     // Put methods for controlling this subsyst
 
 }
