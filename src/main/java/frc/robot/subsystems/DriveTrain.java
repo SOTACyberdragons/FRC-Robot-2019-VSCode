@@ -1,15 +1,11 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.DifferentialDriveWithXbox;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.DifferentialDriveWithJoysticks;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 
 /**
@@ -18,20 +14,20 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class DriveTrain extends Subsystem {
 
 	
-	private TalonSRX leftMotor;
-	private TalonSRX leftMotorFollower;
-	private TalonSRX rightMotor;
-	private TalonSRX rightMotorFollower;
-
-	public DifferentialDrive drive; 
+	private WPI_TalonSRX leftMotor;
+	private WPI_TalonSRX leftMotorFollower;
+	private WPI_TalonSRX rightMotor;
+	private WPI_TalonSRX rightMotorFollower;
+	public DifferentialDrive drive;
 	
 	
 	public DriveTrain() {
 
-		leftMotor = new TalonSRX(RobotMap.LEFT_DRIVE_MOTOR);
-		rightMotor = new TalonSRX(RobotMap.RIGHT_DRIVE_MOTOR);
-		leftMotorFollower = new TalonSRX(RobotMap.LEFT_DRIVE_FOLLOW_MOTOR);
-		rightMotorFollower = new TalonSRX(RobotMap.RIGHT_DRIVE_FOLLOW_MOTOR);
+		leftMotor = new WPI_TalonSRX(RobotMap.LEFT_DRIVE_MOTOR);
+		rightMotor = new WPI_TalonSRX(RobotMap.RIGHT_DRIVE_MOTOR);
+		leftMotorFollower = new WPI_TalonSRX(RobotMap.LEFT_DRIVE_FOLLOW_MOTOR);
+		rightMotorFollower = new WPI_TalonSRX(RobotMap.RIGHT_DRIVE_FOLLOW_MOTOR);
+		drive = new DifferentialDrive(leftMotor, rightMotor);
 	
 		
 		Robot.initTalon(leftMotor);
@@ -41,21 +37,11 @@ public class DriveTrain extends Subsystem {
 		
 		leftMotorFollower.follow(leftMotor);
 		rightMotorFollower.follow(rightMotor);
-		
-		rightMotor.setInverted (true);
-		
-	}
-	public void set(ControlMode mode, double leftvalue, double rightvalue) {
-		leftMotor.set(mode,leftvalue);
-		rightMotor.set(mode,leftvalue);
-
-	}
-	public void stop() {
-		drive.curvatureDrive(0.0, 0.0, true);
 	}
 	
+	
 	public void initDefaultCommand() {
-		setDefaultCommand(new DifferentialDriveWithXbox());
+		setDefaultCommand(new DifferentialDriveWithJoysticks());
 	}
 }
 

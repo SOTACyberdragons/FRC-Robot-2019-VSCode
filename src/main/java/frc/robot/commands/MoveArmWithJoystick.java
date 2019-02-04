@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,12 +9,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DifferentialDriveWithXbox extends Command {
+public class MoveArmWithJoystick extends Command {
 
-    public DifferentialDriveWithXbox() {
+    public MoveArmWithJoystick() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	requires(Robot.arm);
     }
 
     // Called just before this Command runs the first time
@@ -22,8 +23,8 @@ public class DifferentialDriveWithXbox extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.drivetrain.set(ControlMode.PercentOutput, Robot.oi.getLeftStick().getY()*throttle,
-		Robot.oi.getRightStick().getX()*throttle);
+        double throttle = 0.8;
+        Robot.arm.set(ControlMode.PercentOutput, Robot.oi.getLeftAuxStick().getY()*throttle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
