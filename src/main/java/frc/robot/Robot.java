@@ -135,6 +135,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 	}
+	
 	public static void initTalon(TalonSRX motor) {
 		motor.setNeutralMode(NeutralMode.Coast);
 		motor.neutralOutput();
