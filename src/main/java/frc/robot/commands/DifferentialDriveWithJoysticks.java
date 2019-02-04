@@ -1,8 +1,6 @@
 package frc.robot.commands;
 
 import frc.robot.Robot;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 
 import edu.wpi.first.wpilibj.command.Command;
 

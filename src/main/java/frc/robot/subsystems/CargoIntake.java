@@ -1,18 +1,19 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Spark;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 public class CargoIntake extends Subsystem {
 
 
-    public Spark cargoMotor;
+    public WPI_TalonSRX cargoMotor;
 
     @Override
     protected void initDefaultCommand() {
-        cargoMotor = new Spark(4);
+        cargoMotor = new WPI_TalonSRX(RobotMap.CARGO_MOTOR);
     }
 
     public void spinIn() {

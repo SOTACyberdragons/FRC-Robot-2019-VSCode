@@ -4,7 +4,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.MoveArmWithJoystick;
@@ -16,19 +16,23 @@ import frc.robot.commands.MoveArmWithJoystick;
 public class Arm extends Subsystem {
 
 	
-	private TalonSRX armMotor;
+	private WPI_TalonSRX rightArmMotor;
+	private WPI_TalonSRX leftArmMotor;
 
 	
 	
 	public Arm() {
 
-		armMotor = new TalonSRX(RobotMap.ARM_MOTOR);
+		rightArmMotor = new WPI_TalonSRX(RobotMap.RIGHT_ARM_MOTOR);
+		leftArmMotor = new WPI_TalonSRX(RobotMap.LEFT_ARM_MOTOR);
 
-		Robot.initTalon(armMotor);
+		Robot.initTalon(leftArmMotor);
+		Robot.initTalon(rightArmMotor);
 		
 	}
 	public void set(ControlMode mode, double value) {
-		armMotor.set(mode, value);
+		rightArmMotor.set(mode, value);
+		leftArmMotor.set(mode, value);
 	}
 	
 	public void initDefaultCommand() {
