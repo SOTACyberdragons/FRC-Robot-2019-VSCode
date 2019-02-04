@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class HatchPanelIntake extends Subsystem {
@@ -26,6 +27,17 @@ public class HatchPanelIntake extends Subsystem {
         piston.set(DoubleSolenoid.Value.kReverse);
     }
 
+    public boolean hasHatch() {
+        boolean check = false;
+        if(piston.get() == Value.kForward) {
+            check = true;
+        } else if(piston.get() == Value.kReverse) {
+            check = false; 
+        } else {
+            check = false;
+        }
+        return check;
+    }
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
