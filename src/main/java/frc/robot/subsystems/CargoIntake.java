@@ -17,13 +17,16 @@ public class CargoIntake extends Subsystem {
     }
 
     public void spinIn() {
-        cargoMotor.set(1);
+        cargoMotor.set(0.5);
     }
 
     public void spinOut() {
-        cargoMotor.set(-1);
+        cargoMotor.set(-0.5);
     }
 
+    public void stop() {
+        cargoMotor,set(0);
+    }
     //we don't have any sensors for this yet
     public boolean hasCargo() {
         return false;

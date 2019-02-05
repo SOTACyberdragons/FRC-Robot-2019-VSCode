@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.Instrum;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -50,7 +51,7 @@ public class Arm extends Subsystem {
 
 	public void initArmTalon(WPI_TalonSRX talon) {
 		talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
-		setEncoder(0.);
+		setEncoder(0); //@TODO figure out what this should be
 		talon.setSensorPhase(true);
 		talon.setInverted(true);
 	
@@ -83,7 +84,7 @@ public class Arm extends Subsystem {
 		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOut", 0.075);
 		
 		double maxNominalOutput;
-		if(Robot.hatchPanelIntake.hasHatch() && Robot.cargoIntake.hasCargo()) {
+		if(Robot.hatchPanelIntake.hasHatch() && !Robot.cargoIntake.hasCargo()) {
 			maxNominalOutput = wHatchMaxNominalOutput;
 		} else if(Robot.cargoIntake.hasCargo() && !Robot.hatchPanelIntake.hasHatch()) {
 			maxNominalOutput = wCargoMaxNominalOutput;
@@ -108,11 +109,17 @@ public class Arm extends Subsystem {
 		rightArmTalon.setSelectedSensorPosition((int)(angle * TICKS_PER_DEG), Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
 	}
 
-	public void set(ControlMode mode, double value) {
-		rightArmTalon.set(mode, value);
-		leftArmTalon.set(mode, value);
+	public void moveArmWithJoystick(double stickValue) {
+		StringBuilder sb = new StringBuilder();
+		setTalons(stickValue + getFeedForward());
+		Instrum.Process(leftArmTalon, sb);
+		Instrum.Process(rightArmTalon, sb);
 	}
 	
+	private void setTalons(double output) {
+		leftArmTalon.set(ControlMode.PercentOutput, output);
+		rightArmTalon.set(ControlMode.PercentOutput, output);
+	}
 	public void initDefaultCommand() {
 		setDefaultCommand(new MoveArmWithJoystick());
 	}
