@@ -10,7 +10,6 @@ public class CargoIntake extends Subsystem {
 
 
     public WPI_TalonSRX cargoMotor;
-    private double speed = 0.5;
 
     @Override
     protected void initDefaultCommand() {
@@ -18,15 +17,15 @@ public class CargoIntake extends Subsystem {
     }
 
     public void spinIn() {
-        cargoMotor.set(speed);
+        cargoMotor.set(0.5);
     }
 
     public void spinOut() {
-        cargoMotor.set(-speed);
+        cargoMotor.set(-0.5);
     }
 
     public void stop() {
-        cargoMotor.stopMotor();
+        cargoMotor,set(0);
     }
     //we don't have any sensors for this yet
     public boolean hasCargo() {
