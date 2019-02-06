@@ -25,7 +25,7 @@ public class CargoIntake extends Subsystem {
     }
 
     public void stop() {
-        cargoMotor,set(0);
+        cargoMotor.set(0);
     }
     //we don't have any sensors for this yet
     public boolean hasCargo() {
