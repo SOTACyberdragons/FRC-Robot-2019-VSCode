@@ -24,7 +24,7 @@ public class MoveArmWithJoystick extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         double throttle = 0.8;
-        Robot.arm.set(ControlMode.PercentOutput, Robot.oi.getLeftAuxStick().getY()*throttle);
+        Robot.arm.moveArmWithJoystick(Robot.oi.getLeftAuxStick().getY()*throttle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
