@@ -12,7 +12,8 @@ import frc.robot.commands.PistonOut;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    //public XboxController controller = new XboxController(0);
+
+
     JoystickButton pistonOut;
     JoystickButton pistonIn;
     JoystickButton cargoIn;
@@ -23,17 +24,34 @@ public class OI {
 	public Joystick leftStick = new Joystick(0);
     public Joystick rightStick = new Joystick(1);
     public Joystick leftAuxStick = new Joystick(2);
+    public Joystick rightAuxStick = new Joystick(3);
     
 
 
     public OI() {
-        pistonOut = new JoystickButton(leftStick, 2);
+
+        /*
+        Set buttons
+        */
+
+        //Hatch panel intake
+        pistonOut = new JoystickButton(leftStick, ButtonMap.CLOSE_HATCH_PANEL_INTAKE);
+        pistonIn = new JoystickButton(leftStick, ButtonMap.OPEN_HATCH_PANEL_INTAKE);
+        
+        //Cargo Intake 
+        cargoIn = new JoystickButton(leftStick, ButtonMap.INTAKE_CARGO);
+        cargoOut = new JoystickButton(rightStick, ButtonMap.RELEASE_CARGO);
+       
+        /*
+        Set commands
+        */
+
+        //Hatch panel intake
         pistonOut.whenPressed(new PistonOut());
-        pistonIn = new JoystickButton(leftStick, 3);
         pistonIn.whenPressed(new PistonIn());
-        cargoIn = new JoystickButton(leftStick,1);
+
+        //Cargo Intake
         cargoIn.whileHeld(new CargoIn());
-        cargoOut = new JoystickButton(rightStick,1);
         cargoOut.whileHeld(new CargoOut());
 	}
 	
@@ -47,15 +65,12 @@ public class OI {
 
     public Joystick getLeftAuxStick() {
 		return leftAuxStick;
-	}
+    }
+    
+    public Joystick getRIghtAuxStick() {
+        return rightAuxStick;
+    }
 
-    // public XboxControlle.Thumbsstick getLeftStick() {
-    //     return controller.leftStick;
-    // }
-
-    // public XboxController.Thumbstick getRightStick() {
-    //     return controller.rightStick;
-    // }
 
     public boolean getSquaredInput() {
         return squaredInput;

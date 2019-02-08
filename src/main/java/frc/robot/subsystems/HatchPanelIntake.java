@@ -27,6 +27,7 @@ public class HatchPanelIntake extends Subsystem {
         piston.set(DoubleSolenoid.Value.kReverse);
     }
 
+    // 
     public boolean hasHatch() {
         boolean check = false;
         if(piston.get() == Value.kForward) {

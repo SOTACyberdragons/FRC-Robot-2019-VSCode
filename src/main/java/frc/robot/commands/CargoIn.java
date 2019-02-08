@@ -21,8 +21,10 @@ public class CargoIn extends Command {
     }
 
     protected void end() {
+        Robot.cargoIntake.stop();
     }
 
     protected void interrupted() {
+        end();
     }
 }
