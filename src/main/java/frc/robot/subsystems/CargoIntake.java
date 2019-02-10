@@ -43,6 +43,18 @@ public class CargoIntake extends Subsystem {
     public boolean hasCargo() {
         return false;
     }
+    //775 pro max current is 134 
+    public boolean isStalling() {
+        boolean check;
+        if(cargoMotor.getOutputCurrent() > 100) {
+            check = true;
+        } else if(cargoMotor.getOutputCurrent() <= 100) {
+            check = false;
+        } else {
+            check = true;
+        }
+        return check;
+    }
 
     // Put methods for controlling this subsyst
 

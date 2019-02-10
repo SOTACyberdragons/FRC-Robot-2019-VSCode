@@ -21,6 +21,7 @@ public class OI {
     JoystickButton cargoIn;
     JoystickButton cargoOut;
     JoystickButton flashLight;
+    
     JoystickButton groundPosition;
     JoystickButton backwardsPosition;
     JoystickButton ballInCargoShipPosition;
