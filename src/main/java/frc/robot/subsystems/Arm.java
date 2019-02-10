@@ -22,7 +22,7 @@ public class Arm extends Subsystem {
 
 	//Constants
 	public final static double REDUCTION_TO_ENCODER = 114.55; 
-	public final static double TICKS_PER_DEG = (Constants.VERSA_ENCODER_TPR * REDUCTION_TO_ENCODER) / 360;
+	public final static double TICKS_PER_DEG = (Constants.MAG_ENCODER_TPR * REDUCTION_TO_ENCODER) / 360;
 	public final static double ENCODER_MAX_SPEED = 33000; //ticks per 100 ms
 	
 	//Motor controllers 
@@ -104,6 +104,19 @@ public class Arm extends Subsystem {
 
 	}
 
+	public void zeroEncoder() {
+		leftArmTalon.setSelectedSensorPosition(0, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
+		rightArmTalon.setSelectedSensorPosition(0, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
+	}
+	
+	public double getLeftRawEncoderTicks() {
+		return leftArmTalon.getSelectedSensorPosition(0);
+	}
+
+	public double getRightRawEncoderTicks() {
+		return rightArmTalon.getSelectedSensorPosition(0);
+	}
+
 	public void setEncoder(double angle) {
 		leftArmTalon.setSelectedSensorPosition((int)(angle * TICKS_PER_DEG), Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
 		rightArmTalon.setSelectedSensorPosition((int)(angle * TICKS_PER_DEG), Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
@@ -115,12 +128,28 @@ public class Arm extends Subsystem {
 		Instrum.Process(leftArmTalon, sb);
 		Instrum.Process(rightArmTalon, sb);
 	}
+
+	//current
+	public double getLeftCurrent() {
+		return leftArmTalon.getOutputCurrent();	
+	}
+
+	public double getRightCurrent() {
+		return rightArmTalon.getOutputCurrent();
+	}
 	
-	private void setTalons(double output) {
+	public void setTalons(double output) {
 		leftArmTalon.set(ControlMode.PercentOutput, output);
 		rightArmTalon.set(ControlMode.PercentOutput, output);
 	}
 	public void initDefaultCommand() {
 		setDefaultCommand(new MoveArmWithJoystick());
 	}
+
+	public void moveArmToAngle(double angle) {
+		leftArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
+		rightArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
+
+	}
+
 }

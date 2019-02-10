@@ -23,4 +23,5 @@ public class RobotMap {
 	public static final int LEFT_ARM_MOTOR = 1;
 	public static final int CARGO_MOTOR = 6;
 
+
 }

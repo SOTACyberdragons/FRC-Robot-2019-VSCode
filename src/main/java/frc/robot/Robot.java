@@ -127,6 +127,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+
+		//hatch panel intake 
+		SmartDashboard.putBoolean("Hatch panel intake is open", hatchPanelIntake.isOpen());
 	}
 
 	/**
@@ -134,7 +137,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+
 	}
+
 
 	public static void initTalon(TalonSRX talon) {
 		talon.setNeutralMode(NeutralMode.Coast);
