@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.CargoIn;
 import frc.robot.commands.CargoOut;
+import frc.robot.commands.FlashLightForCargo;
+import frc.robot.commands.MoveArmToAngle;
 import frc.robot.commands.PistonIn;
 import frc.robot.commands.PistonOut;
 
@@ -18,6 +20,17 @@ public class OI {
     JoystickButton pistonIn;
     JoystickButton cargoIn;
     JoystickButton cargoOut;
+    JoystickButton flashLight;
+    JoystickButton groundPosition;
+    JoystickButton backwardsPosition;
+    JoystickButton ballInCargoShipPosition;
+    JoystickButton ballInRocketPosition;
+    JoystickButton ballOutCargoShipPosition;
+
+
+
+
+
     // Setting squaredInput to true decreases the sensitivity for tankdrive at lower speeds
 	private boolean squaredInput = true;
 	
@@ -41,6 +54,18 @@ public class OI {
         //Cargo Intake 
         cargoIn = new JoystickButton(leftStick, ButtonMap.INTAKE_CARGO);
         cargoOut = new JoystickButton(rightStick, ButtonMap.RELEASE_CARGO);
+
+        //Arm Positions
+        groundPosition = new JoystickButton(leftAuxStick, ButtonMap.GROUND_POSITION);
+        backwardsPosition = new JoystickButton(leftAuxStick, ButtonMap.BACKWARDS_POSITION);
+        ballInCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_CARGO_SHIP_POSITION);
+        ballInRocketPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_ROCKET_POSITION);
+        ballOutCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_OUT_CARGO_SHIP_POSITION);
+
+
+
+        //LED
+        flashLight = new JoystickButton(rightStick, ButtonMap.FLASH_LIGHT);
        
         /*
         Set commands
@@ -53,6 +78,18 @@ public class OI {
         //Cargo Intake
         cargoIn.whileHeld(new CargoIn());
         cargoOut.whileHeld(new CargoOut());
+
+        //Arm position
+        //change numbers 
+        groundPosition.whileHeld(new MoveArmToAngle(148));
+        backwardsPosition.whileHeld(new MoveArmToAngle(0));
+        ballInCargoShipPosition.whileHeld(new MoveArmToAngle(66)); 
+        ballInRocketPosition.whileHeld(new MoveArmToAngle(22));
+        ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(91));
+
+
+        //LED
+        flashLight.whileHeld(new FlashLightForCargo());
 	}
 	
 	public Joystick getLeftStick() {

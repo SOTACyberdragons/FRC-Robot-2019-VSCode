@@ -27,6 +27,20 @@ public class HatchPanelIntake extends Subsystem {
         piston.set(DoubleSolenoid.Value.kReverse);
     }
 
+    public void getPiston() {
+        piston.get();
+    }
+
+    public boolean isOpen() {
+        boolean check;
+        if(piston.get() == DoubleSolenoid.Value.kForward) {
+            check = true;
+        } else {
+            check = false;
+        }
+        return check;
+    }
+
     // 
     public boolean hasHatch() {
         boolean check = false;
@@ -39,6 +53,7 @@ public class HatchPanelIntake extends Subsystem {
         }
         return check;
     }
+
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());

@@ -9,6 +9,8 @@ public class Constants {
 	 */
 	public static final int SLOT_IDX = 0;
 
+
+
 	/**
 	 * Talon SRX/ Victor SPX will supported multiple (cascaded) PID loops. For
 	 * now we just want the primary one.
@@ -26,6 +28,7 @@ public class Constants {
 	 */
 	public static final int TALON_MAX_OUTPUT = 1023;
 	public static final int VERSA_ENCODER_TPR = 4096;
+	public static final int MAG_ENCODER_TPR = 4096; //change this number
 	
 	/**
 	 * Roborio
