@@ -101,6 +101,27 @@ public interface Waypoints {
 			};
  		}
 	}
+
+	public final class Vision implements Waypoints {
+
+		private final double distanceX;
+		private final double distanceY;
+		private final double angleDeg;
+
+		public Vision(double distanceX, double distanceY, double angleDeg) {
+			this.distanceX = distanceX;
+			this.distanceY = distanceY;
+			this.angleDeg = angleDeg;
+		}
+
+		public Waypoint[] points() {
+			return  new Waypoint[] {
+					new Waypoint(0, 0, 0),
+					new Waypoint(distanceX, distanceY, Math.toRadians(angleDeg)),
+
+			};
+		}
+	}
 	
 	
 }
