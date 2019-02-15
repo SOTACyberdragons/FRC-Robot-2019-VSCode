@@ -31,7 +31,7 @@ public class HatchPanelIntake extends Subsystem {
         piston.get();
     }
 
-    public boolean isOpen() {
+    public boolean isClosed() {
         boolean check;
         if(piston.get() == DoubleSolenoid.Value.kForward) {
             check = true;
@@ -43,15 +43,7 @@ public class HatchPanelIntake extends Subsystem {
 
     // 
     public boolean hasHatch() {
-        boolean check = false;
-        if(piston.get() == Value.kForward) {
-            check = true;
-        } else if(piston.get() == Value.kReverse) {
-            check = false; 
-        } else {
-            check = false;
-        }
-        return check;
+        return isClosed(); 
     }
 
     public void initDefaultCommand() {

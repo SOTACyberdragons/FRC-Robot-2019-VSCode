@@ -2,16 +2,17 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 public class CargoIntake extends Subsystem {
 
-
     public WPI_TalonSRX cargoMotor;
     private double speed = 0.5;
     private Solenoid ringLight;
+    private DigitalInput breakBeam;
 
     @Override
     protected void initDefaultCommand() {
@@ -41,8 +42,10 @@ public class CargoIntake extends Subsystem {
 
     //we don't have any sensors for this yet
     public boolean hasCargo() {
-        return false;
+        return breakBeam.get();
     }
+
+
     //775 pro max current is 134 
     public boolean isStalling() {
         boolean check;
