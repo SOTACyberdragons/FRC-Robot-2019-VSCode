@@ -8,11 +8,11 @@ public class TurnOnLight extends Command {
 
 
     public TurnOnLight() {
-        requires(Robot.cargoIntake);
+        requires(Robot.drivetrain);
     }
 
     protected void initialize() {
-        Robot.cargoIntake.lightOn();
+        Robot.drivetrain.lightOn();
     }
 
     protected void execute() {
@@ -24,7 +24,7 @@ public class TurnOnLight extends Command {
     }
 
     protected void end() {
-        Robot.cargoIntake.lightOff();
+        Robot.drivetrain.lightOff();
 
     }
 

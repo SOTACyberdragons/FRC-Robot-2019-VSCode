@@ -9,9 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.HatchPanelIntake;
-import frc.robot.subsystems.CargoIntake;
-import frc.robot.subsystems.Arm;
+
 
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
@@ -37,19 +35,14 @@ public class Robot extends TimedRobot {
 	public static Preferences prefs;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
-	
-	public static HatchPanelIntake hatchPanelIntake;
-	public static CargoIntake cargoIntake;
-	public static Arm arm;
+
 	public static DriveTrain drivetrain;
 	public static OI oi;
 
 	
 	@Override
 	public void robotInit() {
-		hatchPanelIntake = new HatchPanelIntake();
-		cargoIntake = new CargoIntake();
-		arm = new Arm();
+
 		drivetrain = new DriveTrain();
 		oi = new OI();
 		
@@ -129,7 +122,7 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 
 		//hatch panel intake 
-		SmartDashboard.putBoolean("Hatch panel intake is open", hatchPanelIntake.isOpen());
+
 	}
 
 	/**

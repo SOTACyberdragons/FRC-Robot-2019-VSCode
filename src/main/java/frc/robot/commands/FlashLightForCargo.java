@@ -8,7 +8,7 @@ public class FlashLightForCargo extends Command {
 
     private Timer timer = new Timer();
     public FlashLightForCargo() {
-        requires(Robot.cargoIntake);
+        requires(Robot.drivetrain);
     }
 
     protected void initialize() {
@@ -17,9 +17,9 @@ public class FlashLightForCargo extends Command {
 
     protected void execute() {
         if((int)(timer.get()*5)/2 == 0) {
-            Robot.cargoIntake.lightOn();
+            Robot.drivetrain.lightOn();
         } else{
-            Robot.cargoIntake.lightOff();
+            Robot.drivetrain.lightOff();
         }
     }
 
@@ -28,7 +28,7 @@ public class FlashLightForCargo extends Command {
     }
 
     protected void end() {
-        Robot.cargoIntake.lightOff();
+        Robot.drivetrain.lightOff();
         timer.stop();
         timer.reset();                                                                                                                                        
     }

@@ -2,12 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.CargoIn;
-import frc.robot.commands.CargoOut;
-import frc.robot.commands.FlashLightForCargo;
-import frc.robot.commands.MoveArmToAngle;
-import frc.robot.commands.PistonIn;
-import frc.robot.commands.PistonOut;
+import frc.robot.commands.TurnOnLight;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -16,18 +11,8 @@ import frc.robot.commands.PistonOut;
 public class OI {
     //public XboxController controller = new XboxController(0);
 
-
-    JoystickButton pistonOut;
-    JoystickButton pistonIn;
-    JoystickButton cargoIn;
-    JoystickButton cargoOut;
-    JoystickButton flashLight;
+    JoystickButton lightOn;
     
-    JoystickButton groundPosition;
-    JoystickButton backwardsPosition;
-    JoystickButton ballInCargoShipPosition;
-    JoystickButton ballInRocketPosition;
-    JoystickButton ballOutCargoShipPosition;
 
 
 
@@ -49,49 +34,19 @@ public class OI {
         Set buttons
         */
 
-        //Hatch panel intake
-        pistonOut = new JoystickButton(leftStick, ButtonMap.CLOSE_HATCH_PANEL_INTAKE);
-        pistonIn = new JoystickButton(leftStick, ButtonMap.OPEN_HATCH_PANEL_INTAKE);
-        
-        //Cargo Intake 
-        cargoIn = new JoystickButton(leftStick, ButtonMap.INTAKE_CARGO);
-        cargoOut = new JoystickButton(rightStick, ButtonMap.RELEASE_CARGO);
-
-        //Arm Positions
-        groundPosition = new JoystickButton(leftAuxStick, ButtonMap.GROUND_POSITION);
-        backwardsPosition = new JoystickButton(leftAuxStick, ButtonMap.BACKWARDS_POSITION);
-        ballInCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_CARGO_SHIP_POSITION);
-        ballInRocketPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_ROCKET_POSITION);
-        ballOutCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_OUT_CARGO_SHIP_POSITION);
-
 
 
         //LED
-        flashLight = new JoystickButton(rightStick, ButtonMap.FLASH_LIGHT);
+        lightOn = new JoystickButton(rightStick, ButtonMap.FLASH_LIGHT);
        
         /*
         Set commands
         */
 
-        //Hatch panel intake
-        pistonOut.whenPressed(new PistonOut());
-        pistonIn.whenPressed(new PistonIn());
-
-        //Cargo Intake
-        cargoIn.whileHeld(new CargoIn());
-        cargoOut.whileHeld(new CargoOut());
-
-        //Arm position
-        //change numbers 
-        groundPosition.whileHeld(new MoveArmToAngle(148));
-        backwardsPosition.whileHeld(new MoveArmToAngle(0));
-        ballInCargoShipPosition.whileHeld(new MoveArmToAngle(66)); 
-        ballInRocketPosition.whileHeld(new MoveArmToAngle(22));
-        ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(91));
 
 
         //LED
-        flashLight.whileHeld(new FlashLightForCargo());
+        lightOn.whileHeld(new TurnOnLight());
 	}
 	
 	public Joystick getLeftStick() {
@@ -106,7 +61,7 @@ public class OI {
 		return leftAuxStick;
     }
     
-    public Joystick getRIghtAuxStick() {
+    public Joystick getRightAuxStick() {
         return rightAuxStick;
     }
 

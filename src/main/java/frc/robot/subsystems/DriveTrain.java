@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants;
@@ -35,6 +36,7 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX leftMotorFollower;
 	private WPI_TalonSRX rightMotor;
 	private WPI_TalonSRX rightMotorFollower;
+	private Solenoid light = new Solenoid(0);
 	
 	public DifferentialDrive drive;
 
@@ -122,6 +124,16 @@ public class DriveTrain extends Subsystem {
 		rightMotor.setSelectedSensorPosition(0);
 		gyro.reset();
 	}
+
+	public void lightOn() {
+		light.set(true);
+	}
+
+	
+	public void lightOff() {
+		light.set(false);
+	}
+
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new DifferentialDriveWithJoysticks());
