@@ -23,6 +23,7 @@ public class OI {
 	public Joystick leftStick = new Joystick(0);
     public Joystick rightStick = new Joystick(1);
     public Joystick leftAuxStick = new Joystick(2);
+    public Joystick rightAuxStick = new Joystick(3);
     
 
 
@@ -31,11 +32,12 @@ public class OI {
         pistonOut.whenPressed(new PistonOut());
         pistonIn = new JoystickButton(leftStick, 3);
         pistonIn.whenPressed(new PistonIn());
-        cargoIn = new JoystickButton(leftStick,1);
+        cargoIn = new JoystickButton(rightStick,4);
         cargoIn.whileHeld(new CargoIn());
         cargoOut = new JoystickButton(rightStick,1);
         cargoOut.whileHeld(new CargoOut());
-	}
+    }
+    
 	
 	public Joystick getLeftStick() {
 		return leftStick;
@@ -47,6 +49,10 @@ public class OI {
 
     public Joystick getLeftAuxStick() {
 		return leftAuxStick;
+    }
+    
+    public Joystick getRightAuxStick() {
+		return rightAuxStick;
 	}
 
     // public XboxControlle.Thumbsstick getLeftStick() {
