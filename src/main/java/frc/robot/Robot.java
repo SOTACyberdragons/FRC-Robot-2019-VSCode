@@ -127,6 +127,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+
+		//hatch panel intake 
+		SmartDashboard.putBoolean("Hatch panel intake is open", hatchPanelIntake.isOpen());
 	}
 
 	/**
@@ -134,16 +137,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+
 	}
 
-	public static void initTalon(TalonSRX talon) {
-		talon.setNeutralMode(NeutralMode.Coast);
-		talon.neutralOutput();
-		talon.setSensorPhase(false);
-		talon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-		talon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-		talon.configNominalOutputForward(0.0,0);
-		talon.configNominalOutputReverse(0.0,0);
-		talon.configClosedloopRamp(0.5,0);
-	}
+
 }

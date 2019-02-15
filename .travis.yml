@@ -1,0 +1,10 @@
+language: minimal
+
+dist: xenial
+
+install: docker-compose -f infrastructure/travis/docker-compose.yml build
+
+script: docker-compose -f infrastructure/travis/docker-compose.yml up
+
+services:
+  - docker
