@@ -7,6 +7,10 @@ public interface Waypoints {
 
 	public Waypoint[] points();
 
+	//X is verticle axis, forwards is positive and backwards is negative
+	//Y is the horizontal axis, right is positive and left is negative
+	//Turning is in radians, right is positive ansd left is negative
+
 	public final class CenterToLeftSwitch implements Waypoints {
 		public Waypoint[] points() {
 			return  new Waypoint[] {
@@ -102,6 +106,26 @@ public interface Waypoints {
  		}
 	}
 
+	public final class DriveDistance implements Waypoints {
+		private double distanceX; 
+		private double distanceY; 
+		private double angleDeg; 
+
+		public DriveDistance(double distanceX, double distanceY, double angleDeg) {
+			this.distanceX = distanceX; 
+			this.distanceY = distanceY;
+			this.angleDeg = angleDeg;
+		}
+
+		public Waypoint[] points() {
+			return  new Waypoint[] {
+					new Waypoint(0, 0, 0),
+					new Waypoint(distanceX, distanceY, Pathfinder.d2r(angleDeg))
+			};
+		}
+	}
+	
+
 	public final class Vision implements Waypoints {
 
 		private final double distanceX;
@@ -117,11 +141,13 @@ public interface Waypoints {
 		public Waypoint[] points() {
 			return  new Waypoint[] {
 					new Waypoint(0, 0, 0),
-					new Waypoint(distanceX, distanceY, Math.toRadians(angleDeg)),
+					new Waypoint(distanceX, distanceY, Pathfinder.d2r(angleDeg)),
 
 			};
 		}
 	}
-	
-	
+
 }
+	
+	
+

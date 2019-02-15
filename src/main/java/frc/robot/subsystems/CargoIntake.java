@@ -59,5 +59,9 @@ public class CargoIntake extends Subsystem {
         return check;
     }
 
+    public double getTalonOutputVoltage() {
+       return cargoMotor.getOutputCurrent();
+    }
+
 
 }
