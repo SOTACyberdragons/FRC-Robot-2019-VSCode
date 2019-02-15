@@ -40,26 +40,31 @@ public class TargetInfo {
 
     public double planeAngle() {
         //inches
-        // double distanceToLeft = (5.5 * FOCAL_LENGTH) / TapePairRecognizer.getLongestSide(tapePair.left);
-        // double distanceToRight = (5.5 * FOCAL_LENGTH) / TapePairRecognizer.getLongestSide(tapePair.right);
-        // double distanceBetween = 11.5;
 
-        // double headingToLeft = headingOfPixelRadians(tapePair.left.center.x);
-        // double headingToRight = headingOfPixelRadians(tapePair.right.center.x);
+       double distanceToLeft = (5.5 * FOCAL_LENGTH) / TapePairRecognizer.getLongestSide(tapePair.left);
+       double headingToLeft = headingOfPixelRadians(tapePair.left.center.x);
+       double yLeft = distanceToLeft * Math.cos(headingToLeft);
+       double xLeft = distanceToLeft * Math.sin(headingToLeft);
 
-        // double groundXLeft = Math.cos(headingToLeft) * distanceToLeft;
-        // double groundYLeft = Math.sin(headingToLeft) * distanceToLeft;
+       double distanceToRight = (5.5 * FOCAL_LENGTH) /  TapePairRecognizer.getLongestSide(tapePair.right);
+       double headingToRight = headingOfPixelRadians(tapePair.right.center.x);
+       double yRight = distanceToRight * Math.cos(headingToRight);
+       double xRight = distanceToRight * Math.sin(headingToRight);
 
-        // double groundXRight = Math.cos(headingToRight) * distanceToRight;
-        // double groundYRight = Math.sin(headingToRight) * distanceToRight;
+//        System.out.println(xLeft);
+//        System.out.println(yLeft);
+//        System.out.println(xRight);
+//        System.out.println(yRight);
 
-        // double changeY = groundYLeft - groundYRight;
-        // double changeX = groundXLeft - groundXRight;
-        double constant = 9 / tapePair.getWidth();
-        double distanceFromeCenter = tapePair.getCenterX() - frameWidth / 2;
-        double distanceFromCenterIn = distanceFromeCenter * constant;  
-        return Math.toDegrees(Math.atan(distanceFromCenterIn / distanceToTarget()));
+        if(distanceToLeft < distanceToRight){
+            return Math.toDegrees(Math.atan((yRight - yLeft) / (xRight - xLeft)));
+        }else{
+            return Math.toDegrees(Math.atan((yLeft - yRight) / (xLeft - xRight)));
+        }
     }
 
-    
+    @Override
+    public String toString() {
+        return "distance: "+distanceToTarget()+" heading: "+headingOfTarget()+" planeAngle: "+planeAngle();
+    }
 }

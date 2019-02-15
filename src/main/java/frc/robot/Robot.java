@@ -129,7 +129,7 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 
 		//hatch panel intake 
-		SmartDashboard.putBoolean("Hatch panel intake is open", hatchPanelIntake.isOpen());
+		SmartDashboard.putBoolean("Hatch panel intake is closed", hatchPanelIntake.isClosed());
 	}
 
 	/**
@@ -151,4 +151,6 @@ public class Robot extends TimedRobot {
 		talon.configNominalOutputReverse(0.0,0);
 		talon.configClosedloopRamp(0.5,0);
 	}
+
+
 }

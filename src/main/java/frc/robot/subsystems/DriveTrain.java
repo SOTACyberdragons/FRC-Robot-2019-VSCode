@@ -4,6 +4,10 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -17,18 +21,31 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrain extends Subsystem {
 
-	public final double reductionToEncoder = 114.55; 
-	public final double ticksPerDeg = (Constants.VERSA_ENCODER_TPR * reductionToEncoder) / 360;
-	public final double encoderMaxSpeed = 33000; //ticks per 100 ms
-	
+
+	public final static double WHEELBASE_WIDTH = 24.25;
+	public final static double WHEEL_DIAMETER = 6;
+	public final static double PULSE_PER_REVOLUTION = 360;
+	public final static double DISTANCE_PER_PULSE = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION;
+	public final static double MAX_SPEED = 110.0;
+	public static final double MAX_ACCEL = 1.0 / 0.0254; //0.2g in in/s^2
+	public static final double MAX_JERK = 30 / 0.0254; //from example code in Pathfinder
+	public final double encoderMaxSpeed = 33000;
+
 	private WPI_TalonSRX leftMotor;
 	private WPI_TalonSRX leftMotorFollower;
 	private WPI_TalonSRX rightMotor;
 	private WPI_TalonSRX rightMotorFollower;
 	
 	public DifferentialDrive drive;
-	
-	
+
+	private BuiltInAccelerometer accel;
+	private ADXRS450_Gyro gyro;
+
+	private Timer timer;
+
+	private Preferences prefs;
+
+
 	public DriveTrain() {
 
 		leftMotor = new WPI_TalonSRX(RobotMap.LEFT_DRIVE_MOTOR);
@@ -86,6 +103,24 @@ public class DriveTrain extends Subsystem {
 
 	public double getRightRawEncoderTicks() {
 		return rightMotor.getSelectedSensorPosition(0);
+	}
+
+	public double getLeftEncoder() {
+		return getLeftRawEncoderTicks() * DISTANCE_PER_PULSE;
+	}
+
+	public double getRightEncoder() {
+		return getRightRawEncoderTicks() * DISTANCE_PER_PULSE;
+	}
+
+	public double getHeading() {
+		return gyro.getAngle();
+	}
+
+	public void resetSensors() {
+		leftMotor.setSelectedSensorPosition(0);
+		rightMotor.setSelectedSensorPosition(0);
+		gyro.reset();
 	}
 
 	public void initDefaultCommand() {

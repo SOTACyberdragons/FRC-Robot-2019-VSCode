@@ -59,6 +59,5 @@ public class CargoIntake extends Subsystem {
         return check;
     }
 
-    // Put methods for controlling this subsyst
 
 }

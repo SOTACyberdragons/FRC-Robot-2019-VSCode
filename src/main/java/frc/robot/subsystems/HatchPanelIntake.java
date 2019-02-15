@@ -40,8 +40,7 @@ public class HatchPanelIntake extends Subsystem {
         }
         return check;
     }
-
-    // 
+ 
     public boolean hasHatch() {
         return isClosed(); 
     }
