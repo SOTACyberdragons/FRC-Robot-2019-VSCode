@@ -8,6 +8,7 @@ import frc.robot.commands.FlashLightForCargo;
 import frc.robot.commands.MoveArmToAngle;
 import frc.robot.commands.PistonIn;
 import frc.robot.commands.PistonOut;
+import frc.robot.commands.ZeroArmEncoder;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -21,6 +22,7 @@ public class OI {
     JoystickButton cargoIn;
     JoystickButton cargoOut;
     JoystickButton flashLight;
+    JoystickButton zeroArmEncoder;
     
     JoystickButton groundPosition;
     JoystickButton backwardsPosition;
@@ -63,6 +65,7 @@ public class OI {
         ballInRocketPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_ROCKET_POSITION);
         ballOutCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_OUT_CARGO_SHIP_POSITION);
 
+        zeroArmEncoder = new JoystickButton(leftAuxStick, ButtonMap.ZERO_ARM_ENCODER);
 
 
         //LED
@@ -82,11 +85,13 @@ public class OI {
 
         //Arm position
         //change numbers 
-        groundPosition.whileHeld(new MoveArmToAngle(148));
-        backwardsPosition.whileHeld(new MoveArmToAngle(0));
-        ballInCargoShipPosition.whileHeld(new MoveArmToAngle(66)); 
-        ballInRocketPosition.whileHeld(new MoveArmToAngle(22));
-        ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(91));
+        groundPosition.whileHeld(new MoveArmToAngle(0));
+        backwardsPosition.whileHeld(new MoveArmToAngle(180));
+        ballInCargoShipPosition.whileHeld(new MoveArmToAngle(110)); 
+        ballInRocketPosition.whileHeld(new MoveArmToAngle(45));
+        ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(30));
+
+        zeroArmEncoder.whenPressed(new ZeroArmEncoder());
 
 
         //LED

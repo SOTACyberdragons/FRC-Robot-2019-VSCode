@@ -10,7 +10,7 @@ import frc.robot.RobotMap;
 public class CargoIntake extends Subsystem {
 
     public WPI_TalonSRX cargoMotor;
-    private double speed = 0.5;
+    private double speed = 0.85;
     private Solenoid ringLight;
     private DigitalInput breakBeam;
 
