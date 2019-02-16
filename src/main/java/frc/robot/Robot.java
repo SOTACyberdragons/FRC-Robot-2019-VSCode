@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
 	// tests
 	private Command autoDriveStraight20Inches;
 	private Command autoDriveStraight50Inches;
-	private Object imgLock;
+	private final Object imgLock = new Object();
 	private double centerX;
 
 	private void initCommands() {
@@ -98,12 +98,19 @@ public class Robot extends TimedRobot {
 
 		VisionThread visionThread = new VisionThread(camera, new GripPipelineContour(), pipeline -> {
             if (!pipeline.filterContoursOutput().isEmpty()) {
-				TapePair pair = TapePairRecognizer.recognize(pipeline.filterContoursOutput()).get(0);
-				synchronized (imgLock) {
-				centerX = pair.getCenterX();
-				System.out.println(centerX);
-                }
-            }
+				SmartDashboard.putString("See contours: ", "Yes");
+				SmartDashboard.putNumber("Number of contours: ", pipeline.filterContoursOutput().size());
+				System.out.println("Number of contours: " + pipeline.filterContoursOutput().size());
+				if (!TapePairRecognizer.recognize(pipeline.filterContoursOutput()).isEmpty()) {
+					TapePair pair = TapePairRecognizer.recognize(pipeline.filterContoursOutput()).get(0);
+					synchronized (imgLock) {
+					centerX = pair.getCenterX();
+					System.out.println(centerX);
+					}
+				
+				} else System.out.println("Didn't find any pairs.");
+				
+            } else SmartDashboard.putString("See contours: ", "No");
         });
         visionThread.start();
 	}
@@ -180,7 +187,7 @@ public class Robot extends TimedRobot {
 		if (autoCommand != null) {
 			autoCommand.cancel();
 		}
-		drivetrain.resetSensors();
+		//drivetrain.resetSensors();
 	}
 
 	/**
