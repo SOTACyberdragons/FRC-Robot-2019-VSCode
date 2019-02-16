@@ -94,6 +94,11 @@ public class DriveTrain extends Subsystem {
 		talon.configMotionAcceleration(30000, Constants.TIMEOUT_MS);
 	}
 
+	public void stop() {
+		drive.arcadeDrive(0,0);
+	}
+
+
 	public void zeroEncoder() {
 		leftMotor.setSelectedSensorPosition(0, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
 		rightMotor.setSelectedSensorPosition(0, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);

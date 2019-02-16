@@ -36,8 +36,7 @@ public class TargetInfo {
 
         return (5.5 * FOCAL_LENGTH) / averageLongestSide;
     }
-
-
+   
     public double planeAngle() {
         //inches
 
@@ -65,6 +64,6 @@ public class TargetInfo {
 
     @Override
     public String toString() {
-        return "distance: "+distanceToTarget()+" heading: "+headingOfTarget()+" planeAngle: "+planeAngle();
+        return "distance: "+ distanceToTarget()+" heading: "+headingOfTarget()+" planeAngle: "+planeAngle();
     }
 }

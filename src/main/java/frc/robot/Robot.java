@@ -8,20 +8,30 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import frc.robot.Constants.AutoChoice;
+import frc.robot.commands.AutoDoNotMove;
+import frc.robot.commands.AutoDriveDistance;
 import frc.robot.subsystems.DriveTrain;
-
+import frc.robot.vision.GripPipelineContour;
+import frc.robot.vision.TapePairRecognizer;
+import frc.robot.vision.TapePairRecognizer.TapePair;
 
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
+
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.vision.VisionThread;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,25 +41,71 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
+
+	public static final int IMAGE_WIDTH = 320;
+	public static final int IMAGE_HEIGHT = 240;
 	private Command autonomousCommand;
 	public static Preferences prefs;
-	SendableChooser<Command> chooser = new SendableChooser<>();
-
 
 	public static DriveTrain drivetrain;
 	public static OI oi;
 
-	
+	private AutoChoice autoChoice;
+	private SendableChooser<AutoChoice> chooser;
+	private Command autoCommand;
+
+	private static boolean isRecording;
+
+	/* Auto Commands */
+
+	// tests
+	private Command autoDriveStraight20Inches;
+	private Command autoDriveStraight50Inches;
+	private Object imgLock;
+	private double centerX;
+
+	private void initCommands() {
+		System.out.println("Initializing commands...");
+
+		// Test
+		autoDriveStraight20Inches = new AutoDriveDistance(20, 0, 0);
+		autoDriveStraight50Inches = new AutoDriveDistance(50, 0, 0);
+
+		System.out.println("Done initializing commands");
+
+		SmartDashboard.putData("autoDriveStraight20Inches", autoDriveStraight20Inches);
+		SmartDashboard.putData("autoDriveStraight50Inches", autoDriveStraight50Inches);
+
+	}
+
 	@Override
 	public void robotInit() {
 
 		drivetrain = new DriveTrain();
 		oi = new OI();
-		
-		
-		
-		
+
+		initCommands();
+
+		// Autonomous Chooser
+		chooser = new SendableChooser<AutoChoice>();
+		chooser.addObject("Drive Straight 20 Inches ", AutoChoice.DRIVE_STRAIGHT_20_INCHES);
+		chooser.addDefault("Drive Straight 50 Inches", AutoChoice.DRIVE_STRAIGHT_50_INCHES);
+
 		SmartDashboard.putData("Auto mode", chooser);
+
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(IMAGE_WIDTH, IMAGE_HEIGHT);
+
+		VisionThread visionThread = new VisionThread(camera, new GripPipelineContour(), pipeline -> {
+            if (!pipeline.filterContoursOutput().isEmpty()) {
+				TapePair pair = TapePairRecognizer.recognize(pipeline.filterContoursOutput()).get(0);
+				synchronized (imgLock) {
+				centerX = pair.getCenterX();
+				System.out.println(centerX);
+                }
+            }
+        });
+        visionThread.start();
 	}
 
 	/**
@@ -67,32 +123,32 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 	}
 
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
-	 */
+
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		
+		autoChoice = chooser.getSelected();
+		SmartDashboard.putString("Selected Autonomous", autoChoice.toString());
 
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null) {
-			autonomousCommand.start();
+		switch(autoChoice) {
+			case DO_NOT_MOVE:
+				autoCommand = new AutoDoNotMove();
+				break;
+			case DRIVE_STRAIGHT_20_INCHES: 
+				autoCommand = autoDriveStraight20Inches;
+				break;
+			case DRIVE_STRAIGHT_50_INCHES: 
+				autoCommand = autoDriveStraight50Inches;
+			default:
+				//will only work on sides
+				autoCommand = new AutoDoNotMove();
 		}
+ 
+		SmartDashboard.putString("Autonomous Command", autoCommand.getName());
+		System.out.println("Starting auto command!");
+		autoCommand.start();
+		System.out.println("Finished auto command!");
+
 	}
 
 	/**
@@ -101,17 +157,30 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+
+		
+
+		SmartDashboard.putNumber("Right Encoder Distance", drivetrain.getRightEncoder());
+		SmartDashboard.putNumber("Left Encoder Distance", drivetrain.getLeftEncoder());
+
+
+		Scheduler.getInstance().run();
+		double centerX;
+		synchronized (imgLock) {
+			centerX = this.centerX;
+		}
+		double turn = centerX - (IMAGE_WIDTH / 2);
+		System.out.println("Turn is: " + turn);
+		SmartDashboard.putNumber("Turn is: ", turn);
 	}
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (autonomousCommand != null) {
-			autonomousCommand.cancel();
+
+		if (autoCommand != null) {
+			autoCommand.cancel();
 		}
+		drivetrain.resetSensors();
 	}
 
 	/**
@@ -121,7 +190,6 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 
-		//hatch panel intake 
 
 	}
 
@@ -131,6 +199,18 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 
+	}
+
+
+	public static void initTalon(TalonSRX talon) {
+		talon.setNeutralMode(NeutralMode.Coast);
+		talon.neutralOutput();
+		talon.setSensorPhase(false);
+		talon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+		talon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+		talon.configNominalOutputForward(0.0,0);
+		talon.configNominalOutputReverse(0.0,0);
+		talon.configClosedloopRamp(0.5,0);
 	}
 
 

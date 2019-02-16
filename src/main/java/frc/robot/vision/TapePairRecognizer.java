@@ -31,6 +31,12 @@ public class TapePairRecognizer {
         return findPairs(rectangles);
     }
 
+    public static ArrayList<TapePair> recognize(ArrayList<MatOfPoint> pipelineResult) {
+        ArrayList<RotatedRect> rectangles = contoursToRectangles(pipelineResult);
+        return findPairs(rectangles);
+    }
+
+
     private static ArrayList<RotatedRect> contoursToRectangles(ArrayList<MatOfPoint> contours) {
         ArrayList<RotatedRect> rectangles = new ArrayList<>();
 
