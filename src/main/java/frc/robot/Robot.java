@@ -196,7 +196,13 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-
+		double centerX;
+		synchronized (imgLock) {
+			centerX = this.centerX;
+		}
+		double turn = centerX - (IMAGE_WIDTH / 2);
+		System.out.println("Turn is: " + turn);
+		SmartDashboard.putNumber("Turn is: ", turn);
 
 	}
 
