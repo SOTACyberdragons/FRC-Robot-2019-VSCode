@@ -22,8 +22,10 @@ public class Arm extends Subsystem {
 
 	//Constants
 	public final static double REDUCTION_TO_ENCODER = 100; 
-	public final static double TICKS_PER_DEG = (Constants.MAG_ENCODER_TPR * REDUCTION_TO_ENCODER) / 360;
+	public final static double TICKS_PER_DEG = 8080 /180; // (Constants.VERSA_ENCODER_TPR * REDUCTION_TO_ENCODER) / 360;
 	public final static double ENCODER_MAX_SPEED = 33000; //ticks per 100 ms
+
+
 	
 	//Motor controllers 
 	private WPI_TalonSRX rightArmTalon;
@@ -74,14 +76,14 @@ public class Arm extends Subsystem {
 		
 		/* set acceleration and cruise velocity - see documentation */
 		talon.configMotionCruiseVelocity(25000 , Constants.TIMEOUT_MS);
-		talon.configMotionAcceleration(30000, Constants.TIMEOUT_MS);
+		talon.configMotionAcceleration(20000, Constants.TIMEOUT_MS);
 	}
 
 	public double getFeedForward() {
 		prefs = Preferences.getInstance();
 		wHatchMaxNominalOutput = prefs.getDouble("armWHatchOut", 0.15); // set these values
 		wCargoMaxNominalOutput = prefs.getDouble("armWCargoOut", 0.15);
-		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOut", 0.075);
+		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.25);
 		
 		double maxNominalOutput;
 		if(Robot.hatchPanelIntake.hasHatch() && !Robot.cargoIntake.hasCargo()) {

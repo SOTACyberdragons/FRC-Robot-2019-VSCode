@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.DifferentialDriveWithJoysticks;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -24,9 +23,9 @@ public class DriveTrain extends Subsystem {
 
 	public final static double WHEELBASE_WIDTH = 24.25;
 	public final static double WHEEL_DIAMETER = 6;
-	public final static double PULSE_PER_REVOLUTION = Constants.MAG_ENCODER_TPR;
+	public final static double PULSE_PER_REVOLUTION = 4096;
 	public final static double REDUCTION_TO_ENCODER = 10.75;
-	public final static double DISTANCE_PER_PULSE = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION * REDUCTION_TO_ENCODER;
+	public final static double DISTANCE_PER_PULSE = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION;
 	public final static double MAX_SPEED = 110.0;
 	public static final double MAX_ACCEL = 1.0 / 0.0254; //0.2g in in/s^2
 	public static final double MAX_JERK = 30 / 0.0254; //from example code in Pathfinder
@@ -38,12 +37,9 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX rightMotorFollower;
 	
 	public DifferentialDrive drive;
-
 	private BuiltInAccelerometer accel;
 	private ADXRS450_Gyro gyro;
-
 	private Timer timer;
-
 	private Preferences prefs;
 
 
@@ -90,7 +86,7 @@ public class DriveTrain extends Subsystem {
 		
 		/* set acceleration and cruise velocity - see documentation */
 		talon.configMotionCruiseVelocity(25000 , Constants.TIMEOUT_MS);
-		talon.configMotionAcceleration(30000, Constants.TIMEOUT_MS);
+		talon.configMotionAcceleration(20000, Constants.TIMEOUT_MS);
 	}
 	 
 	public void stop() {
@@ -125,7 +121,7 @@ public class DriveTrain extends Subsystem {
 	public void resetSensors() {
 		leftMotor.setSelectedSensorPosition(0);
 		rightMotor.setSelectedSensorPosition(0);
-		gyro.reset();
+		//gyro.reset();
 	}
 
 	public void initDefaultCommand() {

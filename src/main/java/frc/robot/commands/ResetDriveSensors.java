@@ -6,19 +6,19 @@ import frc.robot.Robot;
 /**
  *
  */
-public class ZeroArmEncoder extends Command {
+public class ResetDriveSensors extends Command {
 
-    public ZeroArmEncoder() {
+    public ResetDriveSensors() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.arm);
+        requires(Robot.drivetrain);
         System.out.println("Im in");
     }
 
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.arm.setEncoder(0);
+        Robot.drivetrain.resetSensors();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -27,7 +27,6 @@ public class ZeroArmEncoder extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        System.out.println("I'm out");
         return true;
     }
 

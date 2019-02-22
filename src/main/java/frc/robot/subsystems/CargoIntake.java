@@ -10,19 +10,20 @@ import frc.robot.RobotMap;
 public class CargoIntake extends Subsystem {
 
     public WPI_TalonSRX cargoMotor;
-    private double speed = 0.85;
+    private double speed = 1.0;
     private Solenoid ringLight;
     private DigitalInput breakBeam;
 
     @Override
     protected void initDefaultCommand() {
         cargoMotor = new WPI_TalonSRX(RobotMap.CARGO_MOTOR);
-        ringLight = new Solenoid(3);
-    }
+        ringLight = new Solenoid(7);
+        breakBeam = new DigitalInput(0);
+        }
 
     public void spinIn() {
-        cargoMotor.set(speed);
-    }
+        cargoMotor.set(speed*0.7);
+    }                                                                                                                                                                                                                                                   
 
     public void spinOut() {
         cargoMotor.set(-speed);
@@ -57,6 +58,10 @@ public class CargoIntake extends Subsystem {
             check = true;
         }
         return check;
+    }
+
+    public boolean getBreakBeam() {
+        return breakBeam.get();
     }
 
     public double getTalonOutputVoltage() {

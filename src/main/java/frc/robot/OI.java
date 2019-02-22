@@ -8,6 +8,7 @@ import frc.robot.commands.FlashLightForCargo;
 import frc.robot.commands.MoveArmToAngle;
 import frc.robot.commands.PistonIn;
 import frc.robot.commands.PistonOut;
+import frc.robot.commands.ResetDriveSensors;
 import frc.robot.commands.ZeroArmEncoder;
 
 /**
@@ -23,7 +24,13 @@ public class OI {
     JoystickButton cargoOut;
     JoystickButton flashLight;
     JoystickButton zeroArmEncoder;
-    
+    JoystickButton resetDriveSensors;
+
+    JoystickButton coCargoIn;
+    JoystickButton coCargoOut; 
+    JoystickButton coHatchClose;
+    JoystickButton coHatchOpen;
+
     JoystickButton groundPosition;
     JoystickButton backwardsPosition;
     JoystickButton ballInCargoShipPosition;
@@ -58,6 +65,10 @@ public class OI {
         cargoIn = new JoystickButton(leftStick, ButtonMap.INTAKE_CARGO);
         cargoOut = new JoystickButton(rightStick, ButtonMap.RELEASE_CARGO);
 
+        coCargoIn = new JoystickButton(leftAuxStick, ButtonMap.CO_CARGO_IN);
+        coCargoOut = new JoystickButton(rightAuxStick, ButtonMap.CO_CARGO_OUT);
+        coHatchClose = new JoystickButton(rightAuxStick, 2);
+        coHatchOpen = new JoystickButton(rightAuxStick, 3) ;
         //Arm Positions
         groundPosition = new JoystickButton(leftAuxStick, ButtonMap.GROUND_POSITION);
         backwardsPosition = new JoystickButton(leftAuxStick, ButtonMap.BACKWARDS_POSITION);
@@ -66,6 +77,7 @@ public class OI {
         ballOutCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_OUT_CARGO_SHIP_POSITION);
 
         zeroArmEncoder = new JoystickButton(leftAuxStick, ButtonMap.ZERO_ARM_ENCODER);
+        resetDriveSensors = new JoystickButton(leftStick, ButtonMap.RESET_DRIVE_SENSORS);
 
 
         //LED
@@ -83,6 +95,11 @@ public class OI {
         cargoIn.whileHeld(new CargoIn());
         cargoOut.whileHeld(new CargoOut());
 
+        coCargoIn.whileHeld(new CargoIn());
+        coCargoOut.whileHeld(new CargoOut());
+        coHatchClose.whenPressed(new PistonIn());
+        coHatchOpen.whenPressed(new PistonOut());
+
         //Arm position
         //change numbers 
         groundPosition.whileHeld(new MoveArmToAngle(0));
@@ -92,6 +109,7 @@ public class OI {
         ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(30));
 
         zeroArmEncoder.whenPressed(new ZeroArmEncoder());
+        resetDriveSensors.whenPressed(new ResetDriveSensors());
 
 
         //LED
