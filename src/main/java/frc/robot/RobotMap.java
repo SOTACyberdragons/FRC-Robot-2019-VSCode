@@ -15,9 +15,13 @@ package frc.robot;
  */
 public class RobotMap {
 	//PWM
+	
+
+	//CAN
 	public static final int LEFT_DRIVE_MOTOR = 4;
 	public static final int RIGHT_DRIVE_MOTOR = 2;
 	public static final int LEFT_DRIVE_FOLLOW_MOTOR = 3;
 	public static final int RIGHT_DRIVE_FOLLOW_MOTOR = 1;
+	public static final int CARGO_MOTOR = 0;
 
 }

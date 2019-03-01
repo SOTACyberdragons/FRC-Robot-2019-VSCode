@@ -14,6 +14,7 @@ import frc.robot.commands.AutoDriveDistance;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.vision.GripPipelineContour;
 import frc.robot.vision.TapePairRecognizer;
+import frc.robot.vision.TargetInfo;
 import frc.robot.vision.TapePairRecognizer.TapePair;
 
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
@@ -63,6 +64,7 @@ public class Robot extends TimedRobot {
 	private Command autoDriveStraight50Inches;
 	private Object imgLock;
 	private double centerX;
+	private TargetInfo targetInfo;
 
 	private void initCommands() {
 		System.out.println("Initializing commands...");
@@ -95,13 +97,18 @@ public class Robot extends TimedRobot {
 
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(IMAGE_WIDTH, IMAGE_HEIGHT);
+		//@TODO: camera exposure and change from dashboard
+		//camera.setExposureManual(value);
 
 		VisionThread visionThread = new VisionThread(camera, new GripPipelineContour(), pipeline -> {
             if (!pipeline.filterContoursOutput().isEmpty()) {
 				TapePair pair = TapePairRecognizer.recognize(pipeline.filterContoursOutput()).get(0);
+				//only proceed if pair is not empty (ArrayList.empty)
 				synchronized (imgLock) {
 				centerX = pair.getCenterX();
 				System.out.println(centerX);
+				targetInfo = new TargetInfo(pair);
+				System.out.println(targetInfo);
                 }
             }
         });
@@ -168,6 +175,8 @@ public class Robot extends TimedRobot {
 		double centerX;
 		synchronized (imgLock) {
 			centerX = this.centerX;
+			System.out.println("Inside autonomous: " + targetInfo);
+			//get heading, distance, and plane angle here
 		}
 		double turn = centerX - (IMAGE_WIDTH / 2);
 		System.out.println("Turn is: " + turn);

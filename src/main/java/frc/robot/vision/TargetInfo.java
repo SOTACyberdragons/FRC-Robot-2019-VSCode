@@ -1,19 +1,22 @@
 package frc.robot.vision;
 
+import frc.robot.Robot;
+
 public class TargetInfo {
 
     private static final double SIZE_AT_36IN = 94.283;
     private static final double SIZE_AT_100IN = 35.746;
-    public static final double frameHeight = 427, frameWidth = 640, ANGLE_OF_VIEW_DEG = 60,
+    public static final double frameHeight = Robot.IMAGE_HEIGHT, frameWidth = Robot.IMAGE_WIDTH, ANGLE_OF_VIEW_DEG = 60,
         ANGLE_OF_VIEW = ANGLE_OF_VIEW_DEG * Math.PI/180;
 
     public static final double aspectRatio = frameWidth / frameHeight;
 
-
+    //TODO: document what this is
     public static final double FOCAL_LENGTH = (93.0 * 36.0) / 5.5;
 
 
     private final TapePairRecognizer.TapePair tapePair;
+    //TODO: what is this
     private static final double ROBOT_CENTER = 8.0;
 
     public TargetInfo(TapePairRecognizer.TapePair tapePair) {
