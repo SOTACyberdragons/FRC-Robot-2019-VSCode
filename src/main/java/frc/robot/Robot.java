@@ -62,7 +62,7 @@ public class Robot extends TimedRobot {
 	// tests
 	private Command autoDriveStraight20Inches;
 	private Command autoDriveStraight50Inches;
-	private Object imgLock;
+	private final Object imgLock = new Object();
 	private double centerX;
 	private TargetInfo targetInfo;
 
@@ -189,7 +189,7 @@ public class Robot extends TimedRobot {
 		if (autoCommand != null) {
 			autoCommand.cancel();
 		}
-		drivetrain.resetSensors();
+		//drivetrain.resetSensors();
 	}
 
 	/**
@@ -198,7 +198,13 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-
+		double centerX;
+		synchronized (imgLock) {
+			centerX = this.centerX;
+		}
+		double turn = centerX - (IMAGE_WIDTH / 2);
+		System.out.println("Turn is: " + turn);
+		SmartDashboard.putNumber("Turn is: ", turn);
 
 	}
 
