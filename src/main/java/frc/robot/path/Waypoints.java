@@ -61,7 +61,16 @@ public interface Waypoints {
 		}
 	}
 
-	
+	// public final class LeftFarHatch implements Waypoints {
+	// 	public Waypoint [] points() {
+	// 		return  new Waypoint[] {
+	// 				new Waypoint(0, 0, 0),
+	// 				new Waypoint(73, 0, 0),
+	// 				new Waypoint(89, -5,4 Pathfinder.d2r(0)), //add angle
+	// 				new Waypoint()
+	// 		};
+	// 	}
+	// }
 	
 	
 }

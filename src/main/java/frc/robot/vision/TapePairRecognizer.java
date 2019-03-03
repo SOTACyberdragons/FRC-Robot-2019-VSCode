@@ -16,6 +16,7 @@ import static org.opencv.imgproc.Imgproc.*;
  */
 public class TapePairRecognizer {
 
+    //we expect the target rectangles to be about 8 times the "width" (short side) apart
     private static final int DISTANCE_APART_MULTIPLIER = 8;
     private static final double DISTANCE_APART_TOLERANCE = .35;
 

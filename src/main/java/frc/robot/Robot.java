@@ -17,6 +17,8 @@ import frc.robot.vision.TapePairRecognizer;
 import frc.robot.vision.TargetInfo;
 import frc.robot.vision.TapePairRecognizer.TapePair;
 
+import java.util.ArrayList;
+
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -56,7 +58,7 @@ public class Robot extends TimedRobot {
 	private Command autoCommand;
 
 	private static boolean isRecording;
-
+	private int exposure =  10; //exposure for USB camera as a percentage 
 	/* Auto Commands */
 
 	// tests
@@ -98,18 +100,23 @@ public class Robot extends TimedRobot {
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(IMAGE_WIDTH, IMAGE_HEIGHT);
 		//@TODO: camera exposure and change from dashboard
-		//camera.setExposureManual(value);
+		//Set the exposure to manual, as a percentage (0-100) 100 is letting in a lot of light
+		camera.setExposureManual(exposure);
 
 		VisionThread visionThread = new VisionThread(camera, new GripPipelineContour(), pipeline -> {
             if (!pipeline.filterContoursOutput().isEmpty()) {
-				TapePair pair = TapePairRecognizer.recognize(pipeline.filterContoursOutput()).get(0);
+				ArrayList<TapePair> pairs = TapePairRecognizer.recognize(pipeline.filterContoursOutput());
 				//only proceed if pair is not empty (ArrayList.empty)
-				synchronized (imgLock) {
-				centerX = pair.getCenterX();
-				System.out.println(centerX);
-				targetInfo = new TargetInfo(pair);
-				System.out.println(targetInfo);
-                }
+				if(!pairs.isEmpty() ) {
+					synchronized (imgLock) {
+						for (int i = 0; i < pairs.size(); i++) {
+							centerX = pairs.get(i).getCenterX();
+							System.out.println("Center X of tape pair " + i +": " + centerX);
+							targetInfo = new TargetInfo(pairs.get(i));
+							System.out.println("Target info of tape pair " + i + ": " + targetInfo);
+						}
+					}
+				}
             }
         });
         visionThread.start();
@@ -197,6 +204,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		
+		//vision 
 		Scheduler.getInstance().run();
 		double centerX;
 		synchronized (imgLock) {
@@ -205,6 +214,22 @@ public class Robot extends TimedRobot {
 		double turn = centerX - (IMAGE_WIDTH / 2);
 		System.out.println("Turn is: " + turn);
 		SmartDashboard.putNumber("Turn is: ", turn);
+
+		Scheduler.getInstance().run();
+
+		//SmartDashboard
+
+		SmartDashboard.putNumber("Right Encoder Ticks", drivetrain.getRightRawEncoderTicks());
+		SmartDashboard.putNumber("Left Encoder Ticks", drivetrain.getLeftRawEncoderTicks());
+
+		SmartDashboard.putNumber("Right Drive Inches", drivetrain.getRightEncoder());
+		SmartDashboard.putNumber("Left Drive Inches", drivetrain.getLeftEncoder());
+
+		SmartDashboard.putNumber("Drive gyro", drivetrain.getHeading());
+
+		SmartDashboard.putNumber("Exposure: ", exposure);
+
+
 
 	}
 

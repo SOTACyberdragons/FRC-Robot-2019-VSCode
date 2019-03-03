@@ -32,9 +32,9 @@ public class GripPipelineContour implements VisionPipeline {
 	@Override	public void process(Mat source0) {
 		// Step HSV_Threshold0:
 		Mat hsvThresholdInput = source0;
-		double[] hsvThresholdHue = {74.46043165467624, 134.15959252971138};
-		double[] hsvThresholdSaturation = {48.1564748201439, 255.0};
-		double[] hsvThresholdValue = {158.22841726618702, 255.0};
+		double[] hsvThresholdHue = {66, 91};
+		double[] hsvThresholdSaturation = {158, 255.0};
+		double[] hsvThresholdValue = {101, 255.0};
 		hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
 		// Step Find_Contours0:
@@ -44,7 +44,7 @@ public class GripPipelineContour implements VisionPipeline {
 
 		// Step Filter_Contours0:
 		ArrayList<MatOfPoint> filterContoursContours = findContoursOutput;
-		double filterContoursMinArea = 50.0;
+		double filterContoursMinArea = 35.0;
 		double filterContoursMinPerimeter = 0;
 		double filterContoursMinWidth = 0;
 		double filterContoursMaxWidth = 1000;
