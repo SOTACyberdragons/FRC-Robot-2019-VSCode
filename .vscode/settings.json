@@ -10,5 +10,6 @@
     ".classpath": true,
     ".project": true
   },
-  "wpilib.autoStartRioLog": true
+  "wpilib.autoStartRioLog": true,
+  "wpilib.skipTests": true
 }

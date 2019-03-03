@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.Constants.AutoChoice;
 import frc.robot.commands.AutoDoNotMove;
 import frc.robot.commands.AutoDriveDistance;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.vision.GripPipelineContour;
 import frc.robot.vision.TapePairRecognizer;
@@ -50,6 +51,7 @@ public class Robot extends TimedRobot {
 	private Command autonomousCommand;
 	public static Preferences prefs;
 
+	public static Climber climber;
 	public static DriveTrain drivetrain;
 	public static OI oi;
 
@@ -85,6 +87,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 
+		climber = new Climber();
 		drivetrain = new DriveTrain();
 		oi = new OI();
 
@@ -228,6 +231,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Drive gyro", drivetrain.getHeading());
 
 		SmartDashboard.putNumber("Exposure: ", exposure);
+	
 
 
 
