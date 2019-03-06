@@ -11,6 +11,12 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.Constants.AutoChoice;
 import frc.robot.commands.AutoDoNotMove;
 import frc.robot.commands.AutoDriveDistance;
+import frc.robot.commands.AutoLeftCenterHatch;
+import frc.robot.commands.AutoLeftFartchCargo;
+import frc.robot.commands.AutoLeftFartchCargoDouble;
+import frc.robot.commands.AutoRightCenterHatch;
+import frc.robot.commands.AutoRightFartchCargo;
+import frc.robot.commands.AutoRightFartchCargoDouble;
 import frc.robot.commands.FollowPathTimeTest;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -67,6 +73,15 @@ public class Robot extends TimedRobot {
 	// tests
 	private Command autoDriveStraight20Inches;
 	private Command autoDriveStraight50Inches;
+
+	//auto commands
+	private Command autoLeftCenterHatch;
+	private Command autoRightCenterHatch;
+	private Command autoLeftFartchCargo;
+	private Command autoRightFartchCargo;
+	private Command autoRightFartchCargoDouble; 
+	private Command autoLeftFartchCargoDouble; 
+
 	private final Object imgLock = new Object();
 	private double centerX;
 	private TargetInfo targetInfo;
@@ -78,11 +93,19 @@ public class Robot extends TimedRobot {
 		autoDriveStraight20Inches = new AutoDriveDistance(20, 0, 0);
 		autoDriveStraight50Inches = new AutoDriveDistance(50, 0, 0);
 
+		//auto commands
+		autoLeftCenterHatch = new AutoLeftCenterHatch();
+		autoRightCenterHatch = new AutoRightCenterHatch();
+		autoLeftFartchCargo = new AutoLeftFartchCargo();
+		autoRightFartchCargo = new AutoRightFartchCargo();
+		autoLeftFartchCargoDouble = new AutoLeftFartchCargoDouble();
+		autoRightFartchCargoDouble = new AutoRightFartchCargoDouble();
+
 		System.out.println("Done initializing commands");
 
 		SmartDashboard.putData("autoDriveStraight20Inches", autoDriveStraight20Inches);
 		SmartDashboard.putData("autoDriveStraight50Inches", autoDriveStraight50Inches);
-		SmartDashboard.putData("Trajectory time test", new FollowPathTimeTest());
+
 
 	}
 
@@ -97,9 +120,18 @@ public class Robot extends TimedRobot {
 
 		// Autonomous Chooser
 		chooser = new SendableChooser<AutoChoice>();
-		chooser.addObject("Drive Straight 20 Inches ", AutoChoice.DRIVE_STRAIGHT_20_INCHES);
-		chooser.addObject("Drive Straight 50 Inches", AutoChoice.DRIVE_STRAIGHT_50_INCHES);
-		chooser.setDefaultOption("Trajectory time test", AutoChoice.TRAJECTORY_TEST);
+		chooser.setDefaultOption("Do Not Move", AutoChoice.DO_NOT_MOVE);
+		chooser.addOption("Drive Straight 20 Inches ", AutoChoice.DRIVE_STRAIGHT_20_INCHES);
+		chooser.addOption("Drive Straight 50 Inches", AutoChoice.DRIVE_STRAIGHT_50_INCHES);
+		chooser.addOption("Trajectory time test", AutoChoice.TRAJECTORY_TEST);
+		
+		//auto commands
+		chooser.addOption("Left Center Hatch", AutoChoice.LEFT_CENTER_HATCH);
+		chooser.addOption("Right Center Hatch", AutoChoice.RIGHT_CENTER_HATCH );
+		chooser.addOption("Left Fartch Cargo", AutoChoice.LEFT_FARTCH_CARGO);
+		chooser.addOption("Right Fartch Cargo", AutoChoice.RIGHT_FARTCH_CARGO);
+		chooser.addOption("Double Left Fartch Cargo", AutoChoice.RIGHT_FARTCH_CARGO_DOUBLE);
+		chooser.addOption("Double Right Fartch Cargo", AutoChoice.LEFT_FARTCH_CARGO_DOUBLE);
 
 		SmartDashboard.putData("Auto mode", chooser);
 
@@ -161,6 +193,24 @@ public class Robot extends TimedRobot {
 				break;
 			case DRIVE_STRAIGHT_50_INCHES: 
 				autoCommand = autoDriveStraight50Inches;
+				break;
+			case LEFT_CENTER_HATCH:
+				autoCommand = autoLeftCenterHatch;
+				break;
+			case RIGHT_CENTER_HATCH: 
+				autoCommand = autoRightCenterHatch;
+				break;
+			case LEFT_FARTCH_CARGO:
+				autoCommand = autoLeftFartchCargo;
+				break;
+			case RIGHT_FARTCH_CARGO:
+				autoCommand = autoRightFartchCargo;
+				break;
+			case LEFT_FARTCH_CARGO_DOUBLE:
+				autoCommand = autoLeftFartchCargoDouble;
+				break;
+			case RIGHT_FARTCH_CARGO_DOUBLE:
+				autoCommand = autoRightFartchCargoDouble;
 			default:
 				//will only work on sides
 				autoCommand = new AutoDoNotMove();
