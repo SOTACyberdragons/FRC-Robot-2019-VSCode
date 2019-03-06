@@ -50,7 +50,7 @@ public class Robot extends TimedRobot {
 	public static final int IMAGE_WIDTH = 320;
 	public static final int IMAGE_HEIGHT = 240;
 	private Command autonomousCommand;
-	public static Preferences prefs;
+	public static Preferences prefs = Preferences.getInstance();
 
 	public static Climber climber;
 	public static DriveTrain drivetrain;
@@ -98,7 +98,8 @@ public class Robot extends TimedRobot {
 		// Autonomous Chooser
 		chooser = new SendableChooser<AutoChoice>();
 		chooser.addObject("Drive Straight 20 Inches ", AutoChoice.DRIVE_STRAIGHT_20_INCHES);
-		chooser.addDefault("Drive Straight 50 Inches", AutoChoice.DRIVE_STRAIGHT_50_INCHES);
+		chooser.addObject("Drive Straight 50 Inches", AutoChoice.DRIVE_STRAIGHT_50_INCHES);
+		chooser.setDefaultOption("Trajectory time test", AutoChoice.TRAJECTORY_TEST);
 
 		SmartDashboard.putData("Auto mode", chooser);
 
@@ -150,6 +151,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Selected Autonomous", autoChoice.toString());
 
 		switch(autoChoice) {
+			case TRAJECTORY_TEST:
+				autoCommand = new FollowPathTimeTest();
 			case DO_NOT_MOVE:
 				autoCommand = new AutoDoNotMove();
 				break;
@@ -175,16 +178,12 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
-
-		
-
+		Scheduler.getInstance().run();	
+		/*
 		SmartDashboard.putNumber("Right Encoder Distance", drivetrain.getRightEncoder());
 		SmartDashboard.putNumber("Left Encoder Distance", drivetrain.getLeftEncoder());
-
-
-		Scheduler.getInstance().run();
 		double centerX;
+
 		synchronized (imgLock) {
 			centerX = this.centerX;
 			System.out.println("Inside autonomous: " + targetInfo);
@@ -193,6 +192,7 @@ public class Robot extends TimedRobot {
 		double turn = centerX - (IMAGE_WIDTH / 2);
 		System.out.println("Turn is: " + turn);
 		SmartDashboard.putNumber("Turn is: ", turn);
+		*/
 	}
 
 	@Override
