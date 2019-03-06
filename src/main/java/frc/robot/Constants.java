@@ -39,6 +39,6 @@ public class Constants {
 
 	public static enum StartPosition {LEFT, CENTER, RIGHT, UNKNOWN};
 	
-	public static enum AutoChoice {DO_NOT_MOVE, DRIVE_STRAIGHT_20_INCHES, DRIVE_STRAIGHT_50_INCHES};
+	public static enum AutoChoice {DO_NOT_MOVE, DRIVE_STRAIGHT_20_INCHES, DRIVE_STRAIGHT_50_INCHES, TRAJECTORY_TEST};
         
 }
