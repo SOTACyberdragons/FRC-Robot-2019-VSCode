@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.Constants.AutoChoice;
 import frc.robot.commands.AutoDoNotMove;
 import frc.robot.commands.AutoDriveDistance;
+import frc.robot.commands.FollowPathTimeTest;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.vision.GripPipelineContour;
@@ -81,6 +82,7 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putData("autoDriveStraight20Inches", autoDriveStraight20Inches);
 		SmartDashboard.putData("autoDriveStraight50Inches", autoDriveStraight50Inches);
+		SmartDashboard.putData("Trajectory time test", new FollowPathTimeTest());
 
 	}
 
