@@ -12,15 +12,12 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.HatchPanelFloorIntake;
 import frc.robot.subsystems.HatchPanelIntake;
 import frc.robot.subsystems.CargoIntake;
-<<<<<<< HEAD
 import frc.robot.subsystems.Climber;
-=======
 import frc.robot.Constants.AutoChoice;
 import frc.robot.commands.AutoCrossBaseline;
 import frc.robot.commands.AutoDoNotMove;
 import frc.robot.commands.AutoDriveDistance;
 import frc.robot.commands.ZeroArmEncoder;
->>>>>>> 490ffb47d42538ac0b59077db63dc59b34bc788b
 import frc.robot.subsystems.Arm;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
