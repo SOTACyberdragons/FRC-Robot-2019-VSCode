@@ -1,8 +1,6 @@
 package frc.robot.commands;
 
 import frc.robot.path.Waypoints;
-import frc.robot.path.Waypoints.CenterToLeftSwitch;
-import frc.robot.path.Waypoints.CenterToRightSwitch;
 import frc.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

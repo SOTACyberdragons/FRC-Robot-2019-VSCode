@@ -22,7 +22,7 @@ public class Arm extends Subsystem {
 
 	//Constants
 	public final static double REDUCTION_TO_ENCODER = 114.55; 
-	public final static double TICKS_PER_DEG = (Constants.MAG_ENCODER_TPR * REDUCTION_TO_ENCODER) / 360;
+	public final static double TICKS_PER_DEG = (Constants.VERSA_ENCODER_TPR * REDUCTION_TO_ENCODER) / 360;
 	public final static double ENCODER_MAX_SPEED = 33000; //ticks per 100 ms
 	
 	//Motor controllers 
