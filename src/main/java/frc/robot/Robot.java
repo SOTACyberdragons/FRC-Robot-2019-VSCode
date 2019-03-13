@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.HatchPanelFloorIntake;
 import frc.robot.subsystems.HatchPanelIntake;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Climber;
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
 	public static Preferences prefs;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
+	public static HatchPanelFloorIntake hatchPanelFloorIntake;
 	public static Climber climber;
 	public static HatchPanelIntake hatchPanelIntake;
 	public static CargoIntake cargoIntake;
@@ -48,6 +50,7 @@ public class Robot extends TimedRobot {
 	
 	@Override
 	public void robotInit() {
+		hatchPanelFloorIntake = new HatchPanelFloorIntake();
 		climber = new Climber();
 		hatchPanelIntake = new HatchPanelIntake();
 		cargoIntake = new CargoIntake();

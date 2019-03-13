@@ -13,6 +13,8 @@ public class ButtonMap {
     public static final int BALL_IN_CARGO_SHIP_POSITION = 1; 
     public static final int BALL_IN_ROCKET_POSITION = 4; 
     public static final int BALL_OUT_CARGO_SHIP_POSITION = 1;
+    public static final int FLOOR_HATCH_PANEL_IN = 5;
+    public static final int FLOOR_HATCH_PANEL_OUT = 6;
 
 }
 		

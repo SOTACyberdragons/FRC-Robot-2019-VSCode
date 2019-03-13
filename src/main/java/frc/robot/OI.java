@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.CargoIn;
 import frc.robot.commands.CargoOut;
 import frc.robot.commands.FlashLightForCargo;
+import frc.robot.commands.HatchPanelFloorIn;
+import frc.robot.commands.HatchPanelFloorOut;
 import frc.robot.commands.MoveArmToAngle;
 import frc.robot.commands.PistonIn;
 import frc.robot.commands.PistonOut;
@@ -22,6 +24,8 @@ public class OI {
     JoystickButton cargoIn;
     JoystickButton cargoOut;
     JoystickButton flashLight;
+    JoystickButton floorHatchIn;
+    JoystickButton floorHatchOut;
     
     JoystickButton groundPosition;
     JoystickButton backwardsPosition;
@@ -52,6 +56,10 @@ public class OI {
         //Hatch panel intake
         pistonOut = new JoystickButton(leftStick, ButtonMap.CLOSE_HATCH_PANEL_INTAKE);
         pistonIn = new JoystickButton(leftStick, ButtonMap.OPEN_HATCH_PANEL_INTAKE);
+
+        //Hatch panel floor intake
+        floorHatchIn = new JoystickButton(rightAuxStick, ButtonMap.FLOOR_HATCH_PANEL_IN);
+        floorHatchOut = new JoystickButton(rightAuxStick, ButtonMap.FLOOR_HATCH_PANEL_OUT);
         
         //Cargo Intake 
         cargoIn = new JoystickButton(leftStick, ButtonMap.INTAKE_CARGO);
@@ -76,6 +84,10 @@ public class OI {
         //Hatch panel intake
         pistonOut.whenPressed(new PistonOut());
         pistonIn.whenPressed(new PistonIn());
+
+        //Hatch panel floor intake 
+        floorHatchIn.whileHeld(new HatchPanelFloorIn());
+        floorHatchOut.whileHeld(new HatchPanelFloorOut());
 
         //Cargo Intake
         cargoIn.whileHeld(new CargoIn());
@@ -106,7 +118,7 @@ public class OI {
 		return leftAuxStick;
     }
     
-    public Joystick getRIghtAuxStick() {
+    public Joystick getRightAuxStick() {
         return rightAuxStick;
     }
 
