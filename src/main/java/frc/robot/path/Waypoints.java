@@ -64,6 +64,30 @@ public interface Waypoints {
 			}		
 		}
 
+<<<<<<< HEAD
+=======
+	public final class DriveDistance implements Waypoints {
+		private double distanceX; 
+		private double distanceY; 
+		private double angleDeg; 
+
+		public DriveDistance(double distanceX, double distanceY, double angleDeg) {
+			this.distanceX = distanceX; 
+			this.distanceY = distanceY;
+			this.angleDeg = angleDeg;
+		}
+
+		public Waypoint[] points() {
+			return  new Waypoint[] {
+					new Waypoint(0, 0, 0),
+					new Waypoint(distanceX, distanceY, Pathfinder.d2r(angleDeg))
+			};
+		}
+	}
+	
+
+	public final class Vision implements Waypoints {
+>>>>>>> 490ffb47d42538ac0b59077db63dc59b34bc788b
 
 		// start on the left and put hatch panel on the farthest hatch on the left side of the cargo ship
 		public final class LeftFartchCargo implements Waypoints {
@@ -106,6 +130,7 @@ public interface Waypoints {
 			}
 		}
 
+<<<<<<< HEAD
 		//go back to the human player station to get another hatch panel after RightFartchCargo
 		public final class RightFartchCargoRetrieval implements Waypoints {
 			public Waypoint [] points() {
@@ -118,6 +143,12 @@ public interface Waypoints {
 				};
 			}
 		}
+=======
+		public Waypoint[] points() {
+			return  new Waypoint[] {
+					new Waypoint(0, 0, 0),
+					new Waypoint(distanceX, distanceY, Pathfinder.d2r(angleDeg)),
+>>>>>>> 490ffb47d42538ac0b59077db63dc59b34bc788b
 
 		//go back to the human player station to get another hatch panel after LeftFartchCargo
 		public final class LeftFartchCargoRetrieval implements Waypoints {
@@ -158,5 +189,41 @@ public interface Waypoints {
 			}
 		}
 	}
+
+	public final class FartchCargo1Left implements Waypoints {
+		public Waypoint[] points() {
+			return  new Waypoint[] {
+					new Waypoint(0, 0, 0),
+					new Waypoint(152, 20, 0),
+					new Waypoint(216.5, -42.4, Pathfinder.d2r(-90)),
+					new Waypoint(216.5, -137.5, Pathfinder.d2r(-50)),
+					//so it is straight before driving on the platform 
+					new Waypoint(226.6, -137.5, Pathfinder.d2r(0)),
+					new Waypoint(274.25, -145.07, Pathfinder.d2r(0)),
+					new Waypoint(280.25, -145.07, Pathfinder.d2r(20))
+			};
+ 		}
+	}
+
+	public final class FartchCargo1Right implements Waypoints {
+		public Waypoint[] points() {
+			return  new Waypoint[] {
+					new Waypoint(0, 0, 0),
+					new Waypoint(152, 20, 0),
+					new Waypoint(216.5, -42.4, Pathfinder.d2r(-90)),
+					new Waypoint(216.5, -137.5, Pathfinder.d2r(-50)),
+					//so it is straight before driving on the platform 
+					new Waypoint(226.6, -137.5, Pathfinder.d2r(0)),
+					new Waypoint(274.25, -145.07, Pathfinder.d2r(0)),
+					new Waypoint(280.25, -145.07, Pathfinder.d2r(20))
+			};
+ 		}
+	}
+
+}
 	
 	
+<<<<<<< HEAD
+=======
+
+>>>>>>> 490ffb47d42538ac0b59077db63dc59b34bc788b

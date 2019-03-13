@@ -1,35 +1,33 @@
 package frc.robot.commands;
 
-import frc.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
-
+import frc.robot.Robot;
 
 /**
  *
  */
-public class DifferentialDriveWithJoysticks extends Command {
+public class ResetDriveSensors extends Command {
 
-    public DifferentialDriveWithJoysticks() {
+    public ResetDriveSensors() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+        requires(Robot.drivetrain);
+        System.out.println("Im in");
     }
+
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        Robot.drivetrain.resetSensors();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        double throttle = 1.0;
-        Robot.drivetrain.drive.arcadeDrive(Robot.oi.getLeftStick().getY()*throttle,
-		-Robot.oi.getRightStick().getX()*throttle, true);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

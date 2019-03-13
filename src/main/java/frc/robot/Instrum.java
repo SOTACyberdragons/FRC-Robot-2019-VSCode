@@ -1,9 +1,7 @@
 package frc.robot;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class Instrum {
 
@@ -29,7 +27,7 @@ public class Instrum {
 			SmartDashboard.putNumber("ClosedLoopTarget", tal.getClosedLoopTarget(Constants.PID_LOOP_IDX));
 			SmartDashboard.putNumber("ActTrajVelocity", tal.getActiveTrajectoryVelocity());
 			SmartDashboard.putNumber("ActTrajPosition", tal.getActiveTrajectoryPosition());
-			SmartDashboard.putNumber("ActTrajHeading", tal.getActiveTrajectoryHeading());
+			SmartDashboard.putNumber("ActTrajHeading", tal.getActiveTrajectoryPosition(1));
 		}
 		/* periodically print to console */
 		if (++_loops >= 10) {

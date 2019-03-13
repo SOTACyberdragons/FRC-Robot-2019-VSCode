@@ -1,6 +1,5 @@
 package frc.robot.commands;
 
-import java.io.File;
 
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -67,6 +66,7 @@ public class FollowPath extends Command {
     protected void initialize() {
         System.out.println("In Follow Path init");
         drive.resetSensors();
+        System.out.print("Sensors reset!");
         timer.reset();
         timer.start();
         kP = prefs.getDouble("Pathfinder.kP", 0.45);
@@ -91,6 +91,7 @@ public class FollowPath extends Command {
         drive.resetSensors();
         left.reset();
         right.reset();
+        System.out.println("Init done!!!!!");
     }
 
     protected void execute() {

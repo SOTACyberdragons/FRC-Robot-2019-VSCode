@@ -10,13 +10,14 @@ import frc.robot.commands.HatchPanelFloorOut;
 import frc.robot.commands.MoveArmToAngle;
 import frc.robot.commands.PistonIn;
 import frc.robot.commands.PistonOut;
+import frc.robot.commands.ResetDriveSensors;
+import frc.robot.commands.ZeroArmEncoder;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    //public XboxController controller = new XboxController(0);
 
 
     JoystickButton pistonOut;
@@ -24,9 +25,20 @@ public class OI {
     JoystickButton cargoIn;
     JoystickButton cargoOut;
     JoystickButton flashLight;
+<<<<<<< HEAD
     JoystickButton floorHatchIn;
     JoystickButton floorHatchOut;
     
+=======
+    JoystickButton zeroArmEncoder;
+    JoystickButton resetDriveSensors;
+
+    JoystickButton coCargoIn;
+    JoystickButton coCargoOut; 
+    JoystickButton coHatchClose;
+    JoystickButton coHatchOpen;
+
+>>>>>>> 490ffb47d42538ac0b59077db63dc59b34bc788b
     JoystickButton groundPosition;
     JoystickButton backwardsPosition;
     JoystickButton ballInCargoShipPosition;
@@ -65,6 +77,10 @@ public class OI {
         cargoIn = new JoystickButton(leftStick, ButtonMap.INTAKE_CARGO);
         cargoOut = new JoystickButton(rightStick, ButtonMap.RELEASE_CARGO);
 
+        coCargoIn = new JoystickButton(leftAuxStick, ButtonMap.CO_CARGO_IN);
+        coCargoOut = new JoystickButton(rightAuxStick, ButtonMap.CO_CARGO_OUT);
+        coHatchClose = new JoystickButton(rightAuxStick, 2);
+        coHatchOpen = new JoystickButton(rightAuxStick, 3) ;
         //Arm Positions
         groundPosition = new JoystickButton(leftAuxStick, ButtonMap.GROUND_POSITION);
         backwardsPosition = new JoystickButton(leftAuxStick, ButtonMap.BACKWARDS_POSITION);
@@ -72,6 +88,8 @@ public class OI {
         ballInRocketPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_ROCKET_POSITION);
         ballOutCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_OUT_CARGO_SHIP_POSITION);
 
+        zeroArmEncoder = new JoystickButton(leftAuxStick, ButtonMap.ZERO_ARM_ENCODER);
+        resetDriveSensors = new JoystickButton(leftStick, ButtonMap.RESET_DRIVE_SENSORS);
 
 
         //LED
@@ -93,13 +111,21 @@ public class OI {
         cargoIn.whileHeld(new CargoIn());
         cargoOut.whileHeld(new CargoOut());
 
+        coCargoIn.whileHeld(new CargoIn());
+        coCargoOut.whileHeld(new CargoOut());
+        coHatchClose.whenPressed(new PistonIn());
+        coHatchOpen.whenPressed(new PistonOut());
+
         //Arm position
         //change numbers 
-        groundPosition.whileHeld(new MoveArmToAngle(148));
-        backwardsPosition.whileHeld(new MoveArmToAngle(0));
-        ballInCargoShipPosition.whileHeld(new MoveArmToAngle(66)); 
-        ballInRocketPosition.whileHeld(new MoveArmToAngle(22));
-        ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(91));
+        groundPosition.whileHeld(new MoveArmToAngle(0));
+        backwardsPosition.whileHeld(new MoveArmToAngle(180));
+        ballInCargoShipPosition.whileHeld(new MoveArmToAngle(110)); 
+        ballInRocketPosition.whileHeld(new MoveArmToAngle(45));
+        ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(30));
+
+        zeroArmEncoder.whenPressed(new ZeroArmEncoder());
+        resetDriveSensors.whenPressed(new ResetDriveSensors());
 
 
         //LED

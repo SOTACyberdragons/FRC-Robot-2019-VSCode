@@ -148,7 +148,7 @@ public class TapePairRecognizer {
         }
 
         public double getWidth() {
-          return  (right.center.x - left.center.x) + right.center.x/2 + left.center.x/2;
+          return  (right.center.x - left.center.x);
         }
 
         public double getCenterX() {
