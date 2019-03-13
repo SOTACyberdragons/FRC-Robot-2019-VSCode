@@ -1,10 +1,6 @@
 package frc.robot.commands;
 
 import frc.robot.path.Waypoints;
-<<<<<<< HEAD
-import frc.robot.subsystems.DriveTrain;
-=======
->>>>>>> 490ffb47d42538ac0b59077db63dc59b34bc788b
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 public class VisionGo extends CommandGroup {

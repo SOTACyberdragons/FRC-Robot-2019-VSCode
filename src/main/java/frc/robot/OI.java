@@ -25,11 +25,9 @@ public class OI {
     JoystickButton cargoIn;
     JoystickButton cargoOut;
     JoystickButton flashLight;
-<<<<<<< HEAD
     JoystickButton floorHatchIn;
     JoystickButton floorHatchOut;
     
-=======
     JoystickButton zeroArmEncoder;
     JoystickButton resetDriveSensors;
 
@@ -38,7 +36,6 @@ public class OI {
     JoystickButton coHatchClose;
     JoystickButton coHatchOpen;
 
->>>>>>> 490ffb47d42538ac0b59077db63dc59b34bc788b
     JoystickButton groundPosition;
     JoystickButton backwardsPosition;
     JoystickButton ballInCargoShipPosition;
