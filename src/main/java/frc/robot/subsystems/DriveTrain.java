@@ -65,8 +65,10 @@ public class DriveTrain extends Subsystem {
 		
 		leftMotorFollower.follow(leftMotor);
 		leftMotor.setInverted(false);
+		leftMotor.setSensorPhase(true);
 		rightMotorFollower.follow(rightMotor);
 		rightMotor.setInverted(false);
+		rightMotor.setSensorPhase(false);
 	}
 	
 	

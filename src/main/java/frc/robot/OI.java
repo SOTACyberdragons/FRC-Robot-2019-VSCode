@@ -2,6 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.HatchPanelFloorIn;
+import frc.robot.commands.HatchPanelFloorOut;
 import frc.robot.commands.ResetDriveSensors;
 import frc.robot.commands.TurnOnLight;
 import frc.robot.subsystems.DriveTrain;
@@ -13,6 +15,8 @@ import frc.robot.subsystems.DriveTrain;
 public class OI {
     //public XboxController controller = new XboxController(0);
 
+    JoystickButton floorHatchIn;
+    JoystickButton floorHatchOut;
     JoystickButton lightOn;
     JoystickButton resetDriveSensors;
     
@@ -37,7 +41,9 @@ public class OI {
         Set buttons
         */
 
-
+        //hatch panel
+        floorHatchIn = new JoystickButton(rightAuxStick, ButtonMap.FLOOR_HATCH_IN);
+        floorHatchOut = new JoystickButton(rightAuxStick, ButtonMap.FLOOR_HATCH_OUT);
 
         //LED
         lightOn = new JoystickButton(rightStick, ButtonMap.FLASH_LIGHT);
@@ -47,6 +53,9 @@ public class OI {
         Set commands
         */
 
+        //hatch panel
+        floorHatchIn.whileHeld(new HatchPanelFloorIn());
+        floorHatchOut.whileHeld(new HatchPanelFloorOut());
 
 
         //LED

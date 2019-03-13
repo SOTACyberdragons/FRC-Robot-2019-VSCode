@@ -20,6 +20,7 @@ import frc.robot.commands.AutoRightFartchCargoDouble;
 import frc.robot.commands.FollowPathTimeTest;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.HatchPanelFloorIntake;
 import frc.robot.vision.GripPipelineContour;
 import frc.robot.vision.TapePairRecognizer;
 import frc.robot.vision.TargetInfo;
@@ -57,7 +58,7 @@ public class Robot extends TimedRobot {
 	public static final int IMAGE_HEIGHT = 240;
 	private Command autonomousCommand;
 	public static Preferences prefs;
-
+	public static HatchPanelFloorIntake hatchPanelFloorIntake;
 	public static Climber climber;
 	public static DriveTrain drivetrain;
 	public static OI oi;
@@ -94,7 +95,7 @@ public class Robot extends TimedRobot {
 		autoDriveStraight50Inches = new AutoDriveDistance(50, 0, 0);
 
 		//auto commands
-		// autoLeftCenterHatch = new AutoLeftCenterHatch();
+		 autoLeftCenterHatch = new AutoLeftCenterHatch();
 		// autoRightCenterHatch = new AutoRightCenterHatch();
 		// autoLeftFartchCargo = new AutoLeftFartchCargo();
 		// autoRightFartchCargo = new AutoRightFartchCargo();
@@ -112,6 +113,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 
+		hatchPanelFloorIntake = new HatchPanelFloorIntake();
 		climber = new Climber();
 		drivetrain = new DriveTrain();
 		oi = new OI();
