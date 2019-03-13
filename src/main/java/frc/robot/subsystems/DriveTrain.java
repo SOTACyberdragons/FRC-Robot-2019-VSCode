@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.PigeonIMU;
+import com.ctre.phoenix.sensors.PigeonIMU_ControlFrame;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -25,7 +26,7 @@ public class DriveTrain extends Subsystem {
 
 	public final static double WHEELBASE_WIDTH = 24.25;
 	public final static double WHEEL_DIAMETER = 6;
-	public final static double PULSE_PER_REVOLUTION = 360;
+	public final static double PULSE_PER_REVOLUTION = 4096;
 	public final static double DISTANCE_PER_PULSE = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION;
 	public final static double MAX_SPEED = 110.0;
 	public static final double MAX_ACCEL = 1.0 / 0.0254; //0.2g in in/s^2
@@ -63,14 +64,16 @@ public class DriveTrain extends Subsystem {
 		initDriveTalon(leftMotorFollower);
 		
 		leftMotorFollower.follow(leftMotor);
+		leftMotor.setInverted(false);
 		rightMotorFollower.follow(rightMotor);
+		rightMotor.setInverted(false);
 	}
 	
 	
 	public void initDriveTalon(WPI_TalonSRX talon) {
 		talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
 		talon.setSensorPhase(true);
-		talon.setInverted(true);
+		
 	
 		/* Set relevant frame periods to be at least as fast as periodic rate */
 		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.TIMEOUT_MS);
@@ -121,13 +124,16 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public double getHeading() {
-		return gyro.getCompassHeading();
+		PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
+		double [] xyz_dps = new double[3];
+		gyro.getRawGyro(xyz_dps);
+		double currentAngle = gyro.getFusedHeading(fusionStatus);
+		return currentAngle;
 	}
 
 	public void resetSensors() {
 		leftMotor.setSelectedSensorPosition(0);
 		rightMotor.setSelectedSensorPosition(0);
-
 	}
 
 	public void lightOn() {

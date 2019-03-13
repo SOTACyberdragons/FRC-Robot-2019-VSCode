@@ -2,7 +2,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ResetDriveSensors;
 import frc.robot.commands.TurnOnLight;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -12,6 +14,7 @@ public class OI {
     //public XboxController controller = new XboxController(0);
 
     JoystickButton lightOn;
+    JoystickButton resetDriveSensors;
     
 
 
@@ -38,6 +41,7 @@ public class OI {
 
         //LED
         lightOn = new JoystickButton(rightStick, ButtonMap.FLASH_LIGHT);
+        resetDriveSensors = new JoystickButton(leftStick, ButtonMap.RESET_DRIVE_SENSORS);
        
         /*
         Set commands
@@ -47,6 +51,7 @@ public class OI {
 
         //LED
         lightOn.whileHeld(new TurnOnLight());
+        resetDriveSensors.whenPressed(new ResetDriveSensors());
 	}
 	
 	public Joystick getLeftStick() {

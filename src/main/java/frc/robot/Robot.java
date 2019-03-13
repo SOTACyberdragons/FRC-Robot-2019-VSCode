@@ -56,7 +56,7 @@ public class Robot extends TimedRobot {
 	public static final int IMAGE_WIDTH = 320;
 	public static final int IMAGE_HEIGHT = 240;
 	private Command autonomousCommand;
-	public static Preferences prefs = Preferences.getInstance();
+	public static Preferences prefs;
 
 	public static Climber climber;
 	public static DriveTrain drivetrain;
@@ -94,12 +94,12 @@ public class Robot extends TimedRobot {
 		autoDriveStraight50Inches = new AutoDriveDistance(50, 0, 0);
 
 		//auto commands
-		autoLeftCenterHatch = new AutoLeftCenterHatch();
-		autoRightCenterHatch = new AutoRightCenterHatch();
-		autoLeftFartchCargo = new AutoLeftFartchCargo();
-		autoRightFartchCargo = new AutoRightFartchCargo();
-		autoLeftFartchCargoDouble = new AutoLeftFartchCargoDouble();
-		autoRightFartchCargoDouble = new AutoRightFartchCargoDouble();
+		// autoLeftCenterHatch = new AutoLeftCenterHatch();
+		// autoRightCenterHatch = new AutoRightCenterHatch();
+		// autoLeftFartchCargo = new AutoLeftFartchCargo();
+		// autoRightFartchCargo = new AutoRightFartchCargo();
+		// autoLeftFartchCargoDouble = new AutoLeftFartchCargoDouble();
+		// autoRightFartchCargoDouble = new AutoRightFartchCargoDouble();
 
 		System.out.println("Done initializing commands");
 
@@ -116,6 +116,7 @@ public class Robot extends TimedRobot {
 		drivetrain = new DriveTrain();
 		oi = new OI();
 
+		prefs = Preferences.getInstance();
 		initCommands();
 
 		// Autonomous Chooser
@@ -186,9 +187,11 @@ public class Robot extends TimedRobot {
 			case TRAJECTORY_TEST:
 				autoCommand = new FollowPathTimeTest();
 			case DO_NOT_MOVE:
+				System.out.println("Do not move!");
 				autoCommand = new AutoDoNotMove();
 				break;
 			case DRIVE_STRAIGHT_20_INCHES: 
+				System.out.println("It working!");
 				autoCommand = autoDriveStraight20Inches;
 				break;
 			case DRIVE_STRAIGHT_50_INCHES: 
@@ -276,6 +279,7 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putNumber("Right Encoder Ticks", drivetrain.getRightRawEncoderTicks());
 		SmartDashboard.putNumber("Left Encoder Ticks", drivetrain.getLeftRawEncoderTicks());
+	
 
 		SmartDashboard.putNumber("Right Drive Inches", drivetrain.getRightEncoder());
 		SmartDashboard.putNumber("Left Drive Inches", drivetrain.getLeftEncoder());

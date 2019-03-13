@@ -37,8 +37,8 @@ public interface Waypoints {
 						//drive straight a little 
 						new Waypoint(48.024,0, 0),
 						//move to the right 
-						new Waypoint(64.046, 8.770, Pathfinder.d2r(0)),//add angle
-						new Waypoint(69.349, 25.192, Pathfinder.d2r(0)),//add angle
+						new Waypoint(64.046, 8.770, Pathfinder.d2r(30)),//add angle
+						new Waypoint(69.349, 25.192, Pathfinder.d2r(72)),//add angle
 						new Waypoint(88.54, 35, Pathfinder.d2r(0)),
 						//drive straight to cargo
 						new Waypoint(121.25, 35, Pathfinder.d2r(0))
@@ -54,8 +54,8 @@ public interface Waypoints {
 						//drive straight a little 
 						new Waypoint(48.024,0, 0),
 						//move to the right 
-						new Waypoint(64.046, -8.770, Pathfinder.d2r(0)),//add angle
-						new Waypoint(69.349, -25.192, Pathfinder.d2r(0)),//add angle
+						new Waypoint(64.046, -8.770, Pathfinder.d2r(-30)),//add angle
+						new Waypoint(69.349, -25.192, Pathfinder.d2r(-72)),//add angle
 						new Waypoint(88.54, -35, Pathfinder.d2r(0)),
 						//drive straight to cargo
 						new Waypoint(121.25, -35, Pathfinder.d2r(0))
@@ -73,13 +73,13 @@ public interface Waypoints {
 						//drive straight
 						new Waypoint(73, 0, 0),
 						//move to the left 
-						new Waypoint(89, -5.4, Pathfinder.d2r(0)), //add angle
-						new Waypoint(98, -33, Pathfinder.d2r(0)), //add angle
+						new Waypoint(89, -5.4, Pathfinder.d2r(-22)), //add angle
+						new Waypoint(98, -33, Pathfinder.d2r(-72)), //add angle
 						new Waypoint(112, -41, Pathfinder.d2r(0)),
 						//drive straight again
-						new Waypoint(195, -41, Pathfinder.d2r(0)), 
+						new Waypoint(195, -41, Pathfinder.d2r(45)), 
 						//turn to cargo ship
-						new Waypoint(216.466, -19.678, Pathfinder.d2r(0)), //add angle 
+						new Waypoint(216.466, -19.678, Pathfinder.d2r(71)), //add angle 
 						new Waypoint(225.125, 4.974, Pathfinder.d2r(90))
 				};
 			}
@@ -94,13 +94,13 @@ public interface Waypoints {
 						//drive straight
 						new Waypoint(73, 0, 0),
 						//move to the left 
-						new Waypoint(89, 5.4, Pathfinder.d2r(0)), //add angle
-						new Waypoint(98, 33, Pathfinder.d2r(0)), //add angle
+						new Waypoint(89, 5.4, Pathfinder.d2r(22)), //add angle
+						new Waypoint(98, 33, Pathfinder.d2r(72)), //add angle
 						new Waypoint(112, 41, Pathfinder.d2r(0)),
 						//drive straight again
-						new Waypoint(195, 41, Pathfinder.d2r(0)), 
+						new Waypoint(195, 41, Pathfinder.d2r(-45)), 
 						//turn to cargo ship
-						new Waypoint(216.466, 19.678, Pathfinder.d2r(0)), //add angle 
+						new Waypoint(216.466, 19.678, Pathfinder.d2r(-71)), //add angle 
 						new Waypoint(225.125, -4.974, Pathfinder.d2r(-90))
 				};
 			}
@@ -111,10 +111,10 @@ public interface Waypoints {
 			public Waypoint [] points() {
 				return  new Waypoint[] {
 						new Waypoint(0, 0, 0),
-						new Waypoint(-5.768, 18.933, Pathfinder.d2r(0)), //add angle
-						new Waypoint(-26.88, 36.859, Pathfinder.d2r(0)), //add angle 
-						new Waypoint(-243.18, 99, Pathfinder.d2r(90)), 
-						new Waypoint(-286.125, 99, Pathfinder.d2r(90))
+						new Waypoint(-5.768, 18.933, Pathfinder.d2r(-27)), //add angle
+						new Waypoint(-26.88, 36.859, Pathfinder.d2r(-70)), //add angle 
+						new Waypoint(-243.18, 99, Pathfinder.d2r(-90)), 
+						new Waypoint(-286.125, 99, Pathfinder.d2r(90)),
 				};
 			}
 		}
@@ -124,10 +124,10 @@ public interface Waypoints {
 			public Waypoint [] points() {
 				return  new Waypoint[] {
 						new Waypoint(0, 0, 0),
-						new Waypoint(-5.768, -18.933, Pathfinder.d2r(0)), //add angle
-						new Waypoint(-26.88, -36.859, Pathfinder.d2r(0)), //add angle 
-						new Waypoint(-243.18, -99, Pathfinder.d2r(-90)), 
-						new Waypoint(-286.125, -99, Pathfinder.d2r(-90))
+						new Waypoint(-5.768, -18.933, Pathfinder.d2r(27)), //add angle
+						new Waypoint(-26.88, -36.859, Pathfinder.d2r(70)), //add angle 
+						new Waypoint(-243.18, -99, Pathfinder.d2r(90)), 
+						new Waypoint(-286.125, -99, Pathfinder.d2r(90)),
 				};
 			}
 		}
@@ -136,10 +136,11 @@ public interface Waypoints {
 		public final class RightFartchCargo2 implements Waypoints {
 			public Waypoint [] points() {
 				return  new Waypoint[] {
-						new Waypoint(37.865, 0, Pathfinder.d2r(0)), //add angle
-						new Waypoint(231.446, -53.371, Pathfinder.d2r(0)), //add angle 
-						new Waypoint(256.591, -72.348, Pathfinder.d2r(0)), //add angle
-						new Waypoint(264.375, -99, Pathfinder.d2r(-90))
+						new Waypoint(0, 0, 0),
+						new Waypoint(37.865, 0, Pathfinder.d2r(15)), //add angle
+						new Waypoint(231.446, -53.371, Pathfinder.d2r(38)), //add angle 
+						new Waypoint(256.591, -72.348, Pathfinder.d2r(84)), //add angle
+						new Waypoint(264.375, -99, Pathfinder.d2r(90)),
 				};
 			}
 		}
@@ -148,10 +149,11 @@ public interface Waypoints {
 		public final class LeftFartchCargo2 implements Waypoints {
 			public Waypoint [] points() {
 				return  new Waypoint[] {
-						new Waypoint(37.865, 0, Pathfinder.d2r(0)), //add angle
-						new Waypoint(231.446, 53.371, Pathfinder.d2r(0)), //add angle 
-						new Waypoint(256.591, 72.348, Pathfinder.d2r(0)), //add angle
-						new Waypoint(264.375, 99, Pathfinder.d2r(90))
+						new Waypoint(0, 0, 0),
+						new Waypoint(37.865, 0, Pathfinder.d2r(-15)), //add angle
+						new Waypoint(231.446, 53.371, Pathfinder.d2r(-38)), //add angle 
+						new Waypoint(256.591, 72.348, Pathfinder.d2r(-84)), //add angle
+						new Waypoint(264.375, 99, Pathfinder.d2r(-90))
 				};
 			}
 		}
