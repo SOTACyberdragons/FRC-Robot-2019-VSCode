@@ -12,15 +12,17 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.HatchPanelFloorIntake;
 import frc.robot.subsystems.HatchPanelIntake;
 import frc.robot.subsystems.CargoIntake;
-<<<<<<< HEAD
 import frc.robot.subsystems.Climber;
-=======
 import frc.robot.Constants.AutoChoice;
-import frc.robot.commands.AutoCrossBaseline;
 import frc.robot.commands.AutoDoNotMove;
 import frc.robot.commands.AutoDriveDistance;
+import frc.robot.commands.AutoLeftCenterHatch;
+import frc.robot.commands.AutoLeftFartchCargo;
+import frc.robot.commands.AutoLeftFartchCargoDouble;
+import frc.robot.commands.AutoRightCenterHatch;
+import frc.robot.commands.AutoRightFartchCargo;
+import frc.robot.commands.AutoRightFartchCargoDouble;
 import frc.robot.commands.ZeroArmEncoder;
->>>>>>> 490ffb47d42538ac0b59077db63dc59b34bc788b
 import frc.robot.subsystems.Arm;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -59,7 +61,14 @@ public class Robot extends TimedRobot {
 	// tests
 	private Command autoDriveStraight20Inches;
 	private Command autoDriveStraight50Inches;
-	private Command autoCrossBaseline;
+	
+	//auto commands
+	private Command autoLeftCenterHatch;
+	private Command autoRightCenterHatch;
+	private Command autoLeftFartchCargo;
+	private Command autoRightFartchCargo;
+	private Command autoRightFartchCargoDouble; 
+	private Command autoLeftFartchCargoDouble;
 
 	private void initCommands() {
 		System.out.println("Initializing commands...");
@@ -67,16 +76,16 @@ public class Robot extends TimedRobot {
 		// Test
 		autoDriveStraight20Inches = new AutoDriveDistance(20, 0, 0);
 		autoDriveStraight50Inches = new AutoDriveDistance(50, 0, 0);
-		autoCrossBaseline = new AutoCrossBaseline();
+
+		//auto commands
+		autoLeftCenterHatch = new AutoLeftCenterHatch();
+		autoRightCenterHatch = new AutoRightCenterHatch();
+		autoLeftFartchCargo = new AutoLeftFartchCargo();
+		autoRightFartchCargo = new AutoRightFartchCargo();
+		autoLeftFartchCargoDouble = new AutoLeftFartchCargoDouble();
+		autoRightFartchCargoDouble = new AutoRightFartchCargoDouble();
 
 		System.out.println("Done initializing commands");
-
-		//tests
-		SmartDashboard.putData("autoDriveStraight20Inches", autoDriveStraight20Inches);
-		SmartDashboard.putData("autoDriveStraight50Inches", autoDriveStraight50Inches);
-		SmartDashboard.putData("autoCrossBaseline", autoCrossBaseline);
-
-
 	}
 	@Override
 	public void robotInit() {
@@ -100,11 +109,17 @@ public class Robot extends TimedRobot {
 		chooser = new SendableChooser<AutoChoice>();
 		chooser.addOption("Drive Straight 20 Inches ", AutoChoice.DRIVE_STRAIGHT_20_INCHES);
 		chooser.addOption("Drive Straight 50 Inches", AutoChoice.DRIVE_STRAIGHT_50_INCHES);
-		chooser.addOption("Cross Baseline", AutoChoice.CROSS_BASELINE);
-		
+		chooser.addOption("Left Center Hatch", AutoChoice.LEFT_CENTER_HATCH);
+		chooser.addOption("Right Center Hatch", AutoChoice.RIGHT_CENTER_HATCH );
+		chooser.addOption("Left Fartch Cargo", AutoChoice.LEFT_FARTCH_CARGO);
+		chooser.addOption("Right Fartch Cargo", AutoChoice.RIGHT_FARTCH_CARGO);
+		chooser.addOption("Double Left Fartch Cargo", AutoChoice.RIGHT_FARTCH_CARGO_DOUBLE);
+		chooser.addOption("Double Right Fartch Cargo", AutoChoice.LEFT_FARTCH_CARGO_DOUBLE);
 
 		SmartDashboard.putData("Reset Arm Encoder", new ZeroArmEncoder());
 		SmartDashboard.putData("Auto mode", chooser);
+
+		
 	}
 
 	/**
@@ -130,21 +145,42 @@ public class Robot extends TimedRobot {
 		autoChoice = chooser.getSelected();
 		SmartDashboard.putString("Selected Autonomous", autoChoice.toString());
 
+		
 		switch(autoChoice) {
 			case DO_NOT_MOVE:
+				System.out.println("Do not move!");
 				autoCommand = new AutoDoNotMove();
 				break;
 			case DRIVE_STRAIGHT_20_INCHES: 
+				System.out.println("It working!");
 				autoCommand = autoDriveStraight20Inches;
 				break;
 			case DRIVE_STRAIGHT_50_INCHES: 
 				autoCommand = autoDriveStraight50Inches;
-			case CROSS_BASELINE: 
-				autoCommand = autoCrossBaseline;
+				break;
+			case LEFT_CENTER_HATCH:
+				autoCommand = autoLeftCenterHatch;
+				break;
+			case RIGHT_CENTER_HATCH: 
+				autoCommand = autoRightCenterHatch;
+				break;
+			case LEFT_FARTCH_CARGO:
+				autoCommand = autoLeftFartchCargo;
+				break;
+			case RIGHT_FARTCH_CARGO:
+				autoCommand = autoRightFartchCargo;
+				break;
+			case LEFT_FARTCH_CARGO_DOUBLE:
+				autoCommand = autoLeftFartchCargoDouble;
+				break;
+			case RIGHT_FARTCH_CARGO_DOUBLE:
+				autoCommand = autoRightFartchCargoDouble;
+				break;
 			default:
 				//will only work on sides
 				autoCommand = new AutoDoNotMove();
 		}
+
  
 		SmartDashboard.putString("Autonomous Command", autoCommand.getName());
 		System.out.println("Starting auto command!");
