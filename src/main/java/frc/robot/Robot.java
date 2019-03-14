@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.HatchPanelFloorIntake;
 import frc.robot.subsystems.HatchPanelIntake;
+import frc.robot.vision.GripPipelineContour;
+import frc.robot.vision.TapePairRecognizer;
+import frc.robot.vision.TargetInfo;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Climber;
 import frc.robot.Constants.AutoChoice;
@@ -24,8 +27,12 @@ import frc.robot.commands.AutoRightFartchCargo;
 import frc.robot.commands.AutoRightFartchCargoDouble;
 import frc.robot.commands.ZeroArmEncoder;
 import frc.robot.subsystems.Arm;
+
+import java.util.ArrayList;
+
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.vision.VisionThread;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -43,6 +50,10 @@ public class Robot extends TimedRobot {
 	public static final int IMAGE_WIDTH = 320;
 	public static final int IMAGE_HEIGHT = 240;
 	public static Preferences prefs;
+	private int exposure =  10; //exposure for USB camera as a percentage 
+	private final Object imgLock = new Object();
+	private double centerX;
+	private TargetInfo targetInfo;
 
 	public static HatchPanelFloorIntake hatchPanelFloorIntake;
 	public static Climber climber;
@@ -99,12 +110,6 @@ public class Robot extends TimedRobot {
 		
 		
 		initCommands();
-
-
-		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-		camera.setResolution(IMAGE_WIDTH, IMAGE_HEIGHT);
-
-
 		//Autonomous Chooser
 		chooser = new SendableChooser<AutoChoice>();
 		chooser.addOption("Drive Straight 20 Inches ", AutoChoice.DRIVE_STRAIGHT_20_INCHES);
@@ -118,6 +123,31 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putData("Reset Arm Encoder", new ZeroArmEncoder());
 		SmartDashboard.putData("Auto mode", chooser);
+
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(IMAGE_WIDTH, IMAGE_HEIGHT);
+		//@TODO: camera exposure and change from dashboard
+		//Set the exposure to manual, as a percentage (0-100) 100 is letting in a lot of light
+		camera.setExposureManual(exposure);
+
+		VisionThread visionThread = new VisionThread(camera, new GripPipelineContour(), pipeline -> {
+            if (!pipeline.filterContoursOutput().isEmpty()) {
+				ArrayList<TapePair> pairs = TapePairRecognizer.recognize(pipeline.filterContoursOutput());
+				//only proceed if pair is not empty (ArrayList.empty)
+				if(!pairs.isEmpty() ) {
+					synchronized (imgLock) {
+						for (int i = 0; i < pairs.size(); i++) {
+							centerX = pairs.get(i).getCenterX();
+							System.out.println("Center X of tape pair " + i +": " + centerX);
+							targetInfo = new TargetInfo(pairs.get(i));
+							System.out.println("Target info of tape pair " + i + ": " + targetInfo);
+						}
+					}
+				}
+            }
+        });
+        visionThread.start();
+	}
 
 		
 	}
