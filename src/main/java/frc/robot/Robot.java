@@ -9,13 +9,18 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.HatchPanelFloorIntake;
 import frc.robot.subsystems.HatchPanelIntake;
 import frc.robot.subsystems.CargoIntake;
+<<<<<<< HEAD
+import frc.robot.subsystems.Climber;
+=======
 import frc.robot.Constants.AutoChoice;
 import frc.robot.commands.AutoCrossBaseline;
 import frc.robot.commands.AutoDoNotMove;
 import frc.robot.commands.AutoDriveDistance;
 import frc.robot.commands.ZeroArmEncoder;
+>>>>>>> 490ffb47d42538ac0b59077db63dc59b34bc788b
 import frc.robot.subsystems.Arm;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -37,6 +42,8 @@ public class Robot extends TimedRobot {
 	public static final int IMAGE_HEIGHT = 240;
 	public static Preferences prefs;
 
+	public static HatchPanelFloorIntake hatchPanelFloorIntake;
+	public static Climber climber;
 	public static HatchPanelIntake hatchPanelIntake;
 	public static CargoIntake cargoIntake;
 	public static Arm arm;
@@ -73,6 +80,8 @@ public class Robot extends TimedRobot {
 	}
 	@Override
 	public void robotInit() {
+		hatchPanelFloorIntake = new HatchPanelFloorIntake();
+		climber = new Climber();
 		hatchPanelIntake = new HatchPanelIntake();
 		cargoIntake = new CargoIntake();
 		arm = new Arm();
