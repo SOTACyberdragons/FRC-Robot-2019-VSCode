@@ -6,7 +6,8 @@ import frc.robot.RobotMap;
 
 public class Climber extends Subsystem {
 
-    private Spark motor;;
+    private Spark motor;
+
     public Climber() {
         motor = new Spark(RobotMap.CLIMBER_MOTOR);
     }
