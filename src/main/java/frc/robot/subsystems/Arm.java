@@ -22,6 +22,7 @@ public class Arm extends Subsystem {
 
 	//Constants
 	public final static double REDUCTION_TO_ENCODER = 100; 
+	//8080 is number of ticks per 180 deg rotation
 	public final static double TICKS_PER_DEG = 8080 /180; // (Constants.VERSA_ENCODER_TPR * REDUCTION_TO_ENCODER) / 360;
 	public final static double ENCODER_MAX_SPEED = 33000; //ticks per 100 ms
 
