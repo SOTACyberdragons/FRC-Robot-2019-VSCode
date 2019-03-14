@@ -13,6 +13,7 @@ import frc.robot.subsystems.HatchPanelFloorIntake;
 import frc.robot.subsystems.HatchPanelIntake;
 import frc.robot.vision.GripPipelineContour;
 import frc.robot.vision.TapePairRecognizer;
+import frc.robot.vision.TapePairRecognizer.TapePair;
 import frc.robot.vision.TargetInfo;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Climber;
@@ -147,9 +148,6 @@ public class Robot extends TimedRobot {
             }
         });
         visionThread.start();
-	}
-
-		
 	}
 
 	/**
