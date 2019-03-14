@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.CargoIn;
 import frc.robot.commands.CargoOut;
-import frc.robot.commands.FlashLightForCargo;
 import frc.robot.commands.HatchPanelFloorIn;
 import frc.robot.commands.HatchPanelFloorOut;
 import frc.robot.commands.MoveArmToAngle;
@@ -124,9 +123,6 @@ public class OI {
         zeroArmEncoder.whenPressed(new ZeroArmEncoder());
         resetDriveSensors.whenPressed(new ResetDriveSensors());
 
-
-        //LED
-        flashLight.whileHeld(new FlashLightForCargo());
 	}
 	
 	public Joystick getLeftStick() {
