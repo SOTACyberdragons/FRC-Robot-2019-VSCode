@@ -82,8 +82,11 @@ public class Arm extends Subsystem {
 	public double getFeedForward() {
 		prefs = Preferences.getInstance();
 		wHatchMaxNominalOutput = prefs.getDouble("armWHatchOut", 0.15); // set these values
+		prefs.putDouble("FFwHatch", wHatchMaxNominalOutput);
 		wCargoMaxNominalOutput = prefs.getDouble("armWCargoOut", 0.15);
+		prefs.putDouble("FFwCargo", wCargoMaxNominalOutput);
 		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.25);
+		prefs.putDouble("FFempty", noGamePieceMaxNominalOutput);
 		
 		double maxNominalOutput;
 		if(Robot.hatchPanelIntake.hasHatch() && !Robot.cargoIntake.hasCargo()) {
