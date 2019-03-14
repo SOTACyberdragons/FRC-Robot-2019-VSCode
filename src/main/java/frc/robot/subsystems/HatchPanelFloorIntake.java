@@ -13,7 +13,7 @@ public class HatchPanelFloorIntake extends Subsystem {
      private WPI_TalonSRX intakeMotor;
      private double intakeSpeed = 0.69420;
      
-     public HatchPanelFloorIntake() {
+    public HatchPanelFloorIntake() {
          armMotor = new WPI_TalonSRX(RobotMap.FLOOR_HATCH_INTAKE_MOTOR);
          intakeMotor = new WPI_TalonSRX(RobotMap.FLOOR_HATCH_ARM_MOTOR);
     }

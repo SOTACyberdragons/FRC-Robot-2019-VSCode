@@ -19,8 +19,8 @@ public class Climber extends Subsystem {
     public void stop() {
         motor.set(0);
     }
-
+    @Override
     public void initDefaultCommand() {
-    }
+	}
     
 }
