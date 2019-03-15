@@ -113,12 +113,12 @@ public class OI {
         coHatchOpen.whenPressed(new PistonOut());
 
         //Arm position
-        //change numbers 
-        groundPosition.whileHeld(new MoveArmToAngle(0));
-        backwardsPosition.whileHeld(new MoveArmToAngle(180));
-        ballInCargoShipPosition.whileHeld(new MoveArmToAngle(110)); 
-        ballInRocketPosition.whileHeld(new MoveArmToAngle(45));
-        ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(30));
+        //up is zero
+        groundPosition.whileHeld(new MoveArmToAngle(90));
+        backwardsPosition.whileHeld(new MoveArmToAngle(-90));
+        ballInCargoShipPosition.whileHeld(new MoveArmToAngle(-20)); 
+        ballInRocketPosition.whileHeld(new MoveArmToAngle(-45));
+        ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(70));
 
         zeroArmEncoder.whenPressed(new ZeroArmEncoder());
         resetDriveSensors.whenPressed(new ResetDriveSensors());

@@ -153,9 +153,24 @@ public class Arm extends Subsystem {
 		setDefaultCommand(new MoveArmWithJoystick());
 	}
 
-	public void moveArmToAngle(double angle) {
-		leftArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
-		rightArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
+	public void moveArmToAngle(double targetAngleDeg) {
+    		double currentAngleDeg = getRawAngle();
+    		double angleToUse;
+    		
+    		double choiceA = targetAngleDeg + (currentAngleDeg > 0 ? 0 : -360) + 360 * Math.floor((currentAngleDeg/360));
+    		double choiceB = choiceA + (choiceA < currentAngleDeg ? 360 : -360);
+    		
+    		if (Math.abs(currentAngleDeg - choiceA) < Math.abs(currentAngleDeg - choiceB)) {
+    			angleToUse = choiceA;
+    		} else {
+    			angleToUse = choiceB;
+    		}
+    		
+			leftArmTalon.set(ControlMode.MotionMagic, angleToUse * TICKS_PER_DEG);
+			rightArmTalon.set(ControlMode.MotionMagic, angleToUse * TICKS_PER_DEG);
+			
+		// leftArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
+		// rightArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
 
 	}
 

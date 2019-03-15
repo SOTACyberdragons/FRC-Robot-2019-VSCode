@@ -42,8 +42,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
 	public static final int IMAGE_WIDTH = 320;
 	public static final int IMAGE_HEIGHT = 240;
-	public static Preferences prefs = new Preferences();
-
+	public static Preferences prefs;
 	public static HatchPanelFloorIntake hatchPanelFloorIntake;
 	public static Climber climber;
 	public static HatchPanelIntake hatchPanelIntake;
@@ -96,7 +95,9 @@ public class Robot extends TimedRobot {
 		drivetrain = new DriveTrain();
 		oi = new OI();
 		
-		
+
+		//prefs = new Preferences.getInstance();
+
 		initCommands();
 
 
@@ -242,6 +243,7 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 
 	}
+
 
 
 
