@@ -4,6 +4,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.PigeonIMU;
+
+import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Preferences;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
@@ -121,6 +123,10 @@ public class DriveTrain extends Subsystem {
 		leftMotor.setSelectedSensorPosition(0);
 		rightMotor.setSelectedSensorPosition(0);
 		//gyro.reset();
+	}
+
+	public PIDSource getGyro() {
+		return gyro;
 	}
 
 	public void initDefaultCommand() {

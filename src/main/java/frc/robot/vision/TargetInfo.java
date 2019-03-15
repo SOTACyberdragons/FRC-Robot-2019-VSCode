@@ -1,5 +1,7 @@
 package frc.robot.vision;
 
+import frc.robot.vision.TapePairRecognizer.TapePair;
+
 public class TargetInfo {
 
     private static final double SIZE_AT_36IN = 94.283;
@@ -37,6 +39,13 @@ public class TargetInfo {
         return (5.5 * FOCAL_LENGTH) / averageLongestSide;
     }
 
+    public double getArea() {
+        double leftArea = TapePairRecognizer.getLongestSide(tapePair.left) * 
+            TapePairRecognizer.getShortestSide(tapePair.left);
+        double rightArea = TapePairRecognizer.getLongestSide(tapePair.right) * 
+        TapePairRecognizer.getShortestSide(tapePair.right);
+        return leftArea + rightArea;
+    }
 
     public double planeAngle() {
         //inches
