@@ -27,6 +27,8 @@ public class RobotMap {
 	public static final int CARGO_MOTOR = 6;
 	public static final int FLOOR_HATCH_INTAKE_MOTOR = 3;
 	public static final int FLOOR_HATCH_ARM_MOTOR = 9;
+	public static final int CLIMBER_MOTOR1 = 11;
+	public static final int CLIMBER_MOTOR2 = 2;
 
 
 }
