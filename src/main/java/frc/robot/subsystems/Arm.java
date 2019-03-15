@@ -86,7 +86,7 @@ public class Arm extends Subsystem {
 		prefs.putDouble("FFwHatch", wHatchMaxNominalOutput);
 		wCargoMaxNominalOutput = prefs.getDouble("armWCargoOut", 0.15);
 		prefs.putDouble("FFwCargo", wCargoMaxNominalOutput);
-		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.25);
+		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.28);
 		prefs.putDouble("FFempty", noGamePieceMaxNominalOutput);
 		
 		double maxNominalOutput;
@@ -105,8 +105,9 @@ public class Arm extends Subsystem {
 
 	public double getRawAngle() {
 		//average degrees because two talons control the arm
-		return (leftArmTalon.getSelectedSensorPosition(0) / TICKS_PER_DEG
-		+ rightArmTalon.getSelectedSensorPosition(0) / TICKS_PER_DEG) / 2;
+		//return (leftArmTalon.getSelectedSensorPosition(0) / TICKS_PER_DEG
+		//+ rightArmTalon.getSelectedSensorPosition(0) / TICKS_PER_DEG) / 2;
+		return rightArmTalon.getSelectedSensorPosition(0) / TICKS_PER_DEG;
 
 	}
 

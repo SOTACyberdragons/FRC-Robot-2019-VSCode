@@ -42,7 +42,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
 	public static final int IMAGE_WIDTH = 320;
 	public static final int IMAGE_HEIGHT = 240;
-	public static Preferences prefs;
+	public static Preferences prefs = new Preferences();
 
 	public static HatchPanelFloorIntake hatchPanelFloorIntake;
 	public static Climber climber;
@@ -51,7 +51,6 @@ public class Robot extends TimedRobot {
 	public static Arm arm;
 	public static DriveTrain drivetrain;
 	public static OI oi;
-
 	private AutoChoice autoChoice;
 	private SendableChooser<AutoChoice> chooser;
 	private Command autoCommand;
@@ -82,8 +81,8 @@ public class Robot extends TimedRobot {
 		autoRightCenterHatch = new AutoRightCenterHatch();
 		autoLeftFartchCargo = new AutoLeftFartchCargo();
 		autoRightFartchCargo = new AutoRightFartchCargo();
-		autoLeftFartchCargoDouble = new AutoLeftFartchCargoDouble();
-		autoRightFartchCargoDouble = new AutoRightFartchCargoDouble();
+		//autoLeftFartchCargoDouble = new AutoLeftFartchCargoDouble();
+		//autoRightFartchCargoDouble = new AutoRightFartchCargoDouble();
 
 		System.out.println("Done initializing commands");
 	}
@@ -148,7 +147,7 @@ public class Robot extends TimedRobot {
 		
 		switch(autoChoice) {
 			case DO_NOT_MOVE:
-				System.out.println("Do not move!");
+					System.out.println("Do not move!");
 				autoCommand = new AutoDoNotMove();
 				break;
 			case DRIVE_STRAIGHT_20_INCHES: 
@@ -220,8 +219,8 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 
-		SmartDashboard.putNumber("Right Encoder Ticks", drivetrain.getRightRawEncoderTicks());
-		SmartDashboard.putNumber("Left Encoder Ticks", drivetrain.getLeftRawEncoderTicks());
+		SmartDashboard.putNumber("Right Encoder Ticks", arm.getRightRawEncoderTicks());
+		SmartDashboard.putNumber("Left Encoder Ticks", arm.getLeftRawEncoderTicks());
 
 		SmartDashboard.putNumber("Right Drive", drivetrain.getRightEncoder());
 		SmartDashboard.putNumber("Left Drive", drivetrain.getLeftEncoder());
