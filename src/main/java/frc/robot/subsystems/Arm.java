@@ -22,6 +22,7 @@ public class Arm extends Subsystem {
 
 	//Constants
 	public final static double REDUCTION_TO_ENCODER = 100; 
+	//8080 is number of ticks per 180 deg rotation
 	public final static double TICKS_PER_DEG = 8080 /180; // (Constants.VERSA_ENCODER_TPR * REDUCTION_TO_ENCODER) / 360;
 	public final static double ENCODER_MAX_SPEED = 33000; //ticks per 100 ms
 
@@ -82,8 +83,11 @@ public class Arm extends Subsystem {
 	public double getFeedForward() {
 		prefs = Preferences.getInstance();
 		wHatchMaxNominalOutput = prefs.getDouble("armWHatchOut", 0.15); // set these values
+		prefs.putDouble("FFwHatch", wHatchMaxNominalOutput);
 		wCargoMaxNominalOutput = prefs.getDouble("armWCargoOut", 0.15);
-		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.25);
+		prefs.putDouble("FFwCargo", wCargoMaxNominalOutput);
+		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.28);
+		prefs.putDouble("FFempty", noGamePieceMaxNominalOutput);
 		
 		double maxNominalOutput;
 		if(Robot.hatchPanelIntake.hasHatch() && !Robot.cargoIntake.hasCargo()) {
@@ -101,8 +105,9 @@ public class Arm extends Subsystem {
 
 	public double getRawAngle() {
 		//average degrees because two talons control the arm
-		return (leftArmTalon.getSelectedSensorPosition(0) / TICKS_PER_DEG
-		+ rightArmTalon.getSelectedSensorPosition(0) / TICKS_PER_DEG) / 2;
+		//return (leftArmTalon.getSelectedSensorPosition(0) / TICKS_PER_DEG
+		//+ rightArmTalon.getSelectedSensorPosition(0) / TICKS_PER_DEG) / 2;
+		return rightArmTalon.getSelectedSensorPosition(0) / TICKS_PER_DEG;
 
 	}
 
@@ -148,9 +153,24 @@ public class Arm extends Subsystem {
 		setDefaultCommand(new MoveArmWithJoystick());
 	}
 
-	public void moveArmToAngle(double angle) {
-		leftArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
-		rightArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
+	public void moveArmToAngle(double targetAngleDeg) {
+    		double currentAngleDeg = getRawAngle();
+    		double angleToUse;
+    		
+    		double choiceA = targetAngleDeg + (currentAngleDeg > 0 ? 0 : -360) + 360 * Math.floor((currentAngleDeg/360));
+    		double choiceB = choiceA + (choiceA < currentAngleDeg ? 360 : -360);
+    		
+    		if (Math.abs(currentAngleDeg - choiceA) < Math.abs(currentAngleDeg - choiceB)) {
+    			angleToUse = choiceA;
+    		} else {
+    			angleToUse = choiceB;
+    		}
+    		
+			leftArmTalon.set(ControlMode.MotionMagic, angleToUse * TICKS_PER_DEG);
+			rightArmTalon.set(ControlMode.MotionMagic, angleToUse * TICKS_PER_DEG);
+			
+		// leftArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
+		// rightArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
 
 	}
 

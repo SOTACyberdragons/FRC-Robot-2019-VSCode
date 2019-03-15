@@ -11,13 +11,15 @@ public class CargoIntake extends Subsystem {
 
     public WPI_TalonSRX cargoMotor;
     private double speed = 1.0;
-    private Solenoid ringLight;
+    private Solenoid ringLight1;
+    private Solenoid ringLight2;
     private DigitalInput breakBeam;
 
     @Override
     protected void initDefaultCommand() {
         cargoMotor = new WPI_TalonSRX(RobotMap.CARGO_MOTOR);
-        ringLight = new Solenoid(7);
+        ringLight1 = new Solenoid(7);
+       // ringLight2 = new Solenoid(8);
         breakBeam = new DigitalInput(0);
         }
 
@@ -33,13 +35,31 @@ public class CargoIntake extends Subsystem {
         cargoMotor.stopMotor();
     }
 
-    public void lightOn() {
-		ringLight.set(true);
+    public void lightOn1() {
+		ringLight1.set(true);
 	}
 	
-	public void lightOff() {
-		ringLight.set(false);
-	}
+	public void lightOff1() {
+		ringLight1.set(false);
+    }
+
+     public void lightOn2() {
+	 	ringLight1.set(true);
+	 }
+	
+	 public void lightOff2() {
+	 	ringLight1.set(false);
+     }
+    
+    public void bothLightsOn() {
+        ringLight1.set(true);
+      //  ringLight2.set(true);
+    }
+
+    public void bothLightsOff() {
+        ringLight1.set(false);
+      //  ringLight2.set(false);
+    }
 
     //we don't have any sensors for this yet
     public boolean hasCargo() {

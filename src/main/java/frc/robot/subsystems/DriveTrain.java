@@ -3,11 +3,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.Preferences;
-import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.DifferentialDriveWithJoysticks;
@@ -37,9 +34,7 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX rightMotorFollower;
 	
 	public DifferentialDrive drive;
-	private BuiltInAccelerometer accel;
-	private ADXRS450_Gyro gyro;
-	private Timer timer;
+	private PigeonIMU gyro = new PigeonIMU(0);
 	private Preferences prefs;
 
 
@@ -115,7 +110,11 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public double getHeading() {
-		return gyro.getAngle();
+		PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
+		double [] xyz_dps = new double[3];
+		gyro.getRawGyro(xyz_dps);
+		double currentAngle = gyro.getFusedHeading(fusionStatus);
+		return currentAngle;
 	}
 
 	public void resetSensors() {

@@ -18,7 +18,7 @@ public class ZeroArmEncoder extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.arm.setEncoder(0);
+        Robot.arm.setEncoder(-45);
     }
 
     // Called repeatedly when this Command is scheduled to run

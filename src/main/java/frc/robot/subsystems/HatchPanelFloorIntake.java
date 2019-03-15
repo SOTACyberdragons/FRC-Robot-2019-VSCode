@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -22,13 +21,13 @@ public class HatchPanelFloorIntake extends Subsystem {
         armMotor.set(speed);
     }
         public void spinIn() {
-        armMotor.set(intakeSpeed);
+        intakeMotor.set(intakeSpeed);
     }
     public void spinOut() {
-        armMotor.set(-intakeSpeed);
+        intakeMotor.set(-intakeSpeed);
     }
     public void stop() {
-        armMotor.set(0);
+        intakeMotor.set(0);
     }
 
 
