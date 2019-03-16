@@ -8,9 +8,10 @@ public class AutoRightCenterHatch extends CommandGroup {
 
 
     public AutoRightCenterHatch() {
-        double maxSpeed = DriveTrain.MAX_SPEED * 0.6;
+        double maxSpeed = DriveTrain.MAX_SPEED * 0.4;
 
-        addParallel(new FollowPath(new Waypoints.RightCenterHatch(), maxSpeed));
-
+        addParallel(new FollowPath(new Waypoints.RightCenterHatch(), maxSpeed),10);
+        addParallel(new MoveArmToAngle(90),10 );
+        //addSequential(new PistonOut());
     }
 }

@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.MoveArmWithJoystick;
 
 
@@ -82,11 +83,11 @@ public class Arm extends Subsystem {
 
 	public double getFeedForward() {
 		prefs = Preferences.getInstance();
-		wHatchMaxNominalOutput = prefs.getDouble("armWHatchOut", 0.15); // set these values
+		wHatchMaxNominalOutput = prefs.getDouble("armWHatchOut", 0.2); // set these values
 		prefs.putDouble("FFwHatch", wHatchMaxNominalOutput);
-		wCargoMaxNominalOutput = prefs.getDouble("armWCargoOut", 0.15);
+		wCargoMaxNominalOutput = prefs.getDouble("armWCargoOut", 0.245);
 		prefs.putDouble("FFwCargo", wCargoMaxNominalOutput);
-		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.28);
+		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.2);
 		prefs.putDouble("FFempty", noGamePieceMaxNominalOutput);
 		
 		double maxNominalOutput;
@@ -100,6 +101,8 @@ public class Arm extends Subsystem {
 			maxNominalOutput = noGamePieceMaxNominalOutput;
 		}
 		//Feed Forward Logic
+		double feedForward = Math.sin(Math.toRadians(getRawAngle())) * maxNominalOutput;
+		SmartDashboard.putNumber("Feed Forward", feedForward);
 		return Math.sin(Math.toRadians(getRawAngle())) * maxNominalOutput;
 	}
 

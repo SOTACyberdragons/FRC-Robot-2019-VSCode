@@ -48,9 +48,11 @@ public class DriveTrain extends Subsystem {
 	
 		
 		initDriveTalon(leftMotor);
+		leftMotor.setSensorPhase(true);
+		leftMotor.setInverted(false); //'true' disabled this side -- be careful
 		initDriveTalon(rightMotor);
-		initDriveTalon(rightMotorFollower);
-		initDriveTalon(leftMotorFollower);
+		rightMotor.setSensorPhase(false);
+		rightMotor.setInverted(false);
 		
 		leftMotorFollower.follow(leftMotor);
 		rightMotorFollower.follow(rightMotor);
@@ -59,8 +61,8 @@ public class DriveTrain extends Subsystem {
 	
 	public void initDriveTalon(WPI_TalonSRX talon) {
 		talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
-		talon.setSensorPhase(true);
-		talon.setInverted(true);
+		
+	
 	
 		/* Set relevant frame periods to be at least as fast as periodic rate */
 		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.TIMEOUT_MS);

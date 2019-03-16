@@ -71,9 +71,9 @@ public class FollowPath extends Command {
         timer.start();
         kP = 0.45;//prefs.getDouble("Pathfinder.kP", 0.45);
         //prefs.putDouble("Pathfinder.kP", kP);
-        kD = 0.01;//prefs.getDouble("Pathfinder.kD", 0.01);
+        kD = 0.05;//prefs.getDouble("Pathfinder.kD", 0.01);
         //prefs.putDouble("Pathfinder.kD", kD);
-        angleKP = 0.05;//prefs.getDouble("Pathfinder.angleKP", 0.05);
+        angleKP = 0.1;//prefs.getDouble("Pathfinder.angleKP", 0.05);
         //prefs.putDouble("Pathfinder.angleKP", angleKP);
         angleKD = 0.0;//prefs.getDouble("Pathfinder.angleKD", 0.0);
        // prefs.putDouble("Pathfinder.angleKD", angleKD);

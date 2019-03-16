@@ -40,8 +40,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static final int IMAGE_WIDTH = 320;
-	public static final int IMAGE_HEIGHT = 240;
+	public static final int IMAGE_WIDTH = 160;
+	public static final int IMAGE_HEIGHT = 120;
 	public static Preferences prefs;
 	public static HatchPanelFloorIntake hatchPanelFloorIntake;
 	public static Climber climber;
@@ -115,6 +115,7 @@ public class Robot extends TimedRobot {
 		chooser.addOption("Right Fartch Cargo", AutoChoice.RIGHT_FARTCH_CARGO);
 		chooser.addOption("Double Left Fartch Cargo", AutoChoice.RIGHT_FARTCH_CARGO_DOUBLE);
 		chooser.addOption("Double Right Fartch Cargo", AutoChoice.LEFT_FARTCH_CARGO_DOUBLE);
+		chooser.addOption("Do not moove", AutoChoice.DO_NOT_MOVE);
 
 		SmartDashboard.putData("Reset Arm Encoder", new ZeroArmEncoder());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -184,7 +185,7 @@ public class Robot extends TimedRobot {
  
 		SmartDashboard.putString("Autonomous Command", autoCommand.getName());
 		System.out.println("Starting auto command!");
-		autoCommand.start();
+		//autoCommand.start();
 		System.out.println("Finished auto command!");
 	}
 
@@ -222,7 +223,8 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putNumber("Right Encoder Ticks", arm.getRightRawEncoderTicks());
 		SmartDashboard.putNumber("Left Encoder Ticks", arm.getLeftRawEncoderTicks());
-
+		SmartDashboard.putNumber("Left drive ticks", drivetrain.getLeftRawEncoderTicks());
+		SmartDashboard.putNumber("Right drive ticks", drivetrain.getRightRawEncoderTicks());
 		SmartDashboard.putNumber("Right Drive", drivetrain.getRightEncoder());
 		SmartDashboard.putNumber("Left Drive", drivetrain.getLeftEncoder());
 
@@ -231,7 +233,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Break Beam", cargoIntake.getBreakBeam());
 
 		SmartDashboard.putNumber("Arm Encoder Ticks", arm.getLeftRawEncoderTicks());
-
+		SmartDashboard.putNumber("Gyro", drivetrain.getHeading());
 		//hatch panel intake 
 		SmartDashboard.putBoolean("Hatch panel intake is closed", hatchPanelIntake.isClosed());
 	}
