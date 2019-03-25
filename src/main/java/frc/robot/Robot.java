@@ -68,7 +68,7 @@ public class Robot extends TimedRobot {
 	private Command autoCommand;
 
 	private static boolean isRecording;
-	private int exposure =  10; //exposure for USB camera as a percentage 
+	private int exposure =  90; //exposure for USB camera as a percentage 
 	/* Auto Commands */
 
 	// tests

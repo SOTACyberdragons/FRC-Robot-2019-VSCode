@@ -136,7 +136,7 @@ public class DriveTrain extends Subsystem {
 	public void resetSensors() {
 		leftMotor.setSelectedSensorPosition(0);
 		rightMotor.setSelectedSensorPosition(0);
-		gyro.setSelectedSensorPosition(0);
+		gyro.setFusedHeading(0);
 	}
 
 	public void lightOn() {
