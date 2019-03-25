@@ -18,10 +18,10 @@ public class RobotMap {
 	
 	public static final int CLIMBER_MOTOR = 0;
 	//CAN
-	public static final int LEFT_DRIVE_MOTOR = 8;
-	public static final int RIGHT_DRIVE_MOTOR = 2;
-	public static final int LEFT_DRIVE_FOLLOW_MOTOR = 7;
-	public static final int RIGHT_DRIVE_FOLLOW_MOTOR = 1;
+	public static final int LEFT_DRIVE_MOTOR = 2;
+	public static final int RIGHT_DRIVE_MOTOR = 8;
+	public static final int LEFT_DRIVE_FOLLOW_MOTOR = 1;
+	public static final int RIGHT_DRIVE_FOLLOW_MOTOR = 7;
 	public static final int CARGO_MOTOR = 0;
 
 	public static final int FLOOR_HATCH_INTAKE_MOTOR = 3;

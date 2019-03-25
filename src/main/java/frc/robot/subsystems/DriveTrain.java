@@ -74,7 +74,7 @@ public class DriveTrain extends Subsystem {
 	
 	public void initDriveTalon(WPI_TalonSRX talon) {
 		talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
-		talon.setSensorPhase(true);
+	//	talon.setSensorPhase(true);
 		
 	
 		/* Set relevant frame periods to be at least as fast as periodic rate */
@@ -136,6 +136,7 @@ public class DriveTrain extends Subsystem {
 	public void resetSensors() {
 		leftMotor.setSelectedSensorPosition(0);
 		rightMotor.setSelectedSensorPosition(0);
+		gyro.setSelectedSensorPosition(0);
 	}
 
 	public void lightOn() {
