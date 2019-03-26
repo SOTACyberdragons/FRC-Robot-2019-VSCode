@@ -26,7 +26,7 @@ public class DriveTrain extends Subsystem {
 	public final static double DISTANCE_PER_PULSE = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION;
 	public final static double MAX_SPEED = 110.0;
 	public static final double MAX_ACCEL = 1.0 / 0.0254; //0.2g in in/s^2
-	public static final double MAX_JERK = 30 / 0.0254; //from example code in Pathfinder
+	public static final double MAX_JERK = 20 / 0.0254; // 30 / 0.0254; //from example code in Pathfinder
 	public final double encoderMaxSpeed = 33000;
 
 	private WPI_TalonSRX leftMotor;
@@ -60,7 +60,7 @@ public class DriveTrain extends Subsystem {
 		leftMotor.setInverted(false); //'true' disabled this side -- be careful
 		initDriveTalon(rightMotor);
 		rightMotor.setSensorPhase(false);
-		rightMotor.setInverted(false);
+		rightMotor.setInverted(true); //set to false
 		
 		leftMotorFollower.follow(leftMotor);
 		rightMotorFollower.follow(rightMotor);
@@ -133,7 +133,7 @@ public class DriveTrain extends Subsystem {
 		//gyro.reset();
 	}
 	public void drive(double xSpeed, double zRotation) {
-		drive.arcadeDrive(xSpeed, zRotation);
+		drive.arcadeDrive(xSpeed, zRotation, true);
 	}
 
 	public LimeLight getLimeLight() {
