@@ -34,7 +34,8 @@ public class OI {
     JoystickButton coCargoOut; 
     JoystickButton coHatchClose;
     JoystickButton coHatchOpen;
-
+    
+    //arm positions 
     JoystickButton groundPosition;
     JoystickButton backwardsPosition;
     JoystickButton ballInCargoShipPosition;

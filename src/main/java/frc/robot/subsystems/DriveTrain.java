@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Preferences;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.DifferentialDriveWithJoysticks;
+import oi.limelightvision.limelight.frc.LimeLight;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -32,6 +33,8 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX leftMotorFollower;
 	private WPI_TalonSRX rightMotor;
 	private WPI_TalonSRX rightMotorFollower;
+
+	private LimeLight limelight;
 	
 	private DifferentialDrive drive;
 	public DifferentialDrive drive1;
@@ -45,7 +48,11 @@ public class DriveTrain extends Subsystem {
 		rightMotor = new WPI_TalonSRX(RobotMap.RIGHT_DRIVE_MOTOR);
 		leftMotorFollower = new WPI_TalonSRX(RobotMap.LEFT_DRIVE_FOLLOW_MOTOR);
 		rightMotorFollower = new WPI_TalonSRX(RobotMap.RIGHT_DRIVE_FOLLOW_MOTOR);
+		
 		drive = new DifferentialDrive(leftMotor, rightMotor);
+		drive.setSafetyEnabled(true);
+		drive.setExpiration(0.1);
+		drive.setMaxOutput(1);
 	
 		
 		initDriveTalon(leftMotor);
@@ -127,6 +134,10 @@ public class DriveTrain extends Subsystem {
 	}
 	public void drive(double xSpeed, double zRotation) {
 		drive.arcadeDrive(xSpeed, zRotation);
+	}
+
+	public LimeLight getLimeLight() {
+		return limelight;
 	}
 
 	public void initDefaultCommand() {
