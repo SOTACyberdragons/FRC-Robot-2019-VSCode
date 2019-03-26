@@ -33,7 +33,8 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX rightMotor;
 	private WPI_TalonSRX rightMotorFollower;
 	
-	public DifferentialDrive drive;
+	private DifferentialDrive drive;
+	public DifferentialDrive drive1;
 	private PigeonIMU gyro = new PigeonIMU(0);
 	private Preferences prefs;
 
@@ -123,6 +124,9 @@ public class DriveTrain extends Subsystem {
 		leftMotor.setSelectedSensorPosition(0);
 		rightMotor.setSelectedSensorPosition(0);
 		//gyro.reset();
+	}
+	public void drive(double xSpeed, double zRotation) {
+		drive.arcadeDrive(xSpeed, zRotation);
 	}
 
 	public void initDefaultCommand() {

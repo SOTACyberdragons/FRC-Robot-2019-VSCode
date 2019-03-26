@@ -11,6 +11,11 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.HatchPanelFloorIntake;
 import frc.robot.subsystems.HatchPanelIntake;
+import oi.limelightvision.limelight.frc.LimeLight;
+import oi.limelightvision.limelight.frc.ControlMode.CamMode;
+import oi.limelightvision.limelight.frc.ControlMode.LedMode;
+import oi.limelightvision.limelight.frc.ControlMode.Snapshot;
+import oi.limelightvision.limelight.frc.ControlMode.StreamType;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Climber;
 import frc.robot.Constants.AutoChoice;
@@ -67,6 +72,8 @@ public class Robot extends TimedRobot {
 	private Command autoRightFartchCargo;
 	private Command autoRightFartchCargoDouble; 
 	private Command autoLeftFartchCargoDouble;
+
+	public static final LimeLight limelight = new LimeLight();
 
 	private void initCommands() {
 		System.out.println("Initializing commands...");
@@ -236,6 +243,17 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Gyro", drivetrain.getHeading());
 		//hatch panel intake 
 		SmartDashboard.putBoolean("Hatch panel intake is closed", hatchPanelIntake.isClosed());
+
+		SmartDashboard.putBoolean("Target Found", limelight.getIsTargetFound());
+		SmartDashboard.putNumber("Deg Rotation to Target", limelight.getdegRotationToTarget());
+		//.....and MORE
+
+		//Setters
+		limelight.setPipeline(1);
+		limelight.setLEDMode(LedMode.kforceOff);
+		limelight.setCamMode(CamMode.kdriver);
+		limelight.setSnapshot(Snapshot.kon);
+		limelight.setStream(StreamType.kPiPMain);
 	}
 
 	/**

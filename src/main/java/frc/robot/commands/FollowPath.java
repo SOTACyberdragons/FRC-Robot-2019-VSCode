@@ -116,7 +116,7 @@ public class FollowPath extends Command {
         SmartDashboard.putNumber("Pathfinder.rightMotorOutput", rightMotorOutput);
 
         //		System.out.println("Pathfinder at " + timer.get() + ", output: " + leftMotorOutput);
-        drive.drive.tankDrive(leftMotorOutput, rightMotorOutput);
+        drive.drive1.tankDrive(leftMotorOutput, rightMotorOutput);
     }
 
     protected boolean isFinished() {
