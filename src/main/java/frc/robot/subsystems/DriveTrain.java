@@ -54,13 +54,18 @@ public class DriveTrain extends Subsystem {
 		drive.setExpiration(0.1);
 		drive.setMaxOutput(1);
 	
-		
-		initDriveTalon(leftMotor);
+		leftMotorFollower.follow(leftMotor);
+		leftMotor.setInverted(false);
 		leftMotor.setSensorPhase(true);
-		leftMotor.setInverted(false); //'true' disabled this side -- be careful
-		initDriveTalon(rightMotor);
+		rightMotorFollower.follow(rightMotor);
+		rightMotor.setInverted(false);
 		rightMotor.setSensorPhase(false);
-		rightMotor.setInverted(true); //set to false
+		// initDriveTalon(leftMotor);
+		// leftMotor.setSensorPhase(true);
+		// leftMotor.setInverted(false); //'true' disabled this side -- be careful
+		// initDriveTalon(rightMotor);
+		// rightMotor.setSensorPhase(false);
+		// rightMotor.setInverted(false); //set to false
 		
 		leftMotorFollower.follow(leftMotor);
 		rightMotorFollower.follow(rightMotor);
