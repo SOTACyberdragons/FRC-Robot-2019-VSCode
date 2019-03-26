@@ -23,7 +23,6 @@ public class OI {
     JoystickButton pistonIn;
     JoystickButton cargoIn;
     JoystickButton cargoOut;
-    JoystickButton flashLight;
     JoystickButton floorHatchIn;
     JoystickButton floorHatchOut;
     
@@ -34,7 +33,12 @@ public class OI {
     JoystickButton coCargoOut; 
     JoystickButton coHatchClose;
     JoystickButton coHatchOpen;
-    
+
+    //limelight
+    JoystickButton targetAim;
+    JoystickButton targetDrive;
+    JoystickButton targetDriveAndAim;
+
     //arm positions 
     JoystickButton groundPosition;
     JoystickButton backwardsPosition;
@@ -88,9 +92,12 @@ public class OI {
         zeroArmEncoder = new JoystickButton(leftAuxStick, ButtonMap.ZERO_ARM_ENCODER);
         resetDriveSensors = new JoystickButton(leftStick, ButtonMap.RESET_DRIVE_SENSORS);
 
+        //limelight
+        targetAim = new JoystickButton(leftStick, ButtonMap.TARGET_AIM);
+        targetDrive = new JoystickButton(leftStick, ButtonMap.TARGET_DRIVE);
+        targetDriveAndAim = new JoystickButton(rightStick, ButtonMap.TARGET_DRIVE_AND_AIM);
+ 
 
-        //LED
-        flashLight = new JoystickButton(rightStick, ButtonMap.FLASH_LIGHT);
        
         /*
         Set commands
