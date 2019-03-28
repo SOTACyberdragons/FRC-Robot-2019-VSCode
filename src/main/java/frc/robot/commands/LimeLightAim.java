@@ -27,17 +27,17 @@ public class LimeLightAim extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+    
+    double tx = Robot.drivetrain.getLimeLight().getdegRotationToTarget();
+    boolean targetFound = Robot.drivetrain.getLimeLight().getIsTargetFound();
   
-      double tx = Robot.drivetrain.getLimeLight().getdegRotationToTarget();
-      boolean targetFound = Robot.drivetrain.getLimeLight().getIsTargetFound();
-  
-      if(targetFound){
+    if(targetFound){
         m_moveValue = 0;
         m_rotateValue = tx * kpAim;
-      }else{
+    }else{
         m_moveValue = 0;
-        m_rotateValue = 0;
-      }
+        m_rotateValue = 0 *kpAim;
+    }
   
       Robot.drivetrain.drive(m_moveValue, m_rotateValue);
       

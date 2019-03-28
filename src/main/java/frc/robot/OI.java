@@ -6,6 +6,9 @@ import frc.robot.commands.CargoIn;
 import frc.robot.commands.CargoOut;
 import frc.robot.commands.HatchPanelFloorIn;
 import frc.robot.commands.HatchPanelFloorOut;
+import frc.robot.commands.LimeLightAim;
+import frc.robot.commands.LimeLightDrive;
+import frc.robot.commands.LimeLightDriveAndAim;
 import frc.robot.commands.MoveArmToAngle;
 import frc.robot.commands.PistonIn;
 import frc.robot.commands.PistonOut;
@@ -127,6 +130,10 @@ public class OI {
         ballInCargoShipPosition.whileHeld(new MoveArmToAngle(-20)); 
         ballInRocketPosition.whileHeld(new MoveArmToAngle(-45));
         ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(70));
+
+        targetAim.whileHeld(new LimeLightAim());
+        targetDrive.whileHeld(new LimeLightDrive());
+        targetDriveAndAim.whileHeld(new LimeLightDriveAndAim());
 
         zeroArmEncoder.whenPressed(new ZeroArmEncoder());
         resetDriveSensors.whenPressed(new ResetDriveSensors());

@@ -54,18 +54,13 @@ public class DriveTrain extends Subsystem {
 		drive.setExpiration(0.1);
 		drive.setMaxOutput(1);
 	
-		leftMotorFollower.follow(leftMotor);
-		leftMotor.setInverted(false);
+
+		initDriveTalon(leftMotor);
 		leftMotor.setSensorPhase(true);
-		rightMotorFollower.follow(rightMotor);
-		rightMotor.setInverted(false);
+		leftMotor.setInverted(false); //'true' disabled this side -- be careful
+		initDriveTalon(rightMotor);
 		rightMotor.setSensorPhase(false);
-		// initDriveTalon(leftMotor);
-		// leftMotor.setSensorPhase(true);
-		// leftMotor.setInverted(false); //'true' disabled this side -- be careful
-		// initDriveTalon(rightMotor);
-		// rightMotor.setSensorPhase(false);
-		// rightMotor.setInverted(false); //set to false
+		rightMotor.setInverted(false); //set to false
 		
 		leftMotorFollower.follow(leftMotor);
 		rightMotorFollower.follow(rightMotor);
@@ -135,7 +130,7 @@ public class DriveTrain extends Subsystem {
 	public void resetSensors() {
 		leftMotor.setSelectedSensorPosition(0);
 		rightMotor.setSelectedSensorPosition(0);
-		//gyro.reset();
+		gyro.setFusedHeading(0);
 	}
 	public void drive(double xSpeed, double zRotation) {
 		drive.arcadeDrive(xSpeed, zRotation, true);

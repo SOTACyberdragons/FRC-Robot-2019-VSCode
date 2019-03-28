@@ -11,7 +11,7 @@ public class ButtonMap {
     public static final int TARGET_DRIVE = 5; //left
     public static final int TARGET_DRIVE_AND_AIM = 5; //right
     
-    public static final int RESET_DRIVE_SENSORS = 10; //left
+    public static final int RESET_DRIVE_SENSORS = 6; //left
 
     //codriver buttons
     public static final int CO_CARGO_IN = 1; //left
