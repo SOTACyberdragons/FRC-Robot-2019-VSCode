@@ -244,16 +244,16 @@ public class Robot extends TimedRobot {
 		//hatch panel intake 
 		SmartDashboard.putBoolean("Hatch panel intake is closed", hatchPanelIntake.isClosed());
 
-		SmartDashboard.putBoolean("Target Found", limelight.getIsTargetFound());
-		SmartDashboard.putNumber("Deg Rotation to Target", limelight.getdegRotationToTarget());
+		// SmartDashboard.putBoolean("Target Found", limelight.getIsTargetFound());
+		// SmartDashboard.putNumber("Deg Rotation to Target", limelight.getdegRotationToTarget());
 		//.....and MORE
 
 		//Setters
-		limelight.setPipeline(1);
-		limelight.setLEDMode(LedMode.kforceOff);
-		limelight.setCamMode(CamMode.kdriver);
-		limelight.setSnapshot(Snapshot.kon);
-		limelight.setStream(StreamType.kPiPMain);
+		//limelight.setPipeline(0);
+		//limelight.setLEDMode(LedMode.kforceOn);
+		limelight.setCamMode(CamMode.kvision);
+		//limelight.setSnapshot(Snapshot.kon);
+		//limelight.setStream(StreamType.kPiPMain);
 	}
 
 	/**

@@ -86,11 +86,11 @@ public class OI {
         coHatchClose = new JoystickButton(rightAuxStick, 2);
         coHatchOpen = new JoystickButton(rightAuxStick, 3) ;
         //Arm Positions
-        groundPosition = new JoystickButton(leftAuxStick, ButtonMap.GROUND_POSITION);
-        backwardsPosition = new JoystickButton(leftAuxStick, ButtonMap.BACKWARDS_POSITION);
-        ballInCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_CARGO_SHIP_POSITION);
-        ballInRocketPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_ROCKET_POSITION);
-        ballOutCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_OUT_CARGO_SHIP_POSITION);
+        //groundPosition = new JoystickButton(leftAuxStick, ButtonMap.GROUND_POSITION);
+       // backwardsPosition = new JoystickButton(leftAuxStick, ButtonMap.BACKWARDS_POSITION);
+        //ballInCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_CARGO_SHIP_POSITION);
+       // ballInRocketPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_ROCKET_POSITION);
+       // ballOutCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_OUT_CARGO_SHIP_POSITION);
 
         zeroArmEncoder = new JoystickButton(leftAuxStick, ButtonMap.ZERO_ARM_ENCODER);
         resetDriveSensors = new JoystickButton(leftStick, ButtonMap.RESET_DRIVE_SENSORS);
@@ -125,11 +125,11 @@ public class OI {
 
         //Arm position
         //up is zero
-        groundPosition.whileHeld(new MoveArmToAngle(90));
-        backwardsPosition.whileHeld(new MoveArmToAngle(-90));
-        ballInCargoShipPosition.whileHeld(new MoveArmToAngle(-20)); 
-        ballInRocketPosition.whileHeld(new MoveArmToAngle(-45));
-        ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(70));
+       // groundPosition.whileHeld(new MoveArmToAngle(90));
+       // backwardsPosition.whileHeld(new MoveArmToAngle(-90));
+       // ballInCargoShipPosition.whileHeld(new MoveArmToAngle(-20)); 
+      //  ballInRocketPosition.whileHeld(new MoveArmToAngle(-45));
+      //  ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(70));
 
         targetAim.whileHeld(new LimeLightAim());
         targetDrive.whileHeld(new LimeLightDrive());

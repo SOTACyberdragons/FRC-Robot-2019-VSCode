@@ -34,7 +34,7 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX rightMotor;
 	private WPI_TalonSRX rightMotorFollower;
 
-	private LimeLight limelight;
+	private LimeLight  limelight = new LimeLight();
 	
 	private DifferentialDrive drive;
 	public DifferentialDrive drive1;
