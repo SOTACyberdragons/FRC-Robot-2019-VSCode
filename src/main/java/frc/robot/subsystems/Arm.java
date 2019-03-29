@@ -83,11 +83,11 @@ public class Arm extends Subsystem {
 
 	public double getFeedForward() {
 		prefs = Preferences.getInstance();
-		wHatchMaxNominalOutput = prefs.getDouble("armWHatchOut", 0.2); // set these values
+		wHatchMaxNominalOutput = prefs.getDouble("armWHatchOut", 0.21); // set these values
 		prefs.putDouble("FFwHatch", wHatchMaxNominalOutput);
 		wCargoMaxNominalOutput = prefs.getDouble("armWCargoOut", 0.245);
 		prefs.putDouble("FFwCargo", wCargoMaxNominalOutput);
-		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.2);
+		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.21);
 		prefs.putDouble("FFempty", noGamePieceMaxNominalOutput);
 		
 		double maxNominalOutput;

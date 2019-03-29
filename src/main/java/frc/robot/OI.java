@@ -9,6 +9,7 @@ import frc.robot.commands.HatchPanelFloorOut;
 import frc.robot.commands.LimeLightAim;
 import frc.robot.commands.LimeLightDrive;
 import frc.robot.commands.LimeLightDriveAndAim;
+//import frc.robot.commands.LimeLightOn;
 import frc.robot.commands.MoveArmToAngle;
 import frc.robot.commands.PistonIn;
 import frc.robot.commands.PistonOut;
@@ -31,6 +32,7 @@ public class OI {
     
     JoystickButton zeroArmEncoder;
     JoystickButton resetDriveSensors;
+    JoystickButton groundArmEncoder;
 
     JoystickButton coCargoIn;
     JoystickButton coCargoOut; 
@@ -41,6 +43,7 @@ public class OI {
     JoystickButton targetAim;
     JoystickButton targetDrive;
     JoystickButton targetDriveAndAim;
+   // JoystickButton lightOn;
 
     //arm positions 
     JoystickButton groundPosition;
@@ -94,11 +97,13 @@ public class OI {
 
         zeroArmEncoder = new JoystickButton(leftAuxStick, ButtonMap.ZERO_ARM_ENCODER);
         resetDriveSensors = new JoystickButton(leftStick, ButtonMap.RESET_DRIVE_SENSORS);
+        groundArmEncoder = new JoystickButton(leftAuxStick, ButtonMap.GROUND_ARM_ENCODER);
 
         //limelight
         targetAim = new JoystickButton(leftStick, ButtonMap.TARGET_AIM);
         targetDrive = new JoystickButton(leftStick, ButtonMap.TARGET_DRIVE);
         targetDriveAndAim = new JoystickButton(rightStick, ButtonMap.TARGET_DRIVE_AND_AIM);
+       // lightOn = new JoystickButton(rightStick, ButtonMap.LIGHT_ON);
  
 
        
@@ -134,9 +139,11 @@ public class OI {
         targetAim.whileHeld(new LimeLightAim());
         targetDrive.whileHeld(new LimeLightDrive());
         targetDriveAndAim.whileHeld(new LimeLightDriveAndAim());
+       // lightOn.whileHeld(new LimeLightOn());
 
-        zeroArmEncoder.whenPressed(new ZeroArmEncoder());
+        zeroArmEncoder.whenPressed(new ZeroArmEncoder(-90));
         resetDriveSensors.whenPressed(new ResetDriveSensors());
+        groundArmEncoder.whenPressed(new ZeroArmEncoder(95));
 
 	}
 	

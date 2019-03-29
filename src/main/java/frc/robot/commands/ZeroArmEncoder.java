@@ -8,17 +8,19 @@ import frc.robot.Robot;
  */
 public class ZeroArmEncoder extends Command {
 
-    public ZeroArmEncoder() {
+    double angle1;
+    public ZeroArmEncoder(double angle) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(Robot.arm);
         System.out.println("Im in");
+        angle1 = angle;
     }
 
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.arm.setEncoder(-90);
+        Robot.arm.setEncoder(angle1);
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -12,6 +12,7 @@ public class ButtonMap {
     public static final int TARGET_DRIVE_AND_AIM = 5; //right
     
     public static final int RESET_DRIVE_SENSORS = 6; //left
+    public static final int LIGHT_ON = 4; //right
 
     //codriver buttons
     public static final int CO_CARGO_IN = 1; //left
@@ -27,6 +28,7 @@ public class ButtonMap {
     public static final int BALL_OUT_CARGO_SHIP_POSITION = 6; //left
 
     public static final int ZERO_ARM_ENCODER = 10; //left
+    public static final int GROUND_ARM_ENCODER = 9; //left
  
 
 

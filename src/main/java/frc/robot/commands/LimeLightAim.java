@@ -27,7 +27,7 @@ public class LimeLightAim extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    
+    System.out.println("Aiming!!!!!");
     double tx = Robot.drivetrain.getLimeLight().getdegRotationToTarget();
     boolean targetFound = Robot.drivetrain.getLimeLight().getIsTargetFound();
   
@@ -53,6 +53,7 @@ public class LimeLightAim extends Command {
     @Override
     protected void end() {
       Robot.drivetrain.drive(0,0);
+      System.out.println("Done aiming!");
     }
   
     // Called when another command which requires one or more of the same

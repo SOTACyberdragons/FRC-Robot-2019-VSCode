@@ -124,7 +124,7 @@ public class Robot extends TimedRobot {
 		chooser.addOption("Double Right Fartch Cargo", AutoChoice.LEFT_FARTCH_CARGO_DOUBLE);
 		chooser.addOption("Do not moove", AutoChoice.DO_NOT_MOVE);
 
-		SmartDashboard.putData("Reset Arm Encoder", new ZeroArmEncoder());
+		SmartDashboard.putData("Reset Arm Encoder", new ZeroArmEncoder(-90));
 		SmartDashboard.putData("Auto mode", chooser);
 
 		
@@ -244,13 +244,16 @@ public class Robot extends TimedRobot {
 		//hatch panel intake 
 		SmartDashboard.putBoolean("Hatch panel intake is closed", hatchPanelIntake.isClosed());
 
-		// SmartDashboard.putBoolean("Target Found", limelight.getIsTargetFound());
-		// SmartDashboard.putNumber("Deg Rotation to Target", limelight.getdegRotationToTarget());
+		SmartDashboard.putBoolean("Target Found", limelight.getIsTargetFound());
+		SmartDashboard.putNumber("Deg Rotation to Target", limelight.getdegRotationToTarget());
+		SmartDashboard.putNumber("LimelightY", limelight.getTargetArea());
+		
 		//.....and MORE
 
 		//Setters
 		//limelight.setPipeline(0);
 		//limelight.setLEDMode(LedMode.kforceOn);
+		limelight.setLEDMode(LedMode.kpipeLine);
 		limelight.setCamMode(CamMode.kvision);
 		//limelight.setSnapshot(Snapshot.kon);
 		//limelight.setStream(StreamType.kPiPMain);
