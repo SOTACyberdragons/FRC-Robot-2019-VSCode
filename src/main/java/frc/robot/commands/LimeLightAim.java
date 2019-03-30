@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import oi.limelightvision.limelight.frc.ControlMode.LedMode;
 
 
 /**
@@ -22,11 +23,13 @@ public class LimeLightAim extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+      Robot.drivetrain.getLimeLight().setLEDMode(LedMode.kforceOn);
     }
   
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+    Robot.drivetrain.getLimeLight().setLEDMode(LedMode.kforceOn);
     System.out.println("Aiming!!!!!");
     double tx = Robot.drivetrain.getLimeLight().getdegRotationToTarget();
     boolean targetFound = Robot.drivetrain.getLimeLight().getIsTargetFound();
@@ -54,6 +57,7 @@ public class LimeLightAim extends Command {
     protected void end() {
       Robot.drivetrain.drive(0,0);
       System.out.println("Done aiming!");
+      Robot.drivetrain.getLimeLight().setLEDMode(LedMode.kforceOn);
     }
   
     // Called when another command which requires one or more of the same
