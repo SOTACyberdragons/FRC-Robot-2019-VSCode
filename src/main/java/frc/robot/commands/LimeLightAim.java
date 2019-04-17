@@ -23,13 +23,13 @@ public class LimeLightAim extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-      Robot.drivetrain.getLimeLight().setLEDMode(LedMode.kforceOn);
+      //Robot.drivetrain.getLimeLight().setLEDMode(LedMode.kforceOn);
     }
   
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    Robot.drivetrain.getLimeLight().setLEDMode(LedMode.kforceOn);
+    //Robot.drivetrain.getLimeLight().setLEDMode(LedMode.kforceOn);
     System.out.println("Aiming!!!!!");
     double tx = Robot.drivetrain.getLimeLight().getdegRotationToTarget();
     boolean targetFound = Robot.drivetrain.getLimeLight().getIsTargetFound();

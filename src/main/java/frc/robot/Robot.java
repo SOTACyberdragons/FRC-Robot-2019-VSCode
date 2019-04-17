@@ -253,8 +253,8 @@ public class Robot extends TimedRobot {
 		//Setters
 		//limelight.setPipeline(0);
 		//limelight.setLEDMode(LedMode.kforceOn);
-		limelight.setLEDMode(LedMode.kpipeLine);
-		limelight.setCamMode(CamMode.kvision);
+		limelight.setLEDMode(LedMode.kforceOff);
+		//limelight.setCamMode(CamMode.kvision);
 		//limelight.setSnapshot(Snapshot.kon);
 		//limelight.setStream(StreamType.kPiPMain);
 	}
