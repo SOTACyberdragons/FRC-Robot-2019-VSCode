@@ -219,6 +219,7 @@ public class Robot extends TimedRobot {
 			autoCommand.cancel();
 		}
 		drivetrain.resetSensors();
+		limelight.setLEDMode(LedMode.kforceOff);
 	}
 
 	/**
@@ -252,8 +253,8 @@ public class Robot extends TimedRobot {
 
 		//Setters
 		//limelight.setPipeline(0);
-		//limelight.setLEDMode(LedMode.kforceOn);
-		limelight.setLEDMode(LedMode.kforceOff);
+		
+		//limelight.setLEDMode(LedMode.kforceOff);
 		//limelight.setCamMode(CamMode.kvision);
 		//limelight.setSnapshot(Snapshot.kon);
 		//limelight.setStream(StreamType.kPiPMain);

@@ -1,5 +1,8 @@
+
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -29,10 +32,10 @@ public class DriveTrain extends Subsystem {
 	public static final double MAX_JERK = 20 / 0.0254; // 30 / 0.0254; //from example code in Pathfinder
 	public final double encoderMaxSpeed = 33000;
 
-	private WPI_TalonSRX leftMotor;
-	private WPI_TalonSRX leftMotorFollower;
-	private WPI_TalonSRX rightMotor;
-	private WPI_TalonSRX rightMotorFollower;
+	public WPI_TalonSRX leftMotor;
+	public WPI_TalonSRX leftMotorFollower;
+	public WPI_TalonSRX rightMotor;
+	public WPI_TalonSRX rightMotorFollower;
 
 	private LimeLight  limelight = new LimeLight();
 	
@@ -139,7 +142,13 @@ public class DriveTrain extends Subsystem {
 	public LimeLight getLimeLight() {
 		return limelight;
 	}
-
+	
+	// public void turn(double angle) {
+	// 	double degForTalon =
+	// 	double turnAngle = rightMotor.getSelectedSensorPosition() + degreesinTalonUnits
+	// 	rightMotor.set(ControlMode.MotionMagic, turnAngle, DemandType.AuxPID, 0);
+	// }
+ 
 	public void initDefaultCommand() {
 		setDefaultCommand(new DifferentialDriveWithJoysticks());
 	}
