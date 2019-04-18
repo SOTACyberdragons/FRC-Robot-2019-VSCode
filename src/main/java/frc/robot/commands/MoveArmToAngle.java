@@ -11,10 +11,7 @@ public class MoveArmToAngle extends Command {
     private double endToleranceDeg;
     
     public MoveArmToAngle(double angle) {
-        requires(Robot.arm);
-        angleDeg = angle;
-        delaySec = 0;
-        endToleranceDeg = 1;
+        this(angle, 0);
     }
 
     public MoveArmToAngle(double angle, double delaySecond) {

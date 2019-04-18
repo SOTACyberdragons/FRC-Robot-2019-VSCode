@@ -40,8 +40,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static final int IMAGE_WIDTH = 160;
-	public static final int IMAGE_HEIGHT = 120;
+	public static final int IMAGE_WIDTH = 80;
+	public static final int IMAGE_HEIGHT = 60;
 	public static Preferences prefs;
 	public static HatchPanelFloorIntake hatchPanelFloorIntake;
 	public static Climber climber;
@@ -94,7 +94,7 @@ public class Robot extends TimedRobot {
 		arm = new Arm();
 		drivetrain = new DriveTrain();
 		oi = new OI();
-		
+		][\]
 
 		//prefs = new Preferences.getInstance();
 
@@ -103,6 +103,8 @@ public class Robot extends TimedRobot {
 
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(IMAGE_WIDTH, IMAGE_HEIGHT);
+[]\
+\[]
 
 
 		//Autonomous Chooser
@@ -185,6 +187,7 @@ public class Robot extends TimedRobot {
  
 		SmartDashboard.putString("Autonomous Command", autoCommand.getName());
 		System.out.println("Starting auto command!");
+		
 		//autoCommand.start();
 		System.out.println("Finished auto command!");
 	}

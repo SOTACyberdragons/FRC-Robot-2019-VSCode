@@ -50,6 +50,7 @@ public class Arm extends Subsystem {
 
 		initArmTalon(leftArmTalon);
 		initArmTalon(rightArmTalon);
+		leftArmTalon.follow(rightArmTalon);
 		
 	}
 
@@ -74,7 +75,7 @@ public class Arm extends Subsystem {
 		talon.config_kF(0, Constants.TALON_MAX_OUTPUT/ENCODER_MAX_SPEED, Constants.TIMEOUT_MS);
 		talon.config_kP(0, 0.1, Constants.TIMEOUT_MS);
 		talon.config_kI(0, 0, Constants.TIMEOUT_MS);
-		talon.config_kD(0, 0, Constants.TIMEOUT_MS);
+		talon.config_kD(0, 0.01, Constants.TIMEOUT_MS);
 		
 		/* set acceleration and cruise velocity - see documentation */
 		talon.configMotionCruiseVelocity(25000 , Constants.TIMEOUT_MS);
@@ -149,8 +150,9 @@ public class Arm extends Subsystem {
 	}
 	
 	public void setTalons(double output) {
-		leftArmTalon.set(ControlMode.PercentOutput, output);
+		//leftArmTalon.set(ControlMode.PercentOutput, output);
 		rightArmTalon.set(ControlMode.PercentOutput, output);
+		//leftArmTalon.follow(rightArmTalon);
 	}
 	public void initDefaultCommand() {
 		setDefaultCommand(new MoveArmWithJoystick());
@@ -169,8 +171,9 @@ public class Arm extends Subsystem {
     			angleToUse = choiceB;
     		}
     		
-			leftArmTalon.set(ControlMode.MotionMagic, angleToUse * TICKS_PER_DEG);
-			rightArmTalon.set(ControlMode.MotionMagic, angleToUse * TICKS_PER_DEG);
+			//leftArmTalon.set(ControlMode.MotionMagic, angleToUse * TICKS_PER_DEG);
+			rightArmTalon.set(ControlMode.MotionMagic, targetAngleDeg * TICKS_PER_DEG);
+			//leftArmTalon.follow(rightArmTalon);
 			
 		// leftArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
 		// rightArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
