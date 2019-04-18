@@ -143,12 +143,7 @@ public class DriveTrain extends Subsystem {
 		return limelight;
 	}
 	
-	// public void turn(double angle) {
-	// 	double degForTalon =
-	// 	double turnAngle = rightMotor.getSelectedSensorPosition() + degreesinTalonUnits
-	// 	rightMotor.set(ControlMode.MotionMagic, turnAngle, DemandType.AuxPID, 0);
-	// }
- 
+	
 	public void initDefaultCommand() {
 		setDefaultCommand(new DifferentialDriveWithJoysticks());
 	}
