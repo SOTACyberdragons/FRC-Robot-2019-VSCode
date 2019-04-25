@@ -18,10 +18,10 @@ public class CargoIntake extends Subsystem {
     @Override
     protected void initDefaultCommand() {
         cargoMotor = new WPI_TalonSRX(RobotMap.CARGO_MOTOR);
-        ringLight1 = new Solenoid(7);
-        ringLight2 = new Solenoid(8);
-        breakBeam = new DigitalInput(0);
-        }
+        ringLight1 = new Solenoid(RobotMap.RINGLIGHT_1);
+        ringLight2 = new Solenoid(RobotMap.RINGLIGHT_2);
+        breakBeam = new DigitalInput(RobotMap.BREAK_BEAM);
+    }
 
     public void spinIn() {
         cargoMotor.set(speed*0.7);
@@ -62,6 +62,7 @@ public class CargoIntake extends Subsystem {
     }
 
     //we don't have any sensors for this yet
+    //yeah we do dummy -BEA
     public boolean hasCargo() {
         return breakBeam.get();
     }

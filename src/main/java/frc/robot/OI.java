@@ -119,7 +119,6 @@ public class OI {
         ballInCargoShipPosition.whileHeld(new MoveArmToAngle(110)); 
         ballInRocketPosition.whileHeld(new MoveArmToAngle(45));
         ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(30));
-
         zeroArmEncoder.whenPressed(new ZeroArmEncoder());
         resetDriveSensors.whenPressed(new ResetDriveSensors());
 
