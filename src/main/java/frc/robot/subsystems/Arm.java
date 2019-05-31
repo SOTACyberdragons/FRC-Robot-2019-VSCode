@@ -55,7 +55,7 @@ public class Arm extends Subsystem {
 
 	public void initArmTalon(WPI_TalonSRX talon) {
 		talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
-		setEncoder(0); //@TODO figure out what this should be
+		setEncoder(45); //Normal starting position
 		talon.setSensorPhase(true);
 		talon.setInverted(true);
 	
@@ -76,7 +76,7 @@ public class Arm extends Subsystem {
 		talon.config_kI(0, 0, Constants.TIMEOUT_MS);
 		talon.config_kD(0, 0, Constants.TIMEOUT_MS);
 		
-		/* set acceleration and cruise velocity - see documentation */
+		/* set acceleration and cruise velocity - see documentation */ // idk these are random numbers
 		talon.configMotionCruiseVelocity(25000 , Constants.TIMEOUT_MS);
 		talon.configMotionAcceleration(20000, Constants.TIMEOUT_MS);
 	}
@@ -156,16 +156,12 @@ public class Arm extends Subsystem {
 		setDefaultCommand(new MoveArmWithJoystick());
 	}
 
-
 	public void moveArmToAngle(double targetAngleDeg) {
-    	
 		double currentAngle = getRawAngle();
 		double closestAngle = getClosestAngle(currentAngle, targetAngleDeg);
 	
-		   rightArmTalon.set(/*ControlMode.MotionMagic,*/ closestAngle * TICKS_PER_DEG);
-}
-
-
+		rightArmTalon.set(ControlMode.MotionMagic, closestAngle * TICKS_PER_DEG);
+	}
 
 	/**
 	 * @return angle in degrees between -180 and 180
@@ -182,19 +178,20 @@ public class Arm extends Subsystem {
 			return angle;
 	}
 
+
 	private double getClosestAngle(double currentAngle, double targetAngle) {
 			
-			int delta = (int) Math.floor(currentAngle/360);
-			double normalizedCurrentAngle = currentAngle % 360;
-			normalizedCurrentAngle += normalizedCurrentAngle < 0 ? 360 : 0;
+			int delta = (int) Math.floor(currentAngle/360); //increments of 360 rounded down
+			double normalizedCurrentAngle = currentAngle % 360; //angle in degrees bewtween 0 and 360
+			normalizedCurrentAngle += normalizedCurrentAngle < 0 ? 360 : 0; //make sure normalized angle is positive 
 		
 			if (normalizedCurrentAngle < (targetAngle - 180)) {
-				delta += -1;
+				delta += -1; // -1 if arm passes through zero from the left side
 			} else if (normalizedCurrentAngle > (targetAngle + 180)) {
-				delta += 1;
+				delta += 1; // +1 one if arm passes through zero from right side
 			} 
 			
-			return targetAngle + 360 * delta;	
+			return targetAngle + 360 * delta; //unnormalized closest target angle 
 	}
 
 
