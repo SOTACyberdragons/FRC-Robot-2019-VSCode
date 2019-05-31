@@ -39,7 +39,7 @@ public class FollowPath extends Command {
         super();
         requires(Robot.drivetrain);
 
-        System.out.println("Initializing Follow Path");
+      //  System.out.println("Initializing Follow Path");
 
         timer = new Timer();
         prefs = Robot.prefs;
@@ -64,7 +64,7 @@ public class FollowPath extends Command {
     }
 
     protected void initialize() {
-        System.out.println("In Follow Path init");
+     //   System.out.println("In Follow Path init");
         drive.resetSensors();
         System.out.print("Sensors reset!");
         timer.reset();
@@ -91,11 +91,11 @@ public class FollowPath extends Command {
         drive.resetSensors();
         left.reset();
         right.reset();
-        System.out.println("Init done!!!!!");
+       // System.out.println("Init done!!!!!");
     }
 
     protected void execute() {
-        System.out.println("In Follow Path Execute");
+      //  System.out.println("In Follow Path Execute");
 
         double gyroHeading = - drive.getHeading();    // gyro is clockwise, pathfinder counter-clockwise
         double desiredHeading = Pathfinder.r2d(left.getHeading());  // Should also be in degrees
@@ -124,7 +124,7 @@ public class FollowPath extends Command {
     }
 
     protected void end() {
-        System.out.println("Ended Follow Path");
+    //    System.out.println("Ended Follow Path");
         timer.stop();
     }
 

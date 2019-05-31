@@ -86,11 +86,18 @@ public class DriveTrain extends Subsystem {
 		talon.configPeakOutputReverse(-1, Constants.TIMEOUT_MS);
 	
 		/* set closed loop gains in slot 0 - see documentation */
+		//distance
 		talon.selectProfileSlot(Constants.SLOT_IDX, Constants.PID_LOOP_IDX);
 		talon.config_kF(0, Constants.TALON_MAX_OUTPUT/encoderMaxSpeed, Constants.TIMEOUT_MS);
-		talon.config_kP(0, 0.1, Constants.TIMEOUT_MS);
+		talon.config_kP(0, 0.45, Constants.TIMEOUT_MS);
 		talon.config_kI(0, 0, Constants.TIMEOUT_MS);
-		talon.config_kD(0, 0, Constants.TIMEOUT_MS); 
+		talon.config_kD(0, 0.5, Constants.TIMEOUT_MS); 
+
+		//turning 
+		talon.config_kF(1, 0, Constants.TIMEOUT_MS);
+		talon.config_kP(1, 0.1, Constants.TIMEOUT_MS);
+		talon.config_kI(1, 0, Constants.TIMEOUT_MS);
+		talon.config_kD(1, 0, Constants.TIMEOUT_MS); 
 		
 		/* set acceleration and cruise velocity - see documentation */
 		talon.configMotionCruiseVelocity(25000 , Constants.TIMEOUT_MS);

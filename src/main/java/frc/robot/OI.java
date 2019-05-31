@@ -91,7 +91,7 @@ public class OI {
         //Arm Positions
         //groundPosition = new JoystickButton(leftAuxStick, ButtonMap.GROUND_POSITION);
        // backwardsPosition = new JoystickButton(leftAuxStick, ButtonMap.BACKWARDS_POSITION);
-        //ballInCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_CARGO_SHIP_POSITION);
+        ballInCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_CARGO_SHIP_POSITION);
        // ballInRocketPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_ROCKET_POSITION);
        // ballOutCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_OUT_CARGO_SHIP_POSITION);
 
@@ -132,7 +132,7 @@ public class OI {
         //up is zero
        // groundPosition.whileHeld(new MoveArmToAngle(90));
        // backwardsPosition.whileHeld(new MoveArmToAngle(-90));
-       // ballInCargoShipPosition.whileHeld(new MoveArmToAngle(-20)); 
+        ballInCargoShipPosition.whileHeld(new MoveArmToAngle(-20)); 
       //  ballInRocketPosition.whileHeld(new MoveArmToAngle(-45));
       //  ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(70));
 

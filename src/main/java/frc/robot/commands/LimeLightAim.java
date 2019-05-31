@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -59,22 +60,28 @@ public class LimeLightAim extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    //Robot.drivetrain.getLimeLight().setLEDMode(LedMode.kforceOn);
-    System.out.println("Aiming!!!!!");
-    double tx = Robot.drivetrain.getLimeLight().getdegRotationToTarget();
-    boolean targetFound = Robot.drivetrain.getLimeLight().getIsTargetFound();
-  
-    if(targetFound) {
-        m_moveValue = 0;
-        m_rotateValue = tx * kpAim;
-    } else {
-        m_moveValue = 0;
-        m_rotateValue = 0 *kpAim;
-    }
-   
- 
-   // Robot.drivetrain.leftMotor.set(controlMode.MotionMagic, );
-    Robot.drivetrain.drive(m_moveValue, m_rotateValue);  
+      //Robot.drivetrain.getLimeLight().setLEDMode(LedMode.kforceOn);
+      System.out.println("Aiming!!!!!");
+      double tx = Robot.drivetrain.getLimeLight().getdegRotationToTarget();
+      boolean targetFound = Robot.drivetrain.getLimeLight().getIsTargetFound();
+    
+      if(targetFound) {
+          m_moveValue = 0;
+          m_rotateValue = tx * kpAim;
+      } else {
+          m_moveValue = 0;
+          m_rotateValue = 0 *kpAim;
+      }
+      SmartDashboard.putNumber("Move Value", m_moveValue);
+      SmartDashboard.putNumber("Rotate Value", m_rotateValue);
+
+      
+    // Robot.drivetrain.leftMotor.set(controlMode.MotionMagic, );
+      Robot.drivetrain.drive(m_moveValue, m_rotateValue);  
+      // Robot.drivetrain.rightMotor.set(ControlMode.MotionMagic, 
+      //   0, DemandType.AuxPID, m_rotateValue);
+      // Robot.drivetrain.leftMotor.set(ControlMode.MotionMagic, m_moveValue,  
+      //   DemandType.AuxPID, m_rotateValue);
     }
   
     // Make this return true when this Command no longer needs to run execute()

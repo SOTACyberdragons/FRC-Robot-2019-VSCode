@@ -83,11 +83,11 @@ public class Arm extends Subsystem {
 
 	public double getFeedForward() {
 		prefs = Preferences.getInstance();
-		wHatchMaxNominalOutput = prefs.getDouble("armWHatchOut", 0.22); // set these values
+		wHatchMaxNominalOutput = prefs.getDouble("armWHatchOut", 0.215); // set these values
 		prefs.putDouble("FFwHatch", wHatchMaxNominalOutput);
 		wCargoMaxNominalOutput = prefs.getDouble("armWCargoOut", 0.245);
 		prefs.putDouble("FFwCargo", wCargoMaxNominalOutput);
-		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.21);
+		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.205);
 		prefs.putDouble("FFempty", noGamePieceMaxNominalOutput);
 		
 		double maxNominalOutput;
@@ -156,25 +156,47 @@ public class Arm extends Subsystem {
 		setDefaultCommand(new MoveArmWithJoystick());
 	}
 
-	public void moveArmToAngle(double targetAngleDeg) {
-    		double currentAngleDeg = getRawAngle();
-    		double angleToUse;
-    		
-    		double choiceA = targetAngleDeg + (currentAngleDeg > 0 ? 0 : -360) + 360 * Math.floor((currentAngleDeg/360));
-    		double choiceB = choiceA + (choiceA < currentAngleDeg ? 360 : -360);
-    		
-    		if (Math.abs(currentAngleDeg - choiceA) < Math.abs(currentAngleDeg - choiceB)) {
-    			angleToUse = choiceA;
-    		} else {
-    			angleToUse = choiceB;
-    		}
-    		
-			leftArmTalon.set(ControlMode.MotionMagic, angleToUse * TICKS_PER_DEG);
-			rightArmTalon.set(ControlMode.MotionMagic, angleToUse * TICKS_PER_DEG);
-			
-		// leftArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
-		// rightArmTalon.set(ControlMode.MotionMagic, angle * TICKS_PER_DEG);
 
+	public void moveArmToAngle(double targetAngleDeg) {
+    	
+		double currentAngle = getRawAngle();
+		double closestAngle = getClosestAngle(currentAngle, targetAngleDeg);
+	
+		   rightArmTalon.set(/*ControlMode.MotionMagic,*/ closestAngle * TICKS_PER_DEG);
+}
+
+
+
+	/**
+	 * @return angle in degrees between -180 and 180
+	 */
+	public double get180NormalizedAngle() {
+			double angle = getRawAngle() % 360;
+			
+			if (angle < -180) {
+				angle += 360;
+			} else if (angle > 180) {
+				angle -= 360;
+			}
+
+			return angle;
 	}
+
+	private double getClosestAngle(double currentAngle, double targetAngle) {
+			
+			int delta = (int) Math.floor(currentAngle/360);
+			double normalizedCurrentAngle = currentAngle % 360;
+			normalizedCurrentAngle += normalizedCurrentAngle < 0 ? 360 : 0;
+		
+			if (normalizedCurrentAngle < (targetAngle - 180)) {
+				delta += -1;
+			} else if (normalizedCurrentAngle > (targetAngle + 180)) {
+				delta += 1;
+			} 
+			
+			return targetAngle + 360 * delta;	
+	}
+
+
 
 }
