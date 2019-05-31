@@ -150,7 +150,39 @@ public class DriveTrain extends Subsystem {
 		return limelight;
 	}
 	
-	
+	public void setDistance(double distanceIn) {
+		double distanceTicks = distanceIn / DISTANCE_PER_PULSE;
+		double totalDistance = (getLeftRawEncoderTicks() + getRightRawEncoderTicks()) / 2 + distanceTicks;
+		double angle = getHeading();
+		rightMotor.set(ControlMode.MotionMagic, totalDistance, DemandType.AuxPID, angle);
+	}
+
+	public void setAngle(double angle) {
+		double distance = (getLeftRawEncoderTicks() + getRightRawEncoderTicks()) / 2;
+		double totalAngle = angle + getHeading();
+		rightMotor.set(ControlMode.Position, totalAngle, DemandType.AuxPID, distance);
+
+	}
+	 //inches per second 
+	public void setVelocity(double leftSpeed, double rightSpeed) {
+		double left, right;
+		if(leftSpeed > MAX_SPEED) {
+			left = MAX_SPEED;
+		} else {
+			left = leftSpeed;
+		}
+		if(rightSpeed > MAX_SPEED) {
+			right = MAX_JERK;
+		} else {
+			right = rightSpeed;
+		}
+		double leftInPerSecToTicksPer100ms = left / DISTANCE_PER_PULSE / 10;
+		leftMotor.set(ControlMode.Velocity, leftInPerSecToTicksPer100ms);
+		double rightInPerSecToTicksPer100ms = right / DISTANCE_PER_PULSE / 10;
+		leftMotor.set(ControlMode.Velocity, rightInPerSecToTicksPer100ms);
+
+	}
+
 	public void initDefaultCommand() {
 		setDefaultCommand(new DifferentialDriveWithJoysticks());
 	}

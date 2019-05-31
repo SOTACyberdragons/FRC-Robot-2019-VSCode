@@ -36,6 +36,7 @@ public class MoveArmToAngle extends Command {
     protected boolean isFinished() {
         boolean withinTolerance = (angleDeg - endToleranceDeg) <= Robot.arm.getRawAngle() 
         && Robot.arm.getRawAngle() <= (angleDeg + endToleranceDeg);
+        System.out.println("Arm at angle!!!!!!");
         return withinTolerance;
     }
 
