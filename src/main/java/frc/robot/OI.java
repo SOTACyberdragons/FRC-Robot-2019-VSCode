@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.CargoIn;
 import frc.robot.commands.CargoOut;
+import frc.robot.commands.ClimbDown;
+import frc.robot.commands.ClimberUp;
 import frc.robot.commands.HatchPanelFloorIn;
 import frc.robot.commands.HatchPanelFloorOut;
 import frc.robot.commands.LimeLightAim;
@@ -22,104 +24,106 @@ import frc.robot.commands.ZeroArmEncoder;
  */
 public class OI {
 
-
     JoystickButton pistonOut;
     JoystickButton pistonIn;
     JoystickButton cargoIn;
     JoystickButton cargoOut;
     JoystickButton floorHatchIn;
     JoystickButton floorHatchOut;
-    
+
     JoystickButton zeroArmEncoder;
     JoystickButton resetDriveSensors;
     JoystickButton groundArmEncoder;
 
     JoystickButton coCargoIn;
-    JoystickButton coCargoOut; 
+    JoystickButton coCargoOut;
     JoystickButton coHatchClose;
     JoystickButton coHatchOpen;
 
-    //limelight
+    JoystickButton climbUp;
+    JoystickButton climbDown;
+
+    // limelight
     JoystickButton targetAim;
     JoystickButton targetDrive;
     JoystickButton targetDriveAndAim;
-   // JoystickButton lightOn;
+    // JoystickButton lightOn;
 
-    //arm positions 
+    // arm positions
     JoystickButton groundPosition;
     JoystickButton backwardsPosition;
     JoystickButton ballInCargoShipPosition;
     JoystickButton ballInRocketPosition;
     JoystickButton ballOutCargoShipPosition;
 
+    // Setting squaredInput to true decreases the sensitivity for tankdrive at lower
+    // speeds
+    private boolean squaredInput = true;
 
-
-
-
-    // Setting squaredInput to true decreases the sensitivity for tankdrive at lower speeds
-	private boolean squaredInput = true;
-	
-	public Joystick leftStick = new Joystick(0);
+    public Joystick leftStick = new Joystick(0);
     public Joystick rightStick = new Joystick(1);
     public Joystick leftAuxStick = new Joystick(2);
     public Joystick rightAuxStick = new Joystick(3);
-    
-
 
     public OI() {
 
         /*
-        Set buttons
-        */
+         * Set buttons
+         */
 
-        //Hatch panel intake
+        // Hatch panel intake
         pistonOut = new JoystickButton(leftStick, ButtonMap.CLOSE_HATCH_PANEL_INTAKE);
         pistonIn = new JoystickButton(leftStick, ButtonMap.OPEN_HATCH_PANEL_INTAKE);
 
-        //Hatch panel floor intake
+        // Hatch panel floor intake
         floorHatchIn = new JoystickButton(rightAuxStick, ButtonMap.FLOOR_HATCH_PANEL_IN);
         floorHatchOut = new JoystickButton(rightAuxStick, ButtonMap.FLOOR_HATCH_PANEL_OUT);
-        
-        //Cargo Intake 
+
+        // Cargo Intake
         cargoIn = new JoystickButton(leftStick, ButtonMap.INTAKE_CARGO);
         cargoOut = new JoystickButton(rightStick, ButtonMap.RELEASE_CARGO);
 
         coCargoIn = new JoystickButton(leftAuxStick, ButtonMap.CO_CARGO_IN);
         coCargoOut = new JoystickButton(rightAuxStick, ButtonMap.CO_CARGO_OUT);
         coHatchClose = new JoystickButton(rightAuxStick, 2);
-        coHatchOpen = new JoystickButton(rightAuxStick, 3) ;
-        //Arm Positions
-        //groundPosition = new JoystickButton(leftAuxStick, ButtonMap.GROUND_POSITION);
-       // backwardsPosition = new JoystickButton(leftAuxStick, ButtonMap.BACKWARDS_POSITION);
+        coHatchOpen = new JoystickButton(rightAuxStick, 3);
+        // Arm Positions
+        // groundPosition = new JoystickButton(leftAuxStick, ButtonMap.GROUND_POSITION);
+        // backwardsPosition = new JoystickButton(leftAuxStick,
+        // ButtonMap.BACKWARDS_POSITION);
         ballInCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_CARGO_SHIP_POSITION);
-       // ballInRocketPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_IN_ROCKET_POSITION);
-       // ballOutCargoShipPosition = new JoystickButton(leftAuxStick, ButtonMap.BALL_OUT_CARGO_SHIP_POSITION);
+        // ballInRocketPosition = new JoystickButton(leftAuxStick,
+        // ButtonMap.BALL_IN_ROCKET_POSITION);
+        // ballOutCargoShipPosition = new JoystickButton(leftAuxStick,
+        // ButtonMap.BALL_OUT_CARGO_SHIP_POSITION);
 
         zeroArmEncoder = new JoystickButton(leftAuxStick, ButtonMap.ZERO_ARM_ENCODER);
         resetDriveSensors = new JoystickButton(leftStick, ButtonMap.RESET_DRIVE_SENSORS);
         groundArmEncoder = new JoystickButton(leftAuxStick, ButtonMap.GROUND_ARM_ENCODER);
 
-        //limelight
+        // limelight
         targetAim = new JoystickButton(leftStick, ButtonMap.TARGET_AIM);
         targetDrive = new JoystickButton(leftStick, ButtonMap.TARGET_DRIVE);
         targetDriveAndAim = new JoystickButton(rightStick, ButtonMap.TARGET_DRIVE_AND_AIM);
-       // lightOn = new JoystickButton(rightStick, ButtonMap.LIGHT_ON);
- 
+        // lightOn = new JoystickButton(rightStick, ButtonMap.LIGHT_ON);
 
-       
+        // climber
+        climbUp = new JoystickButton(rightAuxStick, ButtonMap.CLIMB_UP);
+        climbDown = new JoystickButton(rightAuxStick, ButtonMap.CLIMB_DOWN);
+
         /*
-        Set commands
-        */
+         * Set commands
+         */
 
-        //Hatch panel intake
+        // Hatch panel intake
         pistonOut.whenPressed(new PistonOut());
         pistonIn.whenPressed(new PistonIn());
 
-        //Hatch panel floor intake 
+        // Hatch panel floor intake
         floorHatchIn.whileHeld(new HatchPanelFloorIn());
         floorHatchOut.whileHeld(new HatchPanelFloorOut());
 
-        //Cargo Intake
+        // Cargo Intake
         cargoIn.whileHeld(new CargoIn());
         cargoOut.whileHeld(new CargoOut());
 
@@ -128,22 +132,26 @@ public class OI {
         coHatchClose.whenPressed(new PistonIn());
         coHatchOpen.whenPressed(new PistonOut());
 
-        //Arm position
-        //up is zero
-       // groundPosition.whileHeld(new MoveArmToAngle(90));
-       // backwardsPosition.whileHeld(new MoveArmToAngle(-90));
-        ballInCargoShipPosition.whileHeld(new MoveArmToAngle(-20)); 
-      //  ballInRocketPosition.whileHeld(new MoveArmToAngle(-45));
-      //  ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(70));
+        // Arm position
+        // up is zero
+        // groundPosition.whileHeld(new MoveArmToAngle(90));
+        // backwardsPosition.whileHeld(new MoveArmToAngle(-90));
+        ballInCargoShipPosition.whileHeld(new MoveArmToAngle(-20));
+        // ballInRocketPosition.whileHeld(new MoveArmToAngle(-45));
+        // ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(70));
 
         targetAim.whileHeld(new LimeLightAim());
         targetDrive.whileHeld(new LimeLightDrive());
         targetDriveAndAim.whileHeld(new LimeLightDriveAndAim());
-       // lightOn.whileHeld(new LimeLightOn());
+        // lightOn.whileHeld(new LimeLightOn());
 
         zeroArmEncoder.whenPressed(new ZeroArmEncoder(-90));
         resetDriveSensors.whenPressed(new ResetDriveSensors());
         groundArmEncoder.whenPressed(new ZeroArmEncoder(95));
+
+        // climber
+        climbUp.whileHeld(new ClimberUp());
+        climbDown.whileHeld(new ClimbDown());
 
 	}
 	

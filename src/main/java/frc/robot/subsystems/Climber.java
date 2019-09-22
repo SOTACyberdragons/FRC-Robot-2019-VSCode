@@ -31,14 +31,11 @@ public class Climber extends Subsystem {
         rightTalon.set(upSpeed);
     }
 
-    public void climbBackward() {
-        rightTalon.set(backwardSpeed);
-    }
-    public void climbForward() {
-        centerTalon.set(forwardSpeed);
-    }
+   public void driveClimber(double speed) {
+       centerTalon.set(speed);
+   }
     public void climbDown() {
-        centerTalon.set(downSpeed);
+        rightTalon.set(downSpeed);
     }
 
     public void stopCLimb() {

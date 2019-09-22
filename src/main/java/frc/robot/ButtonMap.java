@@ -29,6 +29,9 @@ public class ButtonMap {
 
     public static final int ZERO_ARM_ENCODER = 10; //left
     public static final int GROUND_ARM_ENCODER = 9; //left
+    
+    public static final int CLIMB_UP = 9; //right
+    public static final int CLIMB_DOWN = 10; //right
  
 
 
