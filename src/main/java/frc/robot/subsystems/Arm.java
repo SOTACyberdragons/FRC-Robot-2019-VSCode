@@ -6,6 +6,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -50,6 +51,7 @@ public class Arm extends Subsystem {
 
 		initArmTalon(leftArmTalon);
 		initArmTalon(rightArmTalon);
+
 		
 	}
 
@@ -106,7 +108,8 @@ public class Arm extends Subsystem {
 		return Math.sin(Math.toRadians(getRawAngle())) * maxNominalOutput;
 	}
 
-	public double getRawAngle() {
+	public double getRawAngle() { //set this
+
 		//average degrees because two talons control the arm
 		//return (leftArmTalon.getSelectedSensorPosition(0) / TICKS_PER_DEG
 		//+ rightArmTalon.getSelectedSensorPosition(0) / TICKS_PER_DEG) / 2;
@@ -123,7 +126,7 @@ public class Arm extends Subsystem {
 		return leftArmTalon.getSelectedSensorPosition(0);
 	}
 
-	public double getRightRawEncoderTicks() {
+	public int getRightRawEncoderTicks() {
 		return rightArmTalon.getSelectedSensorPosition(0);
 	}
 
@@ -149,9 +152,22 @@ public class Arm extends Subsystem {
 	}
 	
 	public void setTalons(double output) {
-		leftArmTalon.set(ControlMode.PercentOutput, output);
-		rightArmTalon.set(ControlMode.PercentOutput, output);
+		double kMeasuredPosHorizontal = 800; 
+		int currentPosition = getRightRawEncoderTicks();
+		double degrees = (currentPosition - kMeasuredPosHorizontal) / TICKS_PER_DEG;
+		double radians = Math.toRadians(degrees);
+		double cosineScalar = Math.cos(radians);
+		double maxGravityFF = 0.07;
+	
+
+		rightArmTalon.set(ControlMode.PercentOutput, output,
+			DemandType.ArbitraryFeedForward, maxGravityFF *cosineScalar);
+		leftArmTalon.set(ControlMode.PercentOutput, output,
+			DemandType.ArbitraryFeedForward,  maxGravityFF *cosineScalar);
+		// leftArmTalon.set(ControlMode.PercentOutput, output);
+		// rightArmTalon.set(ControlMode.PercentOutput, output);
 	}
+
 	public void initDefaultCommand() {
 		setDefaultCommand(new MoveArmWithJoystick());
 	}
@@ -179,7 +195,7 @@ public class Arm extends Subsystem {
 	}
 
 
-	private double getClosestAngle(double currentAngle, double targetAngle) {
+	public static double getClosestAngle(double currentAngle, double targetAngle) {
 			
 			int delta = (int) Math.floor(currentAngle/360); //increments of 360 rounded down
 			double normalizedCurrentAngle = currentAngle % 360; //angle in degrees bewtween 0 and 360

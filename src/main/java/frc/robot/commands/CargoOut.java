@@ -14,6 +14,7 @@ public class CargoOut extends Command {
 
     protected void execute() {
         Robot.cargoIntake.spinOut();
+        //System.out.println("Cargo Out!!!");
     }
 
     protected boolean isFinished() {

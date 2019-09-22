@@ -15,12 +15,15 @@ public class CargoIntake extends Subsystem {
     private Solenoid ringLight2;
     private DigitalInput breakBeam;
 
+
     @Override
     protected void initDefaultCommand() {
         cargoMotor = new WPI_TalonSRX(RobotMap.CARGO_MOTOR);
         ringLight1 = new Solenoid(7);
        // ringLight2 = new Solenoid(8);
         breakBeam = new DigitalInput(0);
+        //cargoMotor.setInverted(false);
+        
         }
 
     public void spinIn() {

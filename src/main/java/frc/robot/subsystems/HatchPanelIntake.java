@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 public class HatchPanelIntake extends Subsystem {
 
@@ -14,7 +15,7 @@ public class HatchPanelIntake extends Subsystem {
 
     public HatchPanelIntake() {
         super();
-        piston = new DoubleSolenoid(0, 1);
+        piston = new DoubleSolenoid(RobotMap.HATCH_PISTON_1, RobotMap.HATCH_PISTON_2);
         piston.set(DoubleSolenoid.Value.kForward);
     }
 
