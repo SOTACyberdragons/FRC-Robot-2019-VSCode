@@ -6,8 +6,6 @@ import frc.robot.commands.CargoIn;
 import frc.robot.commands.CargoOut;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimberUp;
-import frc.robot.commands.HatchPanelFloorIn;
-import frc.robot.commands.HatchPanelFloorOut;
 import frc.robot.commands.LimeLightAim;
 import frc.robot.commands.LimeLightDrive;
 import frc.robot.commands.LimeLightDriveAndAim;
@@ -75,10 +73,6 @@ public class OI {
         pistonOut = new JoystickButton(leftStick, ButtonMap.CLOSE_HATCH_PANEL_INTAKE);
         pistonIn = new JoystickButton(leftStick, ButtonMap.OPEN_HATCH_PANEL_INTAKE);
 
-        // Hatch panel floor intake
-        floorHatchIn = new JoystickButton(rightAuxStick, ButtonMap.FLOOR_HATCH_PANEL_IN);
-        floorHatchOut = new JoystickButton(rightAuxStick, ButtonMap.FLOOR_HATCH_PANEL_OUT);
-
         // Cargo Intake
         cargoIn = new JoystickButton(leftStick, ButtonMap.INTAKE_CARGO);
         cargoOut = new JoystickButton(rightStick, ButtonMap.RELEASE_CARGO);
@@ -118,10 +112,6 @@ public class OI {
         // Hatch panel intake
         pistonOut.whenPressed(new PistonOut());
         pistonIn.whenPressed(new PistonIn());
-
-        // Hatch panel floor intake
-        floorHatchIn.whileHeld(new HatchPanelFloorIn());
-        floorHatchOut.whileHeld(new HatchPanelFloorOut());
 
         // Cargo Intake
         cargoIn.whileHeld(new CargoIn());

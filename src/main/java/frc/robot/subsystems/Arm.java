@@ -194,7 +194,7 @@ public class Arm extends Subsystem {
 			return angle;
 	}
 
-
+	//returns closest "unnomalized" angle
 	public static double getClosestAngle(double currentAngle, double targetAngle) {
 			
 			int delta = (int) Math.floor(currentAngle/360); //increments of 360 rounded down

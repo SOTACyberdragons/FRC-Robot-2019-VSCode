@@ -9,7 +9,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.HatchPanelFloorIntake;
 import frc.robot.subsystems.HatchPanelIntake;
 import oi.limelightvision.limelight.frc.LimeLight;
 import oi.limelightvision.limelight.frc.ControlMode.CamMode;
@@ -50,7 +49,6 @@ public class Robot extends TimedRobot {
 	public static final int IMAGE_WIDTH = 160;
 	public static final int IMAGE_HEIGHT = 120;
 	public static Preferences prefs;
-	public static HatchPanelFloorIntake hatchPanelFloorIntake;
 	public static Climber climber;
 	public static HatchPanelIntake hatchPanelIntake;
 	public static CargoIntake cargoIntake;
@@ -97,7 +95,6 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
-		hatchPanelFloorIntake = new HatchPanelFloorIntake();
 		climber = new Climber();
 		hatchPanelIntake = new HatchPanelIntake();
 		cargoIntake = new CargoIntake();

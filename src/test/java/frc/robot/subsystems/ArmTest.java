@@ -5,6 +5,7 @@ import org.junit.Test;
 import frc.robot.subsystems.Arm;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.opencv.imgcodecs.Imgcodecs.imread;
 
 public class ArmTest {
@@ -22,13 +23,12 @@ public class ArmTest {
 
     public static void assertGetClosestAngle(double currentAngle, double targetAngle, double closestAngle) {;
         result = Arm.getClosestAngle(currentAngle, targetAngle);
-        assertEquals(result, closestAngle);
+        assertEquals("message",result, closestAngle, 0);
     }
 
     @Test
     public void _10To20() {;
         assertGetClosestAngle(10, 20, 20);
-        System.out.println("Helooooo!!!@@!@#@@@@" + result);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class ArmTest {
 
     @Test
     public void _170to190() {
-        assertGetClosestAngle(170, 190, 170);
+        assertGetClosestAngle(170, 190, 190);
     }
 
     @Test
@@ -50,4 +50,18 @@ public class ArmTest {
     public void _0to180() {
         assertGetClosestAngle(0, 180, 180);
     }
+
+    @Test
+    public void _0to0() {
+        assertGetClosestAngle(0, 0 ,0);
+        System.out.println("Result: " + Arm.getClosestAngle(4654, 45));
+    }
+
+
+    @Test
+    public void _4654to45() {
+        assertGetClosestAngle(4654, 45, 45); 
+    }
+
+
 }
