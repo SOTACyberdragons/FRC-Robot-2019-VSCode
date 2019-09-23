@@ -135,7 +135,8 @@ public class OI {
         targetDriveAndAim.whileHeld(new LimeLightDriveAndAim());
         // lightOn.whileHeld(new LimeLightOn());
 
-        zeroArmEncoder.whenPressed(new ZeroArmEncoder(-90));
+        zeroArmEncoder.whenPressed(new ZeroArmEncoder(-100)); // TODO figure out what this is
+       
         resetDriveSensors.whenPressed(new ResetDriveSensors());
         groundArmEncoder.whenPressed(new ZeroArmEncoder(95));
 

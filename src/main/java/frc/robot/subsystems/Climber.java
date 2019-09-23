@@ -17,6 +17,7 @@ public class Climber extends Subsystem {
     private double downSpeed = -1.0;
     private double forwardSpeed = 0.3;
     private double backwardSpeed = -0.3;
+    private double throttle = 0.5;
 
     
    
@@ -28,14 +29,14 @@ public class Climber extends Subsystem {
         leftTalon.follow(rightTalon);
     }
     public void climbUp() {
-        rightTalon.set(upSpeed);
+        rightTalon.set(upSpeed*throttle);
     }
 
    public void driveClimber(double speed) {
        centerTalon.set(speed);
    }
     public void climbDown() {
-        rightTalon.set(downSpeed);
+        rightTalon.set(downSpeed*throttle);
     }
 
     public void stopCLimb() {
