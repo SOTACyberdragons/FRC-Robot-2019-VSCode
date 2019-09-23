@@ -27,6 +27,8 @@ import frc.robot.commands.AutoLeftFartchCargoDouble;
 import frc.robot.commands.AutoRightCenterHatch;
 import frc.robot.commands.AutoRightFartchCargo;
 import frc.robot.commands.AutoRightFartchCargoDouble;
+import frc.robot.commands.ClimbDown;
+import frc.robot.commands.ClimberUp;
 import frc.robot.commands.ZeroArmEncoder;
 import frc.robot.subsystems.Arm;
 import edu.wpi.cscore.UsbCamera;
@@ -64,13 +66,13 @@ public class Robot extends TimedRobot {
 	// tests
 	private Command autoDriveStraight20Inches;
 	private Command autoDriveStraight50Inches;
-	
-	//auto commands
+
+	// auto commands
 	private Command autoLeftCenterHatch;
 	private Command autoRightCenterHatch;
 	private Command autoLeftFartchCargo;
 	private Command autoRightFartchCargo;
-	private Command autoRightFartchCargoDouble; 
+	private Command autoRightFartchCargoDouble;
 	private Command autoLeftFartchCargoDouble;
 
 	public static final LimeLight limelight = new LimeLight();
@@ -82,16 +84,17 @@ public class Robot extends TimedRobot {
 		autoDriveStraight20Inches = new AutoDriveDistance(20, 0, 0);
 		autoDriveStraight50Inches = new AutoDriveDistance(50, 0, 0);
 
-		//auto commands
+		// auto commands
 		autoLeftCenterHatch = new AutoLeftCenterHatch();
 		autoRightCenterHatch = new AutoRightCenterHatch();
 		autoLeftFartchCargo = new AutoLeftFartchCargo();
 		autoRightFartchCargo = new AutoRightFartchCargo();
-		//autoLeftFartchCargoDouble = new AutoLeftFartchCargoDouble();
-		//autoRightFartchCargoDouble = new AutoRightFartchCargoDouble();
+		// autoLeftFartchCargoDouble = new AutoLeftFartchCargoDouble();
+		// autoRightFartchCargoDouble = new AutoRightFartchCargoDouble();
 
 		System.out.println("Done initializing commands");
 	}
+
 	@Override
 	public void robotInit() {
 		hatchPanelFloorIntake = new HatchPanelFloorIntake();
@@ -101,11 +104,13 @@ public class Robot extends TimedRobot {
 		arm = new Arm();
 		drivetrain = new DriveTrain();
 		oi = new OI();
-		
 
-		//prefs = new Preferences.getInstance();
+		// prefs = new Preferences.getInstance();
 
 		initCommands();
+
+		SmartDashboard.putData("Climber Up!!!!", new ClimberUp());
+		SmartDashboard.putData("Climber Down!!!!", new ClimbDown());
 
 
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();

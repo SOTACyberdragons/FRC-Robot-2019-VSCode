@@ -41,7 +41,7 @@ public class Climber extends Subsystem {
     public void stopCLimb() {
         rightTalon.set(0);
     }
-    public void stopwheels() {
+    public void stopWheels() {
         centerTalon.set(0); 
     }
 
