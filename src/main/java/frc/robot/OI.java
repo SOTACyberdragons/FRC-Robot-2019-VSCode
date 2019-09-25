@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.CargoIn;
 import frc.robot.commands.CargoOut;
 import frc.robot.commands.ClimbDown;
+import frc.robot.commands.ClimberForward;
 import frc.robot.commands.ClimberUp;
 import frc.robot.commands.LimeLightAim;
 import frc.robot.commands.LimeLightDrive;
@@ -143,6 +144,9 @@ public class OI {
         // climber
         climbUp.whileHeld(new ClimberUp());
         climbDown.whileHeld(new ClimbDown());
+
+        JoystickButton climbForward = new JoystickButton(leftAuxStick, 8);
+        climbForward.whileHeld(new ClimberForward());
 
 	}
 	

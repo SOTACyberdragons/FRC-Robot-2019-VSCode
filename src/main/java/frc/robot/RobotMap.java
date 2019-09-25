@@ -33,9 +33,9 @@ public class RobotMap {
 	//public static final int CLIMBER_MOTOR1 = 11;
 	
 	//public static final int CLIMBER_MOTOR2 = 2;
-	public static final int LEFT_CLIMBER_MOTOR = 8;
+	public static final int LEFT_CLIMBER_MOTOR = 3;
 	public static final int RIGHT_CLIMBER_MOTOR = 10;
-	public static final int CENTER_CLIMBER_MOTOR = 3;
+	public static final int CENTER_CLIMBER_MOTOR = 8;
 
 
 

@@ -95,6 +95,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
+		
 		climber = new Climber();
 		hatchPanelIntake = new HatchPanelIntake();
 		cargoIntake = new CargoIntake();

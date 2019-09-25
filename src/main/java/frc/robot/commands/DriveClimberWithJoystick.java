@@ -17,12 +17,16 @@ public class DriveClimberWithJoystick extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        System.out.println("CLimber innnnnn)!*@!(!*)*0");
     }
+    
+
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+
         double throttle = 0.5;
-        Robot.climber.driveClimber(Robot.oi.getRightAuxStick().getY()*throttle);
+        Robot.climber.driveClimber(Robot.oi.getRightAuxStick().getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,7 +36,6 @@ public class DriveClimberWithJoystick extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.climber.stopWheels();
     }
 
 
