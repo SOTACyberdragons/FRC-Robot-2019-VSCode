@@ -5,8 +5,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 import frc.robot.Instrum;
 import frc.robot.RobotMap;
+import frc.robot.commands.DriveClimberWithJoystick;
 
 // author: Josh 
 public class Climber extends Subsystem {
@@ -21,14 +23,29 @@ public class Climber extends Subsystem {
     private double backwardSpeed = -0.3;
     private double throttle = 0.5;
 
-    
-   
-    @Override
-    protected void initDefaultCommand() {
+    public Climber() {
         rightTalon = new WPI_TalonSRX(RobotMap.RIGHT_CLIMBER_MOTOR);
         leftTalon = new WPI_TalonSRX(RobotMap.LEFT_CLIMBER_MOTOR);
         centerTalon = new WPI_TalonSRX(RobotMap.CENTER_CLIMBER_MOTOR);
+        initClimberTalon(centerTalon);
     }
+   
+    @Override
+    protected void initDefaultCommand() {  
+        setDefaultCommand(new DriveClimberWithJoystick());
+    }
+
+
+    public void initClimberTalon(WPI_TalonSRX talon) {
+        talon.configNominalOutputForward(0, Constants.TIMEOUT_MS);
+        talon.configNominalOutputReverse(0, Constants.TIMEOUT_MS);
+        talon.configPeakOutputForward(1, Constants.TIMEOUT_MS);
+        talon.configPeakOutputReverse(-1, Constants.TIMEOUT_MS);
+
+        talon.configMotionCruiseVelocity(25000 , Constants.TIMEOUT_MS);
+		talon.configMotionAcceleration(20000, Constants.TIMEOUT_MS);
+    }
+
     public void climbUp() {
         rightTalon.set(-upSpeed*throttle);
         leftTalon.set(upSpeed*throttle);

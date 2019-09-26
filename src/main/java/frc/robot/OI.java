@@ -16,6 +16,8 @@ import frc.robot.commands.PistonIn;
 import frc.robot.commands.PistonOut;
 import frc.robot.commands.ResetDriveSensors;
 import frc.robot.commands.ZeroArmEncoder;
+import edu.wpi.first.wpilibj.command.Command;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -58,6 +60,8 @@ public class OI {
     // Setting squaredInput to true decreases the sensitivity for tankdrive at lower
     // speeds
     private boolean squaredInput = true;
+
+    public Command moveToAngle20;
 
     public Joystick leftStick = new Joystick(0);
     public Joystick rightStick = new Joystick(1);
@@ -127,7 +131,8 @@ public class OI {
         // up is zero
         // groundPosition.whileHeld(new MoveArmToAngle(90));
         // backwardsPosition.whileHeld(new MoveArmToAngle(-90));
-        ballInCargoShipPosition.whileHeld(new MoveArmToAngle(-20));
+        moveToAngle20 = new MoveArmToAngle(-20);
+        ballInCargoShipPosition.whileHeld(moveToAngle20);
         // ballInRocketPosition.whileHeld(new MoveArmToAngle(-45));
         // ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(70));
 
@@ -145,7 +150,7 @@ public class OI {
         climbUp.whileHeld(new ClimberUp());
         climbDown.whileHeld(new ClimbDown());
 
-        JoystickButton climbForward = new JoystickButton(leftAuxStick, 8);
+        JoystickButton climbForward = new JoystickButton(rightAuxStick, 8);
         climbForward.whileHeld(new ClimberForward());
 
 	}

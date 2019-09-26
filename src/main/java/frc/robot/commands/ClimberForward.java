@@ -13,7 +13,7 @@ public class ClimberForward extends Command {
     }
 
     protected void execute() {
-        Robot.climber.driveClimber(0.8);
+        Robot.climber.driveClimber(0.5);
         //System.out.println("Cargo in!!!");
     }
 
@@ -22,7 +22,7 @@ public class ClimberForward extends Command {
     }
 
     protected void end() {
-        Robot.cargoIntake.stop();
+        Robot.climber.stopWheels();
     }
 
     protected void interrupted() {

@@ -9,6 +9,8 @@ public class MoveArmToAngle extends Command {
     private double angleDeg;
     private double delaySec;
     private double endToleranceDeg;
+
+    public static int numRunning = 0;
     
     public MoveArmToAngle(double angle) {
         requires(Robot.arm);
@@ -30,6 +32,7 @@ public class MoveArmToAngle extends Command {
     }
 
     protected void execute() {
+        numRunning += 1;
         Robot.arm.moveArmToAngle(angleDeg);
     }
 
@@ -41,6 +44,7 @@ public class MoveArmToAngle extends Command {
     }
 
     protected void end() {
+        numRunning -= 1;
         Robot.arm.setTalons(0);
     }
 

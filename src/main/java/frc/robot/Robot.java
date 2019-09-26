@@ -241,7 +241,9 @@ public class Robot extends TimedRobot {
 
 		//SmartDashboard.putNumber("Drive gyro", drivetrain.getHeading());
 		SmartDashboard.putNumber("Arm Encoder Angle", arm.getRawAngle());
+		SmartDashboard.putNumber("Arm Encoder Ticks", arm.getRightRawEncoderTicks());
 		SmartDashboard.putBoolean("Break Beam", cargoIntake.getBreakBeam());
+		SmartDashboard.putNumber("Arm Feed Forward: ", arm.getFeedForward());
 
 		SmartDashboard.putNumber("Arm Encoder Ticks", arm.getLeftRawEncoderTicks());
 		SmartDashboard.putNumber("Gyro", drivetrain.getHeading());

@@ -24,8 +24,7 @@ public class CargoIntake extends Subsystem {
         breakBeam = new DigitalInput(0);
         //cargoMotor.setInverted(false);
         
-        }
-
+    }
     public void spinIn() {
         cargoMotor.set(speed*0.6);
     }                                                                                                                                                                                                                                                   

@@ -24,9 +24,10 @@ public class DriveClimberWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        
+        double throttle = 0.3;
+        Robot.climber.driveClimber(throttle * (Robot.oi.getRightAuxStick().getY()));
 
-        double throttle = 0.5;
-        Robot.climber.driveClimber(Robot.oi.getRightAuxStick().getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -42,6 +43,5 @@ public class DriveClimberWithJoystick extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        end();
     }
 }

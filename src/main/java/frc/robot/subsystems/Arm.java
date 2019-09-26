@@ -51,7 +51,7 @@ public class Arm extends Subsystem {
 
 		initArmTalon(leftArmTalon);
 		initArmTalon(rightArmTalon);
-
+		leftArmTalon.follow(rightArmTalon);
 		
 	}
 
@@ -74,7 +74,7 @@ public class Arm extends Subsystem {
 		/* set closed loop gains in slot 0 - see documentation */
 		talon.selectProfileSlot(Constants.SLOT_IDX, Constants.PID_LOOP_IDX);
 		talon.config_kF(0, Constants.TALON_MAX_OUTPUT/ENCODER_MAX_SPEED, Constants.TIMEOUT_MS);
-		talon.config_kP(0, 0.1, Constants.TIMEOUT_MS);
+		talon.config_kP(0, 0.5, Constants.TIMEOUT_MS);
 		talon.config_kI(0, 0, Constants.TIMEOUT_MS);
 		talon.config_kD(0, 0, Constants.TIMEOUT_MS);
 		
@@ -85,11 +85,11 @@ public class Arm extends Subsystem {
 
 	public double getFeedForward() {
 		prefs = Preferences.getInstance();
-		wHatchMaxNominalOutput = prefs.getDouble("armWHatchOut", 0.215); // set these values
+		wHatchMaxNominalOutput = prefs.getDouble("armWHatchOut", 0.200); // set these values
 		prefs.putDouble("FFwHatch", wHatchMaxNominalOutput);
-		wCargoMaxNominalOutput = prefs.getDouble("armWCargoOut", 0.245);
+		wCargoMaxNominalOutput = prefs.getDouble("armWCargoOut", 0.200);
 		prefs.putDouble("FFwCargo", wCargoMaxNominalOutput);
-		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.205);
+		noGamePieceMaxNominalOutput = prefs.getDouble("armNoCargoOrHatchOut", 0.200);
 		prefs.putDouble("FFempty", noGamePieceMaxNominalOutput);
 		
 		double maxNominalOutput;
@@ -105,7 +105,7 @@ public class Arm extends Subsystem {
 		//Feed Forward Logic
 		double feedForward = Math.sin(Math.toRadians(getRawAngle())) * maxNominalOutput;
 		SmartDashboard.putNumber("Feed Forward", feedForward);
-		return Math.sin(Math.toRadians(getRawAngle())) * maxNominalOutput;
+		return feedForward;
 	}
 
 	public double getRawAngle() { //set this
