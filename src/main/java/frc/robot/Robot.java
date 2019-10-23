@@ -142,7 +142,6 @@ public class Robot extends TimedRobot {
 	public void disabledInit() {
 
 	}
-
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
@@ -225,6 +224,7 @@ public class Robot extends TimedRobot {
 		limelight.setLEDMode(LedMode.kforceOff);
 	}
 
+
 	/**
 	 * This function is called periodically during operator control.
 	 */
@@ -258,8 +258,7 @@ public class Robot extends TimedRobot {
 
 		//Setters
 		//limelight.setPipeline(0);
-		
-		//limelight.setLEDMode(LedMode.kforceOff);
+	
 		//limelight.setCamMode(CamMode.kvision);
 		//limelight.setSnapshot(Snapshot.kon);
 		//limelight.setStream(StreamType.kPiPMain);

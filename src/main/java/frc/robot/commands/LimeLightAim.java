@@ -75,12 +75,13 @@ public class LimeLightAim extends Command {
       SmartDashboard.putNumber("Move Value", m_moveValue);
       SmartDashboard.putNumber("Rotate Value", m_rotateValue);
 
-      
+      // Robot.limelight.setLEDMode(LedMode.kforceOn);
     // Robot.drivetrain.leftMotor.set(controlMode.MotionMagic, );
-      Robot.drivetrain.drive(m_moveValue, m_rotateValue);  
-      // Robot.drivetrain.rightMotor.set(ControlMode.MotionMagic, 
+    Robot.drivetrain.setAngle(m_rotateValue);  
+   // Robot.drivetrain.drive(m_moveValue, m_rotateValue);
+      // Robot.drivetrain.rightMaster.set(ControlMode.MotionMagic, 
       //   0, DemandType.AuxPID, m_rotateValue);
-      // Robot.drivetrain.leftMotor.set(ControlMode.MotionMagic, m_moveValue,  
+      // Robot.drivetrain.leftMaster.set(ControlMode.MotionMagic, m_moveValue,  
       //   DemandType.AuxPID, m_rotateValue);
     }
   
@@ -98,7 +99,7 @@ public class LimeLightAim extends Command {
     protected void end() {
     Robot.drivetrain.drive(0,0);
     System.out.println("Done aiming!");
-    Robot.drivetrain.getLimeLight().setLEDMode(LedMode.kforceOff);
+    Robot.limelight.setLEDMode(LedMode.kforceOff);
     }
   
     // Called when another command which requires one or more of the same

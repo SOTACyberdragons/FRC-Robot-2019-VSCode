@@ -16,7 +16,7 @@ public class HatchPanelIntake extends Subsystem {
     public HatchPanelIntake() {
         super();
         piston = new DoubleSolenoid(RobotMap.HATCH_PISTON_1, RobotMap.HATCH_PISTON_2);
-        piston.set(DoubleSolenoid.Value.kForward);
+        piston.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void out() {

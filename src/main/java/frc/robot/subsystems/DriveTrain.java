@@ -92,7 +92,7 @@ public class DriveTrain extends Subsystem {
 		talon.config_kF(0, Constants.TALON_MAX_OUTPUT/encoderMaxSpeed, Constants.TIMEOUT_MS);
 		talon.config_kP(0, 0.45, Constants.TIMEOUT_MS);
 		talon.config_kI(0, 0, Constants.TIMEOUT_MS);
-		talon.config_kD(0, 0.5, Constants.TIMEOUT_MS); 
+		talon.config_kD(0, 0.0, Constants.TIMEOUT_MS); 
 
 		//turning 
 		talon.config_kF(1, 0, Constants.TIMEOUT_MS);
@@ -161,8 +161,10 @@ public class DriveTrain extends Subsystem {
 	public void setAngle(double angle) {
 		double distance = (getLeftRawEncoderTicks() + getRightRawEncoderTicks()) / 2;
 		double totalAngle = angle + getHeading();
-		rightMaster.set(ControlMode.Position, totalAngle, DemandType.AuxPID, distance);
-
+		// rightMaster.set(ControlMode.MotionMagic, distance, DemandType.AuxPID, totalAngle);
+		// leftMaster.set(ControlMode.MotionMagic, distance, DemandType.AuxPID, -totalAngle);
+		//leftMaster.set(ControlMode.PercentOutput, distance, DemandType.ArbitraryFeedForward, totalAngle);
+		rightMaster.set(ControlMode.PercentOutput, distance, DemandType.ArbitraryFeedForward, -totalAngle);
 	}
 	 //inches per second 
 	public void setVelocity(double leftSpeed, double rightSpeed) {

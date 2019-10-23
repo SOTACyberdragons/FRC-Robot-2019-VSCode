@@ -74,9 +74,9 @@ public class Arm extends Subsystem {
 		/* set closed loop gains in slot 0 - see documentation */
 		talon.selectProfileSlot(Constants.SLOT_IDX, Constants.PID_LOOP_IDX);
 		talon.config_kF(0, Constants.TALON_MAX_OUTPUT/ENCODER_MAX_SPEED, Constants.TIMEOUT_MS);
-		talon.config_kP(0, 0.5, Constants.TIMEOUT_MS);
-		talon.config_kI(0, 0, Constants.TIMEOUT_MS);
-		talon.config_kD(0, 0, Constants.TIMEOUT_MS);
+		talon.config_kP(0, 0.01, Constants.TIMEOUT_MS);
+		talon.config_kI(0, 0.025, Constants.TIMEOUT_MS);
+		talon.config_kD(0, 0.15, Constants.TIMEOUT_MS);
 		
 		/* set acceleration and cruise velocity - see documentation */ // idk these are random numbers
 		talon.configMotionCruiseVelocity(25000 , Constants.TIMEOUT_MS);
@@ -103,7 +103,7 @@ public class Arm extends Subsystem {
 			maxNominalOutput = noGamePieceMaxNominalOutput;
 		}
 		//Feed Forward Logic
-		double feedForward = Math.sin(Math.toRadians(getRawAngle())) * maxNominalOutput;
+		double feedForward = -(Math.cos(Math.toRadians(getRawAngle()))) * maxNominalOutput;
 		SmartDashboard.putNumber("Feed Forward", feedForward);
 		return feedForward;
 	}
@@ -175,8 +175,18 @@ public class Arm extends Subsystem {
 	public void moveArmToAngle(double targetAngleDeg) {
 		double currentAngle = getRawAngle();
 		double closestAngle = getClosestAngle(currentAngle, targetAngleDeg);
-	
-		rightArmTalon.set(ControlMode.MotionMagic, closestAngle * TICKS_PER_DEG);
+		// if(currentAngle < 0 && currentAngle < closestAngle) {
+		// 	rightArmTalon.set(ControlMode.MotionMagic, closestAngle * TICKS_PER_DEG);
+		// } else if(currentAngle < closestAngle) {
+		// 	rightArmTalon.set(ControlMode.MotionMagic, closestAngle * TICKS_PER_DEG);
+		// } else if(currentAngle > closestAngle) {
+		// 	rightArmTalon.set(ControlMode.MotionMagic, closestAngle * TICKS_PER_DEG);
+		// }
+		if(currentAngle > closestAngle) {
+			rightArmTalon.set(ControlMode.MotionMagic, (closestAngle+360) * TICKS_PER_DEG, DemandType.ArbitraryFeedForward, getFeedForward());
+		} else {
+			rightArmTalon.set(ControlMode.MotionMagic, -closestAngle * TICKS_PER_DEG, DemandType.ArbitraryFeedForward, getFeedForward());
+		}		
 	}
 
 	/**
@@ -195,7 +205,7 @@ public class Arm extends Subsystem {
 	}
 
 	//returns closest "unnomalized" angle
-	public static double getClosestAngle(double currentAngle, double targetAngle) {
+	public static double getClosestAngle1(double currentAngle, double targetAngle) {
 			
 			int delta = (int) Math.floor(currentAngle/360); //increments of 360 rounded down
 			double normalizedCurrentAngle = currentAngle % 360; //angle in degrees bewtween 0 and 360
@@ -210,6 +220,9 @@ public class Arm extends Subsystem {
 			return targetAngle + 360 * delta; //unnormalized closest target angle 
 	}
 
+	public static double getClosestAngle(double currentAngle, double targetAngle) {
+		return targetAngle;
+	}
 
 
 }

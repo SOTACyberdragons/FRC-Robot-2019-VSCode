@@ -22,8 +22,8 @@ public class DifferentialDriveWithJoysticks extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        double throttle = 1.0;
-        Robot.drivetrain.drive(Robot.oi.getRightStick().getX(), -Robot.oi.getLeftStick().getY()*throttle*0.8);
+        double throttle = 1;
+        Robot.drivetrain.drive(Robot.oi.getRightStick().getX(), -Robot.oi.getLeftStick().getY()*throttle);
 		
     }
 

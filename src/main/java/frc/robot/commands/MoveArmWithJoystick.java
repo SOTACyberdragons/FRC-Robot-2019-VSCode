@@ -22,9 +22,10 @@ public class MoveArmWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (MoveArmToAngle.numRunning > 0) {
-            return;
-        }
+        // if (MoveArmToAngle.numRunning > 0) {
+        //     return;
+        // }
+    
         double throttle = 0.8;
         Robot.arm.moveArmWithJoystick(Robot.oi.getLeftAuxStick().getY()*throttle);
     }

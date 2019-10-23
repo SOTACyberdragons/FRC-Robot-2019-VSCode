@@ -26,11 +26,11 @@ public class CargoIntake extends Subsystem {
         
     }
     public void spinIn() {
-        cargoMotor.set(speed*0.6);
+        cargoMotor.set(speed);
     }                                                                                                                                                                                                                                                   
 
     public void spinOut() {
-        cargoMotor.set(-speed);
+        cargoMotor.set(-speed*0.5);
     }
 
     public void stop() {

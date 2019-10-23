@@ -26,7 +26,7 @@ public class DriveClimberWithJoystick extends Command {
     protected void execute() {
         
         double throttle = 0.3;
-        Robot.climber.driveClimber(throttle * (Robot.oi.getRightAuxStick().getY()));
+        Robot.climber.driveClimber(1 * (Robot.oi.getRightAuxStick().getY()));
 
     }
 

@@ -131,7 +131,7 @@ public class OI {
         // up is zero
         // groundPosition.whileHeld(new MoveArmToAngle(90));
         // backwardsPosition.whileHeld(new MoveArmToAngle(-90));
-        moveToAngle20 = new MoveArmToAngle(-20);
+        moveToAngle20 = new MoveArmToAngle(101);
         ballInCargoShipPosition.whileHeld(moveToAngle20);
         // ballInRocketPosition.whileHeld(new MoveArmToAngle(-45));
         // ballOutCargoShipPosition.whileHeld(new MoveArmToAngle(70));
@@ -141,10 +141,10 @@ public class OI {
         targetDriveAndAim.whileHeld(new LimeLightDriveAndAim());
         // lightOn.whileHeld(new LimeLightOn());
 
-        zeroArmEncoder.whenPressed(new ZeroArmEncoder(-100)); // TODO figure out what this is
+        zeroArmEncoder.whenPressed(new ZeroArmEncoder(-6)); // TODO figure out what this is
        
         resetDriveSensors.whenPressed(new ResetDriveSensors());
-        groundArmEncoder.whenPressed(new ZeroArmEncoder(95));
+        groundArmEncoder.whenPressed(new ZeroArmEncoder(184));
 
         // climber
         climbUp.whileHeld(new ClimberUp());
